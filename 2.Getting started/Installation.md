@@ -1,4 +1,4 @@
-# Instalation
+# Installation
 
 Before you start the installation of your ADIOS project, ensure that your local machine has PHP and Composer installed.
 
