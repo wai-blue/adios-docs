@@ -20,4 +20,4 @@ Thanks to the powerful form templating engine in ADIOS you can easily create com
 
 You have free hands over customization of your application.
 
-If you're curious about how ADIOS compares to other frameworks, we prepared a detailed comparison between ADIOS and Laravel in the [Framework-Comparison.md](1.Introduction/Framework-Comparison.md) file.
+If you're curious about how ADIOS compares to other frameworks, we prepared a detailed comparison between ADIOS and Laravel in the [Framework-Comparison.md](./1.Introduction/Framework-Comparison.md) file.
