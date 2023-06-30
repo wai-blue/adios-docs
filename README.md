@@ -1,6 +1,6 @@
 # ADIOS - documentation
 
-You've arrived at the right place to explore the documentation for the ADIOS framework.
+You've arrived at the right place to explore the documentation for the [ADIOS](https://github.com/wai-blue/ADIOS) framework.
 
 We prepared for you ADIOS documentation in two versions, now it's on you, which option you use:
 
@@ -21,7 +21,6 @@ To begin your journey with ADIOS, follow these steps:
 2. Now you need only these simple commands to create your first CRM application:
 
 For linux:
-
 ```
 composer create-project wai-blue/adios-app
 cd adios-app
@@ -29,7 +28,6 @@ cd adios-app
 ```
 
 For windows:
-
 ```
 composer create-project wai-blue/adios-app
 cd adios-app
@@ -41,7 +39,7 @@ build.bat
 
 This will create an ADIOS application based on the [simple-crm.json prototype](https://github.com/wai-blue/ADIOS/blob/main/docs/Prototype/examples/10-simple-crm.json) which you can further customize.
 
-Sounds interesting? Documentation will be still here, ready for you.
+Sounds interesting? The documentation will always be available here, ready for you.
 
 ## Want to contribute?
 
