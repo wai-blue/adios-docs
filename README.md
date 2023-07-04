@@ -35,7 +35,7 @@ cd bin
 build.bat
 ```
 
-<img src="Assets/Images/prototype-builder.png" />
+<img src="Documentation/Assets/Images/prototype-builder.png" />
 
 This will create an ADIOS application based on the [simple-crm.json prototype](https://github.com/wai-blue/ADIOS/blob/main/docs/Prototype/examples/10-simple-crm.json) which you can further customize.
 
