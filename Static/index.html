@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html>
 
 <head>
-    <title>ADIOS Documentation</title>
+  <title>ADIOS Documentation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,8 +25,8 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- own styles -->
-    <link rel="stylesheet" href="Resources\css\layout.css">
-    <link rel="stylesheet" href="Resources\css\main.css">
+    <link rel="stylesheet" href="resources/css/layout.css">
+    <link rel="stylesheet" href="resources/css/main.css">
 </head>
 
 <body>
@@ -41,105 +41,34 @@
         </header>
 
         <article>
-            <div class="container wide-container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 col-xxl-3 column-login-full-height" id="side-column">
-                        <!-- framework name-->
-                        <h1 id="framework-name-header">ADIOS</h1>
 
-                        <hr>
+      <div class="container wide-container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 col-xxl-3 column-login-full-height" id="side-column">
+            <!-- framework name-->
+            <h1 id="framework-name-header">ADIOS</h1>
+            <hr>
 
-                        <!-- table of contents -->
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Introduction -->
-                            <li onclick="renderContent('https://wai-blue.github.io/adios-docs/1.%20Introduction/1.%20Introduction.md')">Introduction</li>
-                        </ul>
+            <!-- table of contents -->
+            <ul class="layer" style="--custom-padding: 0rem;">
+              <ul class="layer" style="--custom-padding: 0rem;">     <li>1.Introduction</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/1.Introduction/Framework-comparison.md')">Framework-comparison</li>     <li onclick="redirectTo('Documentation/1.Introduction/Introduction.md')">Introduction</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>2.Getting started</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/2.Getting started/Deployment.md')">Deployment</li>     <li onclick="redirectTo('Documentation/2.Getting started/Directory-structure.md')">Directory-structure</li>     <li onclick="redirectTo('Documentation/2.Getting started/Installation.md')">Installation</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>3.Architectural Overview</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/3.Architectural Overview/Introduction.md')">Introduction</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>4.The basics</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/4.The basics/Routing.md')">Routing</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>5.Components</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/5.Components/Button.md')">Button</li>     <li onclick="redirectTo('Documentation/5.Components/Cards.md')">Cards</li>     <li onclick="redirectTo('Documentation/5.Components/Chart.md')">Chart</li>     <li onclick="redirectTo('Documentation/5.Components/Data table.md')">Data table</li>     <li onclick="redirectTo('Documentation/5.Components/File browser.md')">File browser</li>     <li onclick="redirectTo('Documentation/5.Components/Form.md')">Form</li>     <li onclick="redirectTo('Documentation/5.Components/Grid.md')">Grid</li>     <li onclick="redirectTo('Documentation/5.Components/Html.md')">Html</li>     <li onclick="redirectTo('Documentation/5.Components/Input.md')">Input</li>     <li onclick="redirectTo('Documentation/5.Components/Introduction.md')">Introduction</li>     <li onclick="redirectTo('Documentation/5.Components/Settings panel.md')">Settings panel</li>     <li onclick="redirectTo('Documentation/5.Components/Table.md')">Table</li>     <li onclick="redirectTo('Documentation/5.Components/Tabs.md')">Tabs</li>     <li onclick="redirectTo('Documentation/5.Components/Title.md')">Title</li>     <li onclick="redirectTo('Documentation/5.Components/Tree.md')">Tree</li>     <li onclick="redirectTo('Documentation/5.Components/Window.md')">Window</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>6.Database</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/6.Database/Introduction.md')">Introduction</li>     <li onclick="redirectTo('Documentation/6.Database/Query builder.md')">Query builder</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>7.Security</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/7.Security/Authentification.md')">Authentification</li>     <li onclick="redirectTo('Documentation/7.Security/Authorization.md')">Authorization</li>     </ul></ul><ul class="layer" style="--custom-padding: 0rem;">     <li>8.Testing</li>     <ul class="layer" style="--custom-padding: 2rem;">     <li onclick="redirectTo('Documentation/8.Testing/Introduction.md')">Introduction</li>     </ul></ul>     </ul></ul>            </ul>
+          </div>
 
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Getting started -->
-                            <li onclick="renderContent('')">Getting started</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('https://wai-blue.github.io/adios-docs/2.%20Getting%20started/1.%20Instalation.md')">Instalation</li>
-                                <li onclick="renderContent('https://wai-blue.github.io/adios-docs/2.%20Getting%20started/2. Directory structure.md')">Directory structure</li>
-                                <li onclick="renderContent('')">Deployment</li>
-                            </ul>
-                        </ul>
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-9 col-xxl-9 column-login-full-height" id="conntent-column">
+            <div id="renderer"></div>
+          </div>
+        </div>
+      </div>
 
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Architectural Overview -->
-                            <li onclick="renderContent('')">Architectural Overview</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('')">Introduction</li>
-                            </ul>
-                        </ul>
+      <script src="resources/js/builder-script.js"></script> 
 
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- The basics -->
-                            <li onclick="renderContent('')">The basics</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('')">Routing</li>
-                            </ul>
-                        </ul>
-
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Components -->
-                            <li onclick="renderContent('')">Components</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('')">Introduction</li>
-                                <li onclick="renderContent('')">Button</li>
-                                <li onclick="renderContent('')">Cards</li>
-                                <li onclick="renderContent('')">Chart</li>
-                                <li onclick="renderContent('')">Data table</li>
-                                <li onclick="renderContent('')">File browser</li>
-                                <li onclick="renderContent('')">Form</li>
-                                <li onclick="renderContent('')">Grid</li>
-                                <li onclick="renderContent('')">Html</li>
-                                <li onclick="renderContent('')">Input</li>
-                                <li onclick="renderContent('')">Settings panel</li>
-                                <li onclick="renderContent('')">Table</li>
-                                <li onclick="renderContent('')">Tabs</li>
-                                <li onclick="renderContent('')">Title</li>
-                                <li onclick="renderContent('')">Tree</li>
-                                <li onclick="renderContent('')">Window</li>
-                            </ul>
-                        </ul>
-
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Database -->
-                            <li onclick="renderContent('')">Database</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('')">Introduction</li>
-                            </ul>
-                        </ul>
-
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Security -->
-                            <li onclick="renderContent('')">Security</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('')">Authentification</li>
-                                <li onclick="renderContent('')">Authorization</li>
-                            </ul>
-                        </ul>
-
-                        <ul class="layer" style="--custom-padding: 0rem;">
-                            <!-- Testing -->
-                            <li onclick="renderContent('')">Testing</li>
-                            <ul class="layer" style="--custom-padding: 2rem;">
-                                <li onclick="renderContent('')">Introduction</li>
-                            </ul>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-9 col-xxl-9 column-login-full-height" id="conntent-column">
-                        <div id="renderer"></div>
-                    </div>
-                </div>
-        </article>
+              </article>
     </div>
 
     <footer class="container wide-container">
         <!-- footer item row -->
         <div class="row" id="footer-items">
-            <a href="https://github.com/wai-blue/ADIOS"><img class="footer-link-logo" src="Resources\logo\github-mark.png" alt="GitHub"></a>
+            <a href="https://github.com/wai-blue/ADIOS"><img class="footer-link-logo" src="resources/logo/github-mark.png" alt="GitHub"></a>
         </div>
 
         <!-- footer row at total bottom -->
@@ -147,38 +76,7 @@
             <div>ADIOS is an open-source MIT licensed framework. You can use it for free for both personal and commercial projects.</div>
         </div>
     </footer>
-
-    <div class="scripts">
-        <script>
-            /*
-            xs (for phones - screens less than 576px wide)
-            sm (for tablets - screens equal to or greater than 576px wide)
-            md (for small laptops - screens equal to or greater than 768px wide)
-            lg (for laptops and desktops - screens equal to or greater than 992px wide)
-            xl (for laptops and desktops - screens equal to or greater than 1200px wide)
-            xxl (for laptops and desktops - screens equal to or greater than 1400px wide)
-            */
-
-            // Path to the Markdown file relative to the HTML page
-            function renderContent(linkToParse) {
-                if (linkToParse == "") {
-                    document.getElementById('renderer').innerHTML = "Not implemented yet.";
-                } else {
-                    let markdownPath = linkToParse;
-
-                    fetch(markdownPath)
-                        .then(response => response.text())
-                        .then(text => {
-                            // Target element to display the rendered Markdown
-                            document.getElementById('renderer').innerHTML = marked.parse(text);
-                        })
-                        .catch(error => {
-                            alert("something went and .md is not loaded.");
-                        });
-                }
-            }
-        </script>
-    </div>
 </body>
 
 </html>
+
