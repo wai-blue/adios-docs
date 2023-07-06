@@ -2,16 +2,24 @@
 
 You've arrived at the right place to explore the documentation for the [ADIOS](https://github.com/wai-blue/ADIOS) framework.
 
-We prepared for you ADIOS documentation in two versions, now it's on you, which option you use:
+We prepared for you ADIOS documentation in two versions, now it's up to you, which option you use:
 
-1. [Static website for browsing all markdown files in one place](https://wai-blue.github.io/adios-docs/)
-2. [adios-docs repository content is ready for you to browse markdown files on your own](https://github.com/wai-blue/adios-docs)
+1. [static website](https://wai-blue.github.io/adios-docs/)
+2. [adios-docs repository](https://github.com/wai-blue/adios-docs)
 
-## About adios
+## About ADIOS
 
-Adios is a powerful ight-weight rapid application development framework for PHP 8.
+ADIOS is a lightweight rapid application development framework for PHP 8 based on the MVC architecture, designed to simplify the development of robust CRM applications. It stands on the concept of being a framework with a small footprint, prioritizing efficiency, performance, and speed as key features. With only a little coding, you can create application with complete CRUD functionality, containing complex inputs such as dates, WYSIWYG editors, or autocomplete, and able to manage complex data structures.
 
-Easy to use and completely free.
+One of the notable advantages of ADIOS is the elimination of router configuration. By simply creating a file, the routing table updates automatically.
+
+ADIOS provides built-in UI components for CRUD operations, removing the need for importing additional components. UI/Table and UI/Form components are are in-built.
+
+Thanks to the powerful form templating engine in ADIOS you can easily create complex forms. Whether it's tabs, grids, inputs, or dashboards, you can achieve them with just a few lines of code.
+
+You have free hands over customization of your application.
+
+If you're curious about how ADIOS compares to other frameworks, we prepared a detailed comparison between ADIOS and Laravel in the [Framework comparison.md](Documentation/1. Getting started/Framework comparison.md) file.
 
 ## Create your first CRM application (in a few minutes)
 
@@ -37,7 +45,7 @@ build.bat
 
 <img src="Documentation/Assets/Images/prototype-builder.png" />
 
-This will create an ADIOS application based on the [simple-crm.json prototype](https://github.com/wai-blue/ADIOS/blob/main/docs/Prototype/examples/10-simple-crm.json) which you can further customize.
+This will create an ADIOS application based on the [simple-crm.json prototype](Documentation/Prototype builder/Examples/10-simple-crm.json) which you can further customize.
 
 Sounds interesting? The documentation will always be available here, ready for you.
 
@@ -45,7 +53,7 @@ Sounds interesting? The documentation will always be available here, ready for y
 
 ADIOS is an open-source MIT licensed framework. You can use it for free for both personal and commercial projects.
 
-We will be happy for any contributions to   the project:
+We will be happy for any contributions to the project:
 
   * UI componets
   * Language dictionaries
