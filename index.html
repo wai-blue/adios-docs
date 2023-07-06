@@ -1,47 +1,47 @@
-      <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 
 <head>
   <title>ADIOS Documentation</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"></script>
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-    <!-- marked.min.js -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- marked.min.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-    <!-- own styles -->
-    <link rel="stylesheet" href="resources/css/layout.css">
-    <link rel="stylesheet" href="resources/css/main.css">
+  <!-- own styles -->
+  <link rel="stylesheet" href="Resources/css\layout.css">
+  <link rel="stylesheet" href="Resources/css\main.css">
 </head>
 
 <body>
-    <div class="content">
-        <header>
-            <div class="container-fluid" id="top-row">
-                <div id="top-intro-txt">
-                    <!-- some intro in header -->
-                    Light-weight rapid application development framework for PHP 8. Easy to use and completely free.
-                </div>
-            </div>
-        </header>
+  <div class="content">
+    <header>
+    <div class="container-fluid" id="top-row">
+        <div id="top-intro-txt">
+            <!-- some intro in header -->
+            Light-weight rapid application development framework for PHP 8. Easy to use and completely free.
+        </div>
+    </div>
+</header>
 
-        <article>
-
+    <article>
       <div class="container wide-container">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 col-xxl-3 column-login-full-height" id="side-column">
@@ -56,26 +56,65 @@
 
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-9 col-xxl-9 column-login-full-height" id="conntent-column">
             <div id="renderer"></div>
+            <div id="demo"></div>
           </div>
         </div>
       </div>
+    </article>
+  </div>
 
-      <script src="resources/js/builder-script.js"></script> 
-
-              </article>
+  <footer class="container wide-container">
+    <!-- footer item row -->
+    <div class="row" id="footer-items">
+        <a href="https://github.com/wai-blue/ADIOS"><img class="footer-link-logo" src="logo\github-mark.png" alt="GitHub"></a>
     </div>
 
-    <footer class="container wide-container">
-        <!-- footer item row -->
-        <div class="row" id="footer-items">
-            <a href="https://github.com/wai-blue/ADIOS"><img class="footer-link-logo" src="resources/logo/github-mark.png" alt="GitHub"></a>
-        </div>
+    <!-- footer row at total bottom -->
+    <div class="row" id="footer-row">
+        <div>ADIOS is an open-source MIT licensed framework. You can use it for free for both personal and commercial projects.</div>
+    </div>
+</footer>
 
-        <!-- footer row at total bottom -->
-        <div class="row" id="footer-row">
-            <div>ADIOS is an open-source MIT licensed framework. You can use it for free for both personal and commercial projects.</div>
-        </div>
-    </footer>
+  <div class="scripts">
+        <script>
+            /*
+            xs (for phones - screens less than 576px wide)
+            sm (for tablets - screens equal to or greater than 576px wide)
+            md (for small laptops - screens equal to or greater than 768px wide)
+            lg (for laptops and desktops - screens equal to or greater than 992px wide)
+            xl (for laptops and desktops - screens equal to or greater than 1200px wide)
+            xxl (for laptops and desktops - screens equal to or greater than 1400px wide)
+            */
+
+            // Path to the Markdown file relative to the HTML page
+            const rootURL = 'https://wai-blue.github.io/adios-docs/';
+
+            function redirectTo(url) {
+              window.location.href = window.location.pathname + "?fileName=" + url;
+            }
+
+            $(document).ready(function() {
+              const params = new URLSearchParams(window.location.search);
+              const fileName = params.get('fileName');
+
+              let markdownPath = rootURL + fileName;
+
+              if (fileName !== null) {
+                fetch(markdownPath)
+                .then(response => response.text())
+                .then(text => {
+                  // Target element to display the rendered Markdown
+                  document.getElementById('renderer').innerHTML = marked.parse(text);
+                })
+                .catch(error => {
+                  alert("chyba");
+                });
+              }
+                //alert (markdownPath);
+            });
+        </script>
+    </div>
+  </div>
 </body>
 
 </html>

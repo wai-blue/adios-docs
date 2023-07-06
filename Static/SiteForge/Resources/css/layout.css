@@ -1,0 +1,66 @@
+:root {
+    --palette-dark-blue: #2d4a8a;
+    --palette-white: #f0f3f6;
+    --palette-black: #080212;
+    --palette-grey: #E2E4E8;
+
+    --footer-bottom-height: 3rem;
+    --footer-items-height: 2rem;
+    --footer-additional-space: 2rem;
+
+    --content-paddint-top: 2rem;
+}
+
+/* html, body */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Fira Code', monospace;
+    color: var(--palette-black) !important;
+}
+
+/* header */
+#top-row {
+    background-color: var(--palette-dark-blue);
+    text-align: center;
+}
+
+#top-intro-txt {
+    color: var(--palette-white);
+    font-size: .8rem;
+    line-height: 1.25rem;
+    padding: .5rem;
+}
+
+/* Footer */
+#footer-row {
+    color: var(--palette-black);
+    min-height: var(--footer-bottom-height);
+
+    font-weight: 400;
+    font-size: 0.8rem;
+    opacity: 0.6;
+
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--palette-grey);
+}
+
+#footer-items {
+    min-height: var(--footer-items-height);
+    color: var(--palette-black);
+}
+
+/* Main for footer padding */
+article {
+    padding: var(--content-paddint-top) 0rem calc(var(--footer-bottom-height) + var(--footer-items-height) + var(--footer-additional-space));
+}
+
+.no-padding-article {
+    padding: 0rem 0rem 0rem !important;
+}
+
+.content {
+    min-height: 100%;
+    margin-bottom: calc((var(--footer-bottom-height) + var(--footer-items-height)) * -1);
+}
