@@ -15,6 +15,7 @@ ob_start(); // Start output buffering
               <?php
                 $repositoryRootURL = 'https://wai-blue.github.io/adios-docs/';
                 $staticPageRoot = '../../Documentation';
+                //$staticPageRoot = '../Source';
                 $notNeccessaryToOpenFolders = array("Assets");
 
                 function listFiles($directory, $indentation = "") {
@@ -22,52 +23,51 @@ ob_start(); // Start output buffering
                   global $staticPageRoot;
                   global $notNeccessaryToOpenFolders;
 
-                  // can't open directory or there isn't any with that name
-                  if (!is_dir($directory)) {
-                    echo "Invalid directory: $directory";
-                    return;
-                  }
+                  if (is_dir($directory)) {
+                    $handle = opendir($directory);
+                    
+                    if ($handle !== false) {
+                    // Directory is valid and successfully opened
+                    closedir($handle);
+                      // folder opened successfully
+                      $files = scandir($directory);
 
-                  // Extract the directory name from the path
-                  $dirName = basename($directory);
+                      //foreach of all files and folders from $files
+                      foreach ($files as $file) {
+                        // skip special entries
+                        if ($file === '.' || $file === '..') {
+                          continue;
+                        }
 
-                  if (!in_array($dirName, $notNeccessaryToOpenFolders)) {
-                    $explodedPath = explode('/', $staticPageRoot);
-                    $lastFolderName = end($explodedPath);
+                        // check file or directory
+                        if (!in_array($file, $notNeccessaryToOpenFolders)) {
+                          $path = $directory . '/' . $file;
 
-                    if ($lastFolderName !== $dirName) {
-                      //Directory name
-                      //Serves as a chapter heading
-                      echo '<ul class="layer" style="--custom-padding: 0rem;">';
-                      echo '     <li>' . $dirName . '</li>';
-                      echo '     <ul class="layer" style="--custom-padding: 2rem;">';
-                    }
+                          if (is_dir($path)) {
+                            echo '<ul class="layer" style="--custom-padding: 0rem;">';
+                            echo '<li>' . "# " . $file . '</li>';
+                            echo '<ul class="layer" style="--custom-padding: 2rem;">';
+                            listFiles($path, $indentation . " "); // Recursively call for subdirectories
+                            echo "     </ul>";
+                            echo "</ul>";
+                          } else {
+                            // Link data
+                            // serves aj variable, that is later used to loading content
+                            $filePath = str_replace("../../", '', $path);
 
-                    $files = scandir($directory);
-                    foreach ($files as $file) {
-                      if ($file === '.' || $file === '..') {
-                        continue;
+                            //Link title
+                            $fileName = pathinfo($file, PATHINFO_FILENAME);
+
+                            // Display link to markdown content
+                            echo '<li onclick="redirectTo(\'' . $filePath . '\')">' . $fileName . '</li>';
+                          }
+                        }
                       }
-
-                      $path = $directory . '/' . $file;
-
-                      if (is_dir($path)) {
-                        listFiles($path, $indentation . " "); // Recursively call for subdirectories
-                      } else {
-                        // Link data
-                        // serves aj variable, that is later used to loading content
-                        $filePath = str_replace("../../", '', $path);
-
-                        //Link title
-                        $fileName = pathinfo($file, PATHINFO_FILENAME);
-
-                        // Display link to markdown content
-                        echo '     <li onclick="redirectTo(\'' . $filePath . '\')">' . $fileName . '</li>';
-                      }
+                    } else {
+                      echo "Failed to open the directory.";
                     }
-
-                    echo "     </ul>";
-                    echo "</ul>";
+                  } else {
+                    echo "Directory does not exist.";
                   }
                 }
 
@@ -89,7 +89,6 @@ ob_start(); // Start output buffering
       <?php include ('includes/footer.php'); ?>
 
 <?php
-
 function copyFolder($src, $dst) { 
   
     // open the source directory
@@ -119,11 +118,10 @@ function copyFolder($src, $dst) {
 } 
   
 $src = "resources";
-  
 $dst = "../resources";
-  
 copyFolder($src, $dst);
 
+// Outout html version of static page
 $output = ob_get_clean();
 
 $file = '../index.html';
