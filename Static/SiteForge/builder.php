@@ -102,14 +102,12 @@ function copyFolder($src, $dst) {
   
         if (( $file != '.' ) && ( $file != '..' )) { 
             if ( is_dir($src . '/' . $file) ) 
-            { 
-  
-                // Recursively calling copyFolder function
-                copyFolder($src . '/' . $file, $dst . '/' . $file); 
-  
+            {
+              // Recursively calling copyFolder function
+              copyFolder($src . '/' . $file, $dst . '/' . $file); 
             } 
             else { 
-                copy($src . '/' . $file, $dst . '/' . $file); 
+              copy($src . '/' . $file, $dst . '/' . $file); 
             } 
         } 
     } 
