@@ -18,7 +18,7 @@ $(document).ready(function() {
     const params = new URLSearchParams(window.location.search);
     const fileName = params.get('fileName');
 
-    let markdownPath = rootURL + fileName;
+    let markdownPath = fileName;
 
     if (fileName !== null) {
         fetch(markdownPath)
