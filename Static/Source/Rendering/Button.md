@@ -6,16 +6,50 @@ The Button component in ADIOS provides a interactive element that allows users t
 
 The Button component supports various properties that can be utilized to meet specific design and functionality requirements:
 
-1. type: Type of the button. Supported values for this parameter are: 'save', 'search', 'apply', 'close', 'copy', 'add', 'delete', 'cancel', 'confirm'.
-2. href: The URL for the button when used as a link.
-3. faIcon: The Font Awesome icon to be displayed alongside the button text.
-4. text: The text displayed on the button.
-5. textRaw: The raw text displayed on the button, not processed.
-6. class: Additional CSS classes for additional styling of the button.
-7. onClick: The JavaScript function to be executed when the button is clicked.
-8. title: The text that appears when hovering over the button.
-9. style: Inline CSS styles to customize the button.
-10. disabled: A boolean property to disable the button and prevent user interaction. The default value is FALSE.
+| Property name | Type    | Description                                                           | Supported value | Default            |
+| ------------- | ------- | --------------------------------------------------------------------- | --------------- | ------------------ |
+| type          | string  | Type of the button                                                    | save            | faIcon             | fas fa-check |
+|               |         |                                                                       |                 | text               | Save |
+|               |         |                                                                       |                 | class              | btn-success |
+|               |         |                                                                       |                 | onClick            | element_id'_save() |
+|               |         |                                                                       | search          | faIcon             | as fa-search |
+|               |         |                                                                       |                 | text               | Search |
+|               |         |                                                                       |                 | class              | btn-light |
+|               |         |                                                                       |                 | onClick            | element_id'_search() |
+|               |         |                                                                       | apply           | faIcon             | fas fa-check |
+|               |         |                                                                       |                 | text               | Apply |
+|               |         |                                                                       |                 | class              | btn-success |
+|               |         |                                                                       |                 | onClick            | element_id'_apply() |
+|               |         |                                                                       | close           | faIcon             | fas fa-times |
+|               |         |                                                                       |                 | class              | btn-light |
+|               |         |                                                                       |                 | title              | Close |
+|               |         |                                                                       |                 | onClick            | element_id'_close() |
+|               |         |                                                                       | copy            | faIcon             | fas fa-copy |
+|               |         |                                                                       |                 | text               | Copy |
+|               |         |                                                                       |                 | class              | btn-secondary |
+|               |         |                                                                       |                 | onClick            | element_id'_copy() |
+|               |         |                                                                       | add             | faIcon             | fas fa-plus |
+|               |         |                                                                       |                 | text               | Add |
+|               |         |                                                                       |                 | onClick            | element_id'_add() |
+|               |         |                                                                       | delete          | faIcon             | fas fa-trash-alt |
+|               |         |                                                                       |                 | class              | text-danger |
+|               |         |                                                                       |                 | title              | Delete |
+|               |         |                                                                       |                 | onClick            | element_id'_delete() |
+|               |         |                                                                       | cancel          | faIcon             | app/x-mark-3.png |
+|               |         |                                                                       |                 | text               | Cancel |
+|               |         |                                                                       |                 | onClick            | element_id'_cancel() |
+|               |         |                                                                       | confirm         | faIcon             | app/ok.png |
+|               |         |                                                                       |                 | text               | Confirm |
+|               |         |                                                                       |                 | onClick            | element_id'_confirm() |
+| href          | string  | The URL for the button when used as a link                            |                 | javascript:void(0) |
+| faIcon        | string  | The Font Awesome icon to be displayed alongside the button text       |                 |                    |
+| text          | string  | The text displayed on the button                                      |                 |                    |
+| textRaw       | string  | The raw text displayed on the button, not processed                   |                 |                    |
+| class         | string  | Additional CSS classes for additional styling of the button           |                 |                    |
+| onClick       | string  | The JavaScript function to be executed when the button is clicked     |                 |                    |
+| title         | string  | The text that appears when hovering over the button                   |                 |                    |
+| style         | string  | Inline CSS styles to customize the button                             |                 |                    |
+| disabled      | boolean | A boolean property to disable the button and prevent user interaction |                 | FALSE              |
 
 ## Usage
 
@@ -39,4 +73,4 @@ Will be added later...
 
 ## Notes
 
-1. Each supported type of button has a predefined Font Awesome icon corresponding to its type.
+1. Each supported type of button has a predefined Font Awesome icon corresponding to its type, as well as properties for 'type', 'class', and 'onClick'.
