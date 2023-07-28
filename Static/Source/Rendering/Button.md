@@ -6,7 +6,7 @@ The Button component in ADIOS provides a interactive element that allows users t
 
 The Button component supports various properties that can be utilized to meet specific design and functionality requirements:
 
-<img src="Static\Source\Assets\Images\button-properties.png" />
+<img src="Static/Source/Assets/Images/button-properties.png" />
 
 ## Usage
 
