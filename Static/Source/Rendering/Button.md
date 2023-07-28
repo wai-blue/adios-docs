@@ -6,16 +6,7 @@ The Button component in ADIOS provides a interactive element that allows users t
 
 The Button component supports various properties that can be utilized to meet specific design and functionality requirements:
 
-1. type: Type of the button. Supported values for this parameter are: 'save', 'search', 'apply', 'close', 'copy', 'add', 'delete', 'cancel', 'confirm'.
-2. href: The URL for the button when used as a link.
-3. faIcon: The Font Awesome icon to be displayed alongside the button text.
-4. text: The text displayed on the button.
-5. textRaw: The raw text displayed on the button, not processed.
-6. class: Additional CSS classes for additional styling of the button.
-7. onClick: The JavaScript function to be executed when the button is clicked.
-8. title: The text that appears when hovering over the button.
-9. style: Inline CSS styles to customize the button.
-10. disabled: A boolean property to disable the button and prevent user interaction. The default value is FALSE.
+<img src="../Assets/Images/button-properties.png" />
 
 ## Usage
 
@@ -39,4 +30,4 @@ Will be added later...
 
 ## Notes
 
-1. Each supported type of button has a predefined Font Awesome icon corresponding to its type.
+1. Each supported type of button has a predefined Font Awesome icon corresponding to its type, as well as properties for 'type', 'class', and 'onClick'.
