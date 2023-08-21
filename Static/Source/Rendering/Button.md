@@ -6,27 +6,50 @@ The Button component in ADIOS provides a interactive element that allows users t
 
 The Button component supports various properties that can be utilized to meet specific design and functionality requirements:
 
-<img src="../Assets/Images/button-properties.png" />
+| Property | Type   | Default value | Description                                           |
+|----------|--------|---------------|-------------------------------------------------------|
+| type     | string | ''            |Predefined type of button. **Options:**  `['save', 'search', 'apply', 'copy', 'close', 'add', 'delete', 'cancel', 'confirm', 'print']`|
+| href     | string | ''            |The URL for the button when used as a link|
+| faIcon     | string | ''            |The Font Awesome icon to be displayed alongside the button text|
+| text     | string | ''            |The text displayed on the button|
+| textRaw     | string | ''            |The raw text displayed on the button, not processed|
+| class     | string | ''            |Additional CSS classes|
+| onclick     | string | ''            |The JavaScript function to be executed after button is clicked|
+| title     | string | ''            |The text that appears when hovering over the button|
+| style    | string | ''            |Inline CSS styles|
+| disabled  | bool | false            |Disabled/enabled|
 
 ## Usage
 
-1. Ensure that you have correctly followed the structure of the prototype builder.
-2. Place the button component in the desired location within your .yml file hierarchy.
-3. Define the necessary properties for the button according to your requirements.
-
-```
-array (
-    'view' => 'Button',
-        'params' => [
-            'title' => 'button title',
-            'text' => 'some text in the button',
-        ],
-    ),
+```php
+$this->adios->view->Button([
+    'type' => 'delete',
+    'title' => 'Delete item',
+    'text' => 'Delete item',
+    'onclick' => 'alert()'
+])->render();
 ```
 
 ## Examples
 
-Will be added later...
+**Example #1:** Disabled button
+
+```php
+$this->adios->view->Button([
+    'type' => 'confirm',
+    'text' => 'Disabled button',
+    'disabled' => true
+]);
+```
+
+**Example #2:** Custom JavaScript function
+
+```php
+$this->adios->view->Button([
+    'text' => 'Your function',
+    'onclick' => 'yourFunction()'
+]);
+```
 
 ## Notes
 
