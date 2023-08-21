@@ -32,7 +32,7 @@ $this->adios->view->Button([
 
 ## Examples
 
-Disabled button
+**Example #1:** Disabled button
 
 ```php
 $this->adios->view->Button([
@@ -42,7 +42,7 @@ $this->adios->view->Button([
 ]);
 ```
 
-Custom JavaScript function
+**Example #2:** Custom JavaScript function
 
 ```php
 $this->adios->view->Button([
