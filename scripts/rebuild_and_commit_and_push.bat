@@ -5,7 +5,7 @@ if "%1" == "" (
   goto end
 )
 
-php builder.php
+php %~dp0builder.php
 git add .
 git commit -m %1
 git push
