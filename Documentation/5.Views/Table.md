@@ -1,10 +1,10 @@
 # Table
 
-The Table component is one of the most important elements for data visualization. It offers extensive customization options, allowing developers to adjust the entire component to their needs. Beyond its role as a data renderer, the Table component includes additional functionalities, such as the ability to export data to CSV format or import data from a CSV file.
+The Table view is one of the most important elements for data visualization. It offers extensive customization options, allowing developers to adjust the entire view to their needs. Beyond its role as a data renderer, the Table view includes additional functionalities, such as the ability to export data to CSV format or import data from a CSV file.
 
-## Properties
+## Parameters
 
-The Table component supports various properties that can be utilized to meet functionality requirements:
+The Table view supports various parameters that can be utilized to meet functionality requirements:
 
 | Property            | Type   | Default value | Description |
 |---------------------|--------|---------------|-------------|
