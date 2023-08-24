@@ -9,7 +9,51 @@ $documentationPath = __DIR__ . '/../Documentation';
 
 require 'vendor/autoload.php';
 
-function listFilesRecursively(string $documentationPath) {
+function buildSidebarArrayRecursive(string $basePath) {
+  $sidebarArray = [];
+
+  if (is_dir($basePath)) {
+    $items = scandir($basePath);
+
+    foreach ($items as $item) {
+      if ($item !== '.' && $item !== '..') {
+        $path = $basePath . DIRECTORY_SEPARATOR . $item;
+
+        if (is_file($path)) {
+          $sidebarArray[] = $item;
+        } elseif (is_dir($path)) {
+          $subSidebar = buildSidebarArrayRecursive($path);
+          $sidebarArray[$item] = $subSidebar;
+        }
+      }
+    }
+  }
+
+  return $sidebarArray;
+}
+
+function buildSidebarHtmlRecursive(array $sidebarArray) {
+  $html = "";
+
+  foreach ($sidebarArray as $key => $value) {
+    if (is_array($value)) {
+      $html .= "<li class='dropdown'>";
+      $html .= "<a href='#$key' class='dropdown-toggle' data-toggle='dropdown'>$key <span class='caret'></span></a>";
+      $html .= "<ul class='dropdown-menu animated fadeInLeft' role='menu'>";
+      $html .= buildSidebarHtmlRecursive($value); // Recursive call for subitems
+      $html .= "</ul>";
+      $html .= "</li>";
+    } else {
+      $html .= "<li><a href='#$value'>$value</a></li>";
+    }
+  }
+
+  $html .= "";
+
+  return $html;
+}
+
+function listFilesRecursively(string $documentationPath, int $depth = 0) {
   if (!is_dir($documentationPath)) {
     return ['files' => [], 'dirs' => []];
   }
@@ -24,10 +68,11 @@ function listFilesRecursively(string $documentationPath) {
     if ($item !== '.' && $item !== '..') {
       $path = $documentationPath . DIRECTORY_SEPARATOR . $item;
       if (is_file($path)) {
-        $results['files'][] = $path;
+        $results['files'][] = ['path' => $path, 'depth' => $depth];
       } elseif (is_dir($path)) {
         $results['dirs'][] = $path;
-        $subResults = listFilesRecursively($path);
+        $subResults = listFilesRecursively($path, $depth + 1);
+        //var_dump($subResults['files']);
         $results['files'] = array_merge($results['files'], $subResults['files']);
         $results['dirs'] = array_merge($results['dirs'], $subResults['dirs']);
       }
@@ -37,7 +82,8 @@ function listFilesRecursively(string $documentationPath) {
   return $results;
 }
 
-function renderHtml(string $markdownPathToRender) {
+
+function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
   $parsedown = new Parsedown();
 
   $markdown = file_get_contents($markdownPathToRender);
@@ -58,26 +104,12 @@ function renderHtml(string $markdownPathToRender) {
         <nav class='navbar navbar-inverse fixed-top' id='sidebar-wrapper' role='navigation'>
           <ul class='nav sidebar-nav'>
             <div class='sidebar-header'>
-            <div class='sidebar-brand'>
-              <a href='#'>ADIOS docs</a></div></div>
-            <li><a href='#home'>Home</a></li>
-            <li><a href='#about'>About</a></li>
-            <li><a href='#events'>Events</a></li>
-            <li><a href='#team'>Team</a></li>
-            <li class='dropdown'>
-            <a href='#works' class='dropdown-toggle'  data-toggle='dropdown'>Works <span class='caret'></span></a>
-          <ul class='dropdown-menu animated fadeInLeft' role='menu'>
-          <div class='dropdown-header'>Dropdown heading</div>
-          <li><a href='#pictures'>Pictures</a></li>
-          <li><a href='#videos'>Videeos</a></li>
-          <li><a href='#books'>Books</a></li>
-          <li><a href='#art'>Art</a></li>
-          <li><a href='#awards'>Awards</a></li>
-          </ul>
-          </li>
-          <li><a href='#services'>Services</a></li>
-          <li><a href='#contact'>Contact</a></li>
-          <li><a href='#followme'>Follow me</a></li>
+              <div class='sidebar-brand'>
+                <img class='logo-img' src='../scripts/assets/adios.jpeg' />
+                <a href='#'>ADIOS</a>
+              </div>
+            </div>
+            {$sidebarsItemsHtml}
           </ul>
         </nav>
 
@@ -137,6 +169,21 @@ function renderHtml(string $markdownPathToRender) {
             wrapper.classList.toggle('toggled');
           });
         }
+
+        var dropdown = document.getElementsByClassName('dropdown-toggle');
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener('click', function() {
+            this.classList.toggle('active');
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === 'block') {
+              dropdownContent.style.display = 'none';
+            } else {
+              dropdownContent.style.display = 'block';
+            }
+          });
+        } 
       });  
     </script>
   ";
@@ -144,17 +191,23 @@ function renderHtml(string $markdownPathToRender) {
   $filePath = preg_replace('/\.md$/', '.html', $markdownPathToRender);
   $filePath = str_replace('Documentation', 'html', $filePath);
   
-  $directory = dirname($filePath);
-  if (!is_dir($directory)) {
-    mkdir($directory, 0777, true);
+  if (!is_file($filePath)) {
+    $directory = dirname($filePath);
+    if (!is_dir($directory)) {
+      mkdir($directory, 0777, true);
+    }
   }
 
+  file_put_contents("../html/index.html", $html);exit;
   file_put_contents($filePath, $html);exit;
 }
 
 $files = listFilesRecursively($documentationPath);
 
+$sidebarItems = buildSidebarArrayRecursive($documentationPath);
+$sidebarsItemsHtml = buildSidebarHtmlRecursive($sidebarItems);
+
 foreach ($files['files'] as $file) {
-  renderHtml($file);
+  renderHtml($file['path'], $sidebarsItemsHtml);
 }
 

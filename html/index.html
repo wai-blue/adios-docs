@@ -1,1 +1,96 @@
-Toto je akoze staticka stranka. 2023-08-23 07:18:59
+
+    <!DOCTYPE html>
+    <html lang='en'>
+      <head>
+        <meta charset='UTF-8'>
+        <title>ADIOS</title>
+        <link rel='stylesheet' href='../scripts/assets/css/style.css'>
+      </head>
+      <body>
+      <div id='wrapper'>
+        <div class='overlay'></div>
+        <nav class='navbar navbar-inverse fixed-top' id='sidebar-wrapper' role='navigation'>
+          <ul class='nav sidebar-nav'>
+            <div class='sidebar-header'>
+            <div class='sidebar-brand'>
+              <img class='logo-img' src='../scripts/assets/adios.jpeg' />
+              <a href='#'>ADIOS docs</a></div></div>
+              <li class='dropdown'><a href='#Architectural Overview' class='dropdown-toggle' data-toggle='dropdown'>Architectural Overview <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Introduction.md'>Introduction.md</a></li></ul></li><li class='dropdown'><a href='#Assets' class='dropdown-toggle' data-toggle='dropdown'>Assets <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li class='dropdown'><a href='#Images' class='dropdown-toggle' data-toggle='dropdown'>Images <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#dashboard.png'>dashboard.png</a></li><li><a href='#login.png'>login.png</a></li><li><a href='#prototype-builder.png'>prototype-builder.png</a></li><li><a href='#ui-form-complex.png'>ui-form-complex.png</a></li></ul></li></ul></li><li class='dropdown'><a href='#Database' class='dropdown-toggle' data-toggle='dropdown'>Database <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li class='dropdown'><a href='#Data Types' class='dropdown-toggle' data-toggle='dropdown'>Data Types <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Integer.md'>Integer.md</a></li></ul></li><li><a href='#Introduction.md'>Introduction.md</a></li><li><a href='#Query builder.md'>Query builder.md</a></li></ul></li><li class='dropdown'><a href='#Getting started' class='dropdown-toggle' data-toggle='dropdown'>Getting started <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Deployment.md'>Deployment.md</a></li><li><a href='#Directory-structure.md'>Directory-structure.md</a></li><li><a href='#Installation.md'>Installation.md</a></li></ul></li><li class='dropdown'><a href='#Introduction' class='dropdown-toggle' data-toggle='dropdown'>Introduction <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Framework-comparison.md'>Framework-comparison.md</a></li><li><a href='#Introduction.md'>Introduction.md</a></li></ul></li><li class='dropdown'><a href='#Security' class='dropdown-toggle' data-toggle='dropdown'>Security <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Authentification.md'>Authentification.md</a></li><li><a href='#Authorization.md'>Authorization.md</a></li></ul></li><li class='dropdown'><a href='#Testing' class='dropdown-toggle' data-toggle='dropdown'>Testing <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Introduction.md'>Introduction.md</a></li></ul></li><li class='dropdown'><a href='#The basics' class='dropdown-toggle' data-toggle='dropdown'>The basics <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Routing.md'>Routing.md</a></li></ul></li><li class='dropdown'><a href='#Views' class='dropdown-toggle' data-toggle='dropdown'>Views <span class='caret'></span></a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='#Button.md'>Button.md</a></li><li><a href='#Cards.md'>Cards.md</a></li><li><a href='#Chart.md'>Chart.md</a></li><li><a href='#Data table.md'>Data table.md</a></li><li><a href='#File browser.md'>File browser.md</a></li><li><a href='#Form.md'>Form.md</a></li><li><a href='#Grid.md'>Grid.md</a></li><li><a href='#Html.md'>Html.md</a></li><li><a href='#Input.md'>Input.md</a></li><li><a href='#Introduction.md'>Introduction.md</a></li><li><a href='#Settings panel.md'>Settings panel.md</a></li><li><a href='#Table.md'>Table.md</a></li><li><a href='#Tabs.md'>Tabs.md</a></li><li><a href='#Title.md'>Title.md</a></li><li><a href='#Tree.md'>Tree.md</a></li><li><a href='#Window.md'>Window.md</a></li></ul></li>
+          </ul>
+        </nav>
+
+        <div id='page-content-wrapper'>
+          <button 
+            type='button' 
+            class='hamburger animated fadeInLeft is-closed' 
+            data-toggle='offcanvas'
+          >
+            <span class='hamb-top'></span>
+            <span class='hamb-middle'></span>
+            <span class='hamb-bottom'></span>
+          </button>
+
+          <div class='container'>
+            <div class='row'>
+              <div class='col-lg-8 col-lg-offset-2'>
+                <h1>Introduction</h1>
+<p>Work in progress...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </body>
+    </html>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var trigger = document.querySelector('.hamburger');
+        var overlay = document.querySelector('.overlay');
+        var isClosed = false;
+
+        trigger.addEventListener('click', function () {
+            hamburger_cross();
+        });
+
+        function hamburger_cross() {
+          if (isClosed) {
+            overlay.style.display = 'none';
+            trigger.classList.remove('is-open');
+            trigger.classList.add('is-closed');
+            isClosed = false;
+          } else {
+            overlay.style.display = 'block';
+            trigger.classList.remove('is-closed');
+            trigger.classList.add('is-open');
+            isClosed = true;
+          }
+        }
+
+
+        var offcanvasToggle = document.querySelectorAll('[data-toggle=\'offcanvas\']');
+        var wrapper = document.getElementById('wrapper');
+
+        for (var i = 0; i < offcanvasToggle.length; i++) {
+          offcanvasToggle[i].addEventListener('click', function () {
+            wrapper.classList.toggle('toggled');
+          });
+        }
+
+        var dropdown = document.getElementsByClassName('dropdown-toggle');
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener('click', function() {
+            this.classList.toggle('active');
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === 'block') {
+              dropdownContent.style.display = 'none';
+            } else {
+              dropdownContent.style.display = 'block';
+            }
+          });
+        } 
+      });  
+    </script>
+  
