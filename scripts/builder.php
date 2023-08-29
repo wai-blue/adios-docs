@@ -38,7 +38,12 @@ function buildSidebarHtmlRecursive(array $sidebarArray) {
   foreach ($sidebarArray as $key => $value) {
     if (is_array($value)) {
       $html .= "<li class='dropdown'>";
-      $html .= "<a href='#$key' class='dropdown-toggle' data-toggle='dropdown'>$key <span class='caret'></span></a>";
+      $html .= "
+        <a 
+          href='#$key' class='dropdown-toggle' data-toggle='dropdown'>
+          {$key} <small style='float:right';padding-top:5px>﹀</small>
+        </a>"
+      ;
       $html .= "<ul class='dropdown-menu animated fadeInLeft' role='menu'>";
       $html .= buildSidebarHtmlRecursive($value); // Recursive call for subitems
       $html .= "</ul>";
