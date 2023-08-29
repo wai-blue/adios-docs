@@ -20,7 +20,7 @@ function buildSidebarArrayRecursive(string $basePath) {
         $path = $basePath . DIRECTORY_SEPARATOR . $item;
 
         if (is_file($path)) {
-          $sidebarArray[] = $item;
+          $sidebarArray[] = preg_replace('/\.md$/', '', $item);
         } elseif (is_dir($path)) {
           $subSidebar = buildSidebarArrayRecursive($path);
           $sidebarArray[$item] = $subSidebar;
@@ -32,7 +32,7 @@ function buildSidebarArrayRecursive(string $basePath) {
   return $sidebarArray;
 }
 
-function buildSidebarHtmlRecursive(array $sidebarArray) {
+function buildSidebarHtmlRecursive(array $sidebarArray, string $url = '') {
   $html = "";
 
   foreach ($sidebarArray as $key => $value) {
@@ -45,11 +45,11 @@ function buildSidebarHtmlRecursive(array $sidebarArray) {
         </a>"
       ;
       $html .= "<ul class='dropdown-menu animated fadeInLeft' role='menu'>";
-      $html .= buildSidebarHtmlRecursive($value); // Recursive call for subitems
+      $html .= buildSidebarHtmlRecursive($value, '../' . $key);
       $html .= "</ul>";
       $html .= "</li>";
     } else {
-      $html .= "<li><a href='#$value'>$value</a></li>";
+      $html .= "<li><a href='{$url}/{$value}.html'>{$value}</a></li>";
     }
   }
 
@@ -87,13 +87,27 @@ function listFilesRecursively(string $documentationPath, int $depth = 0) {
   return $results;
 }
 
+function getAssetsRelativePath(string $markdownPathToRender) {
+  $assetsPath = '';
+  $startPosition = strpos($markdownPathToRender, 'Documentation/') + strlen('Documentation/');
+  $subString = substr($markdownPathToRender, $startPosition);
+
+  foreach (explode('/', $subString) as $path) {
+    $assetsPath .= '../';
+  }
+
+  $assetsPath .= 'resources/assets';
+
+  return $assetsPath;
+}
 
 function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
   $parsedown = new Parsedown();
 
   $markdown = file_get_contents($markdownPathToRender);
-
   $mdHtml = $parsedown->text($markdown);
+
+  $assetsRelativePath = getAssetsRelativePath($markdownPathToRender);
 
   $html = "
     <!DOCTYPE html>
@@ -101,7 +115,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../scripts/assets/css/style.css'>
+        <link rel='stylesheet' href='{$assetsRelativePath}/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -110,7 +124,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
           <ul class='nav sidebar-nav'>
             <div class='sidebar-header'>
               <div class='sidebar-brand'>
-                <img class='logo-img' src='../scripts/assets/adios.jpeg' />
+                <img class='logo-img' src='{$assetsRelativePath}/adios.jpeg' />
                 <a href='#'>ADIOS</a>
               </div>
             </div>
@@ -119,7 +133,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
         </nav>
 
         <div id='page-content-wrapper'>
-          <button 
+          <!--<button 
             type='button' 
             class='hamburger animated fadeInLeft is-closed' 
             data-toggle='offcanvas'
@@ -127,7 +141,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
             <span class='hamb-top'></span>
             <span class='hamb-middle'></span>
             <span class='hamb-bottom'></span>
-          </button>
+          </button>-->
 
           <div class='container'>
             <div class='row'>
@@ -141,56 +155,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
       </body>
     </html>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var trigger = document.querySelector('.hamburger');
-        var overlay = document.querySelector('.overlay');
-        var isClosed = false;
-
-        trigger.addEventListener('click', function () {
-            hamburger_cross();
-        });
-
-        function hamburger_cross() {
-          if (isClosed) {
-            overlay.style.display = 'none';
-            trigger.classList.remove('is-open');
-            trigger.classList.add('is-closed');
-            isClosed = false;
-          } else {
-            overlay.style.display = 'block';
-            trigger.classList.remove('is-closed');
-            trigger.classList.add('is-open');
-            isClosed = true;
-          }
-        }
-
-
-        var offcanvasToggle = document.querySelectorAll('[data-toggle=\'offcanvas\']');
-        var wrapper = document.getElementById('wrapper');
-
-        for (var i = 0; i < offcanvasToggle.length; i++) {
-          offcanvasToggle[i].addEventListener('click', function () {
-            wrapper.classList.toggle('toggled');
-          });
-        }
-
-        var dropdown = document.getElementsByClassName('dropdown-toggle');
-        var i;
-
-        for (i = 0; i < dropdown.length; i++) {
-          dropdown[i].addEventListener('click', function() {
-            this.classList.toggle('active');
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === 'block') {
-              dropdownContent.style.display = 'none';
-            } else {
-              dropdownContent.style.display = 'block';
-            }
-          });
-        } 
-      });  
-    </script>
+    <script src='{$assetsRelativePath}/js/main.js'></script>
   ";
 
   $filePath = preg_replace('/\.md$/', '.html', $markdownPathToRender);
@@ -203,8 +168,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
     }
   }
 
-  file_put_contents("../html/index.html", $html);exit;
-  file_put_contents($filePath, $html);exit;
+  file_put_contents($filePath, $html);
 }
 
 $files = listFilesRecursively($documentationPath);
