@@ -77,7 +77,6 @@ function listFilesRecursively(string $documentationPath, int $depth = 0) {
       } elseif (is_dir($path)) {
         $results['dirs'][] = $path;
         $subResults = listFilesRecursively($path, $depth + 1);
-        //var_dump($subResults['files']);
         $results['files'] = array_merge($results['files'], $subResults['files']);
         $results['dirs'] = array_merge($results['dirs'], $subResults['dirs']);
       }
@@ -106,6 +105,8 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
 
   $markdown = file_get_contents($markdownPathToRender);
   $mdHtml = $parsedown->text($markdown);
+
+  $mdHtml =  $mdHtml == '' ? '<p>Work in progress...</p>' : $mdHtml;
 
   $assetsRelativePath = getAssetsRelativePath($markdownPathToRender);
 
