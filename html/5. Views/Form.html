@@ -71,7 +71,196 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <h1>Table</h1>
+<p>The Form view is one of the most important elements for data manipulating such a inserting and editing records from the database. Also it offers extensive customization options, allowing developers to adjust the entire form to their needs.</p>
+<h2>Properties</h2>
+<p>The Form view supports various properties that can be utilized to meet functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>string</td>
+<td>''</td>
+<td>Path to model</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>string</td>
+<td>''</td>
+<td>Html identifier, if it is empty ADIOS will generate it automatically</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>''</td>
+<td></td>
+</tr>
+<tr>
+<td>title_params</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> formatter</td>
+<td>string</td>
+<td>'ui_form_formatter'</td>
+<td></td>
+</tr>
+<tr>
+<td>defaultValues</td>
+<td>array</td>
+<td></td>
+<td>Default values for inputs. <em>Example #1</em></td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>bool</td>
+<td>false</td>
+<td>All columns in the form will be disabled, the show and close buttons will also be disabled</td>
+</tr>
+<tr>
+<td>template</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>show_save_button</td>
+<td>bool</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>save_button_params</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>show_close_button</td>
+<td>bool</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>close_button_params</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>show_delete_button</td>
+<td>bool</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>delete_button_params</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>show_copy_button</td>
+<td>bool</td>
+<td>false</td>
+<td></td>
+</tr>
+<tr>
+<td>copy_button_params</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>formType</td>
+<td>string</td>
+<td>'window'</td>
+<td></td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> windowParams</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> width</td>
+<td>int</td>
+<td>700</td>
+<td></td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> height</td>
+<td>int</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> onclose</td>
+<td>string</td>
+<td>''</td>
+<td></td>
+</tr>
+<tr>
+<td>onload</td>
+<td>string</td>
+<td>''</td>
+<td>Custom JavaScript function that renders after html document onload</td>
+</tr>
+<tr>
+<td>javascript</td>
+<td>string</td>
+<td>''</td>
+<td>Custom JavaScript function that renders with the Form view</td>
+</tr>
+<tr>
+<td>displayMode</td>
+<td>string</td>
+<td>'desktop'</td>
+<td>The rendering type of the form: <strong>Options:</strong>  <code>['desktop', 'window']</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Usage</h2>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Form([
+  'model' =&gt; 'Path/To/Your/Model'
+])-&gt;render();</code></pre>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong> Form for the VAT with default value for the column ratio.</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Form([
+  'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+  'defaultValues' =&gt; [
+    'ratio' =&gt; 20
+  ]
+]);</code></pre>
+<p><strong>Example #2:</strong> Form for the VAT with read-only inputs.</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Form([
+  'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+  'readonly' =&gt; true
+]);</code></pre>
+<p><strong>Example #3:</strong> Form for the VAT with custom inputs order</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Form([
+  'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+  'columns' =&gt; [
+    [
+      'rows' =&gt; [
+        'id_fin_accounting_period',
+        'ratio'
+      ]
+    ]
+  ]
+]);</code></pre>
+<h2>Notes</h2>
               </div>
             </div>
           </div>

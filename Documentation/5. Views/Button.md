@@ -53,4 +53,4 @@ $this->adios->view->Button([
 
 ## Notes
 
-1. Each supported type of button has a predefined Font Awesome icon corresponding to its type, as well as properties for 'type', 'class', and 'onClick'.
+1. Each supported type of button has a predefined Font Awesome icon corresponding to its type, as well as properties for 'type', 'class', and 'onclick'.
