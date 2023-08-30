@@ -79,4 +79,27 @@ $this->adios->view->Form([
 ]);
 ```
 
+**Example #4:** Form for the VAT with custom tabs windows
+
+```php
+$this->adios->view->Form([
+  'model' => 'App/Widgets/Finance/MainBook/Models/Vat',
+  'template' => [
+    'columns' => [
+      [
+        'tabs' => [
+          'Main' => [ # Tab Main with form input ratio
+            'ratio'
+          ],
+          'Other' => [ # Other tab called Other with another form inputs
+            'id_fin_accounting_period',
+            'id_fin_book_account'
+          ]
+        ]
+      ]
+    ]
+  ]
+])
+```
+
 ## Notes
