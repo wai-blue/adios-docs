@@ -4,7 +4,7 @@ You've arrived at the right place to explore the documentation for the [ADIOS](h
 
 We prepared for you ADIOS documentation in two versions, now it's up to you, which option you use:
 
-1. [static website](https://wai-blue.github.io/adios-docs/)
+1. [static website](https://wai-blue.github.io/adios-docs/html)
 2. [adios-docs repository](https://github.com/wai-blue/adios-docs)
 
 ## About ADIOS
