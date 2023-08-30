@@ -31,7 +31,7 @@ The Form view supports various properties that can be utilized to meet functiona
 | ⚠️ **[deprecated]** onclose      | string | ''                  |                                                                                            |
 | onload                          | string | ''                  | Custom JavaScript function that renders after html document onload                         |
 | javascript                      | string | ''                  | Custom JavaScript function that renders with the Form view                                 |
-| displayMode                     | string | 'desktop'           | The rendering type of the form: **Options:**  `['desktop', 'window']`                      |
+| displayMode                     | string | 'window'            | The rendering type of the form: **Options:**  `['desktop', 'window']`                      |
 
 ## Usage
 
