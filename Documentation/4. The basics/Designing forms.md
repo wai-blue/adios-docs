@@ -1,8 +1,12 @@
 # Designing forms
 
-The [Form](../5.%20Views/Form.md) view contains a flexible and easy-to-configure templating engine that can render complex forms for inserting or editing records in a [model](../6.%20Database/Model.md). The definition of the template can contain:
+The [Form](../5.%20Views/Form.md) view contains a flexible and easy-to-configure templating engine that can render complex forms for inserting or editing records in a [model](../6.%20Database/Model.md). With this templating engine and only a little coding, you will be able to create complex forms for manipulating your data.
+
+The definition of the Form's template can contain:
 
   * inputs to the columns of a model based on its [data type](../6.%20Database/Data%20types.md);
+  * lookups
+  * groups of inputs
   * columns
   * tabs
   * custom fields
@@ -32,9 +36,26 @@ The `model` parameter is for necessary to get the list of available columns.
 
 ## Hello world example
 
-The easiest configuration of the form's template is to provide the list of columns which we want to render into the form, in a form of an array.
-
-As shown in the previous example, the form with this configuration would look like this:
+The easiest configuration of the form's template is to provide the list of columns which we want to render into the form, in a form of an array. The form with the configuration from the previous example would be rendered by like this:
 
 ![Hello world example form](../img/contact_add.png)
+
+You only need to launch the `render()` method:
+
+```php
+echo $theForm->render();
+```
+
+## Using model's configuration to render a form
+
+You may ask, where the other information like the window title or the titles of the inputs come from. The answer is: from a [model](../6.%20Database/Model.md). The model contains several properties used by forms, e.g.:
+
+  * formTitleForInserting
+  * formTitleForEditing
+
+Additionaly, the definition of model's columns (provided by the `columns()` method of model) contains some other information used in rendering of the form, e.g.:
+
+  * type
+  * title
+  * unit
 
