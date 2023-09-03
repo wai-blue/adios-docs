@@ -32,9 +32,9 @@ $theForm = new \ADIOS\Core\Views\Form(
 )
 ```
 
-The `model` parameter is for necessary to get the list of available columns.
+The `model` parameter is used to get the list of available columns and their properties (data type, title, ...).
 
-*Tip: You can create a .yml file with the definition of the template and use the [`prototype builder`](./Prototype%20builder.md) feature to generate the source code from the command line*
+*Tip: You can create a .yml file with the definition of the template and use the [`prototype builder`](./Prototype%20builder.md) feature to generate the source code from the command line.*
 
 ## Hello world example
 
