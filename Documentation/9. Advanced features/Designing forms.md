@@ -34,6 +34,8 @@ $theForm = new \ADIOS\Core\Views\Form(
 
 The `model` parameter is for necessary to get the list of available columns.
 
+*Tip: You can create a .yml file with the definition of the template and use the [`prototype builder`](./Prototype%20builder.md) feature to generate the source code from the command line*
+
 ## Hello world example
 
 The easiest configuration of the form's template is to provide the list of columns which we want to render into the form, in a form of an array. The form with the configuration from the previous example would be rendered by like this:
@@ -48,7 +50,7 @@ echo $theForm->render();
 
 ## Using model's configuration to render a form
 
-You may ask, where the other information like the window title or the titles of the inputs come from. The answer is: from a [model](../6.%20Database/Model.md). The model contains several properties used by forms, e.g.:
+You may ask, where the other information like the window title or the titles of the inputs come from. The answer is: from a [model](../6.%20Database/Model.md). The *model* contains several properties used by forms, e.g.:
 
   * formTitleForInserting
   * formTitleForEditing
@@ -59,3 +61,4 @@ Additionaly, the definition of model's columns (provided by the `columns()` meth
   * title
   * unit
 
+Check [\ADIOS\Core\Model class](https://github.com/wai-blue/ADIOS/blob/main/src/Core/Model.php) for the list of all properies used.
