@@ -26,8 +26,8 @@ $theForm = new \ADIOS\Core\Views\Form(
     'template' => [
       'first_name',
       'last_name',
-      'email',
-    ],
+      'email'
+    ]
   ]
 )
 ```
@@ -40,7 +40,7 @@ The `model` parameter is used to get the list of available columns and their pro
 
 The easiest configuration of the form's template is to provide the list of columns which we want to render into the form, in a form of an array. The form with the configuration from the previous example would be rendered by like this:
 
-![Hello world example form](../img/contact_add.png)
+![Hello world example form](../img/contact_add1.png)
 
 You only need to launch the `render()` method:
 
@@ -62,3 +62,97 @@ Additionaly, the definition of model's columns (provided by the `columns()` meth
   * unit
 
 Check [\ADIOS\Core\Model class](https://github.com/wai-blue/ADIOS/blob/main/src/Core/Model.php) for the list of all properies used.
+
+## More complex examples
+
+### Tabs
+
+Let's imagine, the model for storing the contacts could be far more complex and could contain lots of columns, somehow logically grouped. In such case, you may want to render a form using tabs. With the form's templating engine, this is very simple.
+
+For example, this configuration of the template:
+
+```php
+$theFormWithTabs = new \ADIOS\Core\Views\Form(
+  $adios,
+  [
+    'model' => 'App/Widgets/AddressBook/Models/Contact',
+    'template' => [
+      'columns' => [
+        [
+          'tabs' => [
+            'Basic information' => [
+              'first_name',
+              'middle_name',
+              'last_name',
+              'email'
+            ],
+            'Social profiles' => [
+              'url_facebook',
+              'url_linkedin'
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+)
+```
+
+Would end up with the form rendered followingly:
+
+![Hello world example form](../img/contact_add2.png)
+
+### Groupping inside a tab
+
+```php
+$theFormWithTabs = new \ADIOS\Core\Views\Form(
+  $adios,
+  [
+    'model' => 'App/Widgets/AddressBook/Models/Contact',
+    'template' => [
+      'columns' => [
+        [
+          'tabs' => [
+            'Basic information' => [
+              'group' => [
+                'title' => 'Full name',
+                'items' => [
+                  'first_name',
+                  'middle_name',
+                  'last_name'
+                ],
+              ],
+              'group' => [
+                'title' => 'Contact details',
+                'items' => [
+                  'email',
+                  'phone'
+                ]
+              ]
+            ],
+            'Social profiles' => [
+              'url_facebook',
+              'url_linkedin'
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+)
+```
+![Hello world example form](../img/contact_add3.png)
+
+### Tables linked via foreign keys (lookups)
+
+For example, let's have a form to edit the contact and each contact can have several addresses associated.
+
+In this case, you would have two models:
+
+  1. `\App\Widgets\AddressBook\Models\Contact` to store the basic information about the contact like `first_name`, `last_name` or `email`.
+  2. `\App\Widgets\AddressBook\Models\ContactAddress` to store the associated addresses. This model would contain a *lookup* column `id_contact` - the foreign key to the Contact.
+
+### Inputs based on lookuped models
+
+`id_com_contact_person:LOOKUP:title_before`
+
