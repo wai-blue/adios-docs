@@ -63,6 +63,38 @@ Additionaly, the definition of model's columns (provided by the `columns()` meth
 
 Check [\ADIOS\Core\Model class](https://github.com/wai-blue/ADIOS/blob/main/src/Core/Model.php) for the list of all properies used.
 
+## Rendering views inside a form
+
+Sometimes you need to include more complex views inside a form. A typical example is a table with the list of associated records.
+
+This can be achieved by providing the view class and parameters to the templating engine. In the example below, the view [Table](../5.%20Views/Table.md) will be rendered.
+
+```php
+$theForm = new \ADIOS\Core\Views\Form(
+  $adios,
+  [
+    'model' => 'App/Widgets/AddressBook/Models/Contact',
+    'template' => [
+      'columns' => [
+        'first_name',
+        'last_name',
+        [
+          'view' => 'Table',
+          'params' => [
+            'model' => 'App/Widgets/AddressBook/Models/ContactAddress',
+            'where' => [
+              'id_contact',
+              '=',
+              $this->params['id'],
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+)
+```
+
 ## More complex examples
 
 ### Tabs
@@ -143,14 +175,72 @@ $theFormWithTabs = new \ADIOS\Core\Views\Form(
 ```
 ![Hello world example form](../img/contact_add3.png)
 
+### Multiple columns
+
+...
+
 ### Tables linked via foreign keys (lookups)
 
-For example, let's have a form to edit the contact and each contact can have several addresses associated.
+Let's have a form to edit the contact and each contact can have several addresses associated.
 
 In this case, you would have two models:
 
   1. `\App\Widgets\AddressBook\Models\Contact` to store the basic information about the contact like `first_name`, `last_name` or `email`.
   2. `\App\Widgets\AddressBook\Models\ContactAddress` to store the associated addresses. This model would contain a *lookup* column `id_contact` - the foreign key to the Contact.
+
+The easiest way how to build a UI to manage this dataset, is to create a form for the `Contact` model, containing a table with the list of associated records from the `ContactAddress` model. And to make the form nice looking, we will split the form into two tabs, one for the contact details and the second for the table.
+
+```php
+$theForm = new \ADIOS\Core\Views\Form(
+  $adios,
+  [
+    'model' => 'App/Widgets/AddressBook/Models/Contact',
+    'template' => [
+
+      'columns' => [
+        [
+          'tabs' => [
+            'Basic information' => [
+              'group' => [
+                'title' => 'Full name',
+                'items' => [
+                  'first_name',
+                  'middle_name',
+                  'last_name'
+                ],
+              ],
+              'group' => [
+                'title' => 'Contact details',
+                'items' => [
+                  'email',
+                  'phone'
+                ]
+              ]
+            ],
+            'Social profiles' => [
+              'url_facebook',
+              'url_linkedin'
+            ],
+            'Addresses' => [
+              [
+                'view' => 'Table',
+                'params' => [
+                  'model' => 'App/Widgets/AddressBook/Models/ContactAddress',
+                  'where' => [
+                    'id_contact',
+                    '=',
+                    $this->params['id'],
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+)
+```
 
 ### Inputs based on lookuped models
 
