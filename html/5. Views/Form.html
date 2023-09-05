@@ -226,7 +226,7 @@
 <tr>
 <td>displayMode</td>
 <td>string</td>
-<td>'desktop'</td>
+<td>'window'</td>
 <td>The rendering type of the form: <strong>Options:</strong>  <code>['desktop', 'window']</code></td>
 </tr>
 </tbody>
@@ -260,6 +260,25 @@
     ]
   ]
 ]);</code></pre>
+<p><strong>Example #4:</strong> Form for the VAT with custom tabs windows</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Form([
+  'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+  'template' =&gt; [
+    'columns' =&gt; [
+      [
+        'tabs' =&gt; [
+          'Main' =&gt; [ # Tab Main with form input ratio
+            'ratio'
+          ],
+          'Other' =&gt; [ # Other tab called Other with another form inputs
+            'id_fin_accounting_period',
+            'id_fin_book_account'
+          ]
+        ]
+      ]
+    ]
+  ]
+])</code></pre>
 <h2>Notes</h2>
               </div>
             </div>

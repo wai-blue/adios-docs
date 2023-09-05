@@ -71,7 +71,94 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <h1>Grid</h1>
+<p>The CSS Grid Layout Module offers a grid-based layout system, with rows and columns, making it easier to design web pages without having to use floats and positioning. Learn more about the Grid system <a href="https://www.w3schools.com/css/css_grid.asp">https://www.w3schools.com/css/css_grid.asp</a>.</p>
+<h2>Properties</h2>
+<p>The Grid view supports various properties that can be utilized to meet functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layout</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
+<td>layoutSm</td>
+<td>array</td>
+<td>[]</td>
+<td>For resolution larger than 576px  (Small devices)</td>
+</tr>
+<tr>
+<td>layoutMd</td>
+<td>array</td>
+<td>[]</td>
+<td>For resolution larger than 768px  (Medium devices)</td>
+</tr>
+<tr>
+<td>layoutLg</td>
+<td>array</td>
+<td>[]</td>
+<td>For resolution larger than 992px  (Large devices)</td>
+</tr>
+<tr>
+<td>layoutXl</td>
+<td>array</td>
+<td>[]</td>
+<td>For resolution larger than 1200px (X-Large devices)</td>
+</tr>
+<tr>
+<td>layoutXXl</td>
+<td>array</td>
+<td>[]</td>
+<td>For resolution larger than 1400px (XX-Large devices)</td>
+</tr>
+<tr>
+<td>areas</td>
+<td>array</td>
+<td>[]</td>
+<td>Specifies how to display columns and rows, using named grid items</td>
+</tr>
+</tbody>
+</table>
+<h2>Usage</h2>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Grid([
+  'layout' =&gt; ['A', 'B'],
+  'areas' =&gt; [
+    'A' =&gt; [
+      'html|action|view'
+    ],
+    'B' =&gt; [
+      'html|action|view'
+    ]
+  ]
+])-&gt;render();</code></pre>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong> Grid used for the custom form with area A and area B. Where in area A is renders custom HTML and area B renders Form view.</p>
+<pre><code class="language-php">return $this-&gt;adios-&gt;view-&gt;Grid([
+  'layout' =&gt; ['A', 'B'],
+  'areas' =&gt; [
+    'A' =&gt; [
+      'html' =&gt; '&lt;h1 class="p-0 m-1"&gt;Hello world&lt;/h1&gt;'
+    ],
+    'B' =&gt; [
+      'view' =&gt; 'Form',
+      'params' =&gt; [
+        'displayMode' =&gt; 'inline',
+        'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+      ]
+    ] 
+  ]
+])-&gt;render();</code></pre>
+<h2>Notes</h2>
               </div>
             </div>
           </div>
