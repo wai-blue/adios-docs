@@ -79,7 +79,93 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <h1>FormComplex</h1>
+<pre><code class="language-php">\ADIOS\Core\Views\FormComplex\Template-&gt;render() {
+  foreach (items) {
+    if (item is string) =&gt; Input
+    else adios-&gt;view-&gt;create()
+  }
+}</code></pre>
+<pre><code class="language-php">\ADIOS\Core\Views\FormComplex\Column-&gt;render() {
+  $html = "&lt;column&gt;";
+  $html .= parent::render();
+  $html .= "&lt;/column&gt;";
+}</code></pre>
+<pre><code class="language-php">$theForm = new \ADIOS\Core\Views\FormComplex(
+  $adios,
+  [
+    'model' =&gt; 'App/Widgets/AddressBook/Models/Contact',
+    'template' =&gt; [
+      [
+        'view' =&gt; \ADIOS\Core\Views\FormComplex\Column::class extends Template,
+        'params' =&gt; [
+          'cssClass' =&gt; 'col-8',
+          'items' =&gt; [
+            [
+              'view' =&gt; \ADIOS\Core\Views\FormComplex\Tabs::class extends Template,
+              'params' =&gt; [
+                'cssClass' =&gt; '...',
+                'title' =&gt; 'Basic information',
+                'items' =&gt; [
+                  [
+                    'view' =&gt; \ADIOS\Core\Views\FormComplex\Group::class extends Template,
+                    'params' =&gt; [
+                      'title' =&gt; 'Full name',
+                      'items' =&gt; [
+                        'first_name',
+                        'middle_name',
+                        'last_name',
+                        'id_com_contact_person:LOOKUP:title_before'
+                      ]
+                    ]
+                  ],
+                  [
+                    'view' =&gt; \ADIOS\Core\Views\FormComplex\Group::class extends Template,
+                    'params' =&gt; [
+                      'title' =&gt; 'Contact details',
+                      'items' =&gt; [
+                        'email',
+                        [
+                          'view' =&gt; \ADIOS\Core\Views\Input::class,
+                          'params' =&gt; [
+                            'column' =&gt; 'email',
+                          ],
+                        ]
+                        'phone'
+                      ]
+                    ],
+                  ],
+                  [
+                    'view' =&gt; \ADIOS\Core\Views\Table::class,
+                    'params' =&gt; [
+                      'model' =&gt; \App\Widgets\AddressBook\Models\ContactAddress::class,
+                      'where' =&gt; [
+                        'id_contact',
+                        '=',
+                        $this-&gt;params['id'],
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+);</code></pre>
+<pre><code class="language-yaml">view: \ADIOS\Core\Views\FormComplex
+template:
+  - view: \ADIOS\Core\Views\FormComplex\Column
+    params:
+      cssClass: col-8
+      items:
+        - view: \ADIOS\Core\Views\FormComplex\Tabs
+          title: Contact details
+          items:
+            - first_name
+            - last_name</code></pre>
               </div>
             </div>
           </div>
