@@ -1,0 +1,25 @@
+---
+ConfigEnv:
+  db:
+    host: localhost
+    login: root
+    password: ''
+    name: adios_docs_examples
+  globalTablePrefix: ''
+  rewriteBase: "/adios-docs-examples/"
+ConfigApp:
+  applicationName: AdiosDocs | Examples
+  defaultAction: Home/Dashboard
+  availableLanguages:
+  - en
+  - sk
+Widgets:
+  Home:
+    faIcon: fa-home
+    sidebar:
+      Home:
+        url: Home/Dashboard
+    actions:
+      Dashboard:
+        template: Dashboard
+  AddressBook: "@import AddressBook.yml"

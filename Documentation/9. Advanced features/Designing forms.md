@@ -32,9 +32,11 @@ $theForm = new \ADIOS\Core\Views\Form(
 )
 ```
 
+> :bulb: Check the `AddressBook/Contact/Add-Version1` action in the [AddressBook.yml](../examples/prototype-builder-yaml/AddressBook.yml)
+> :bulb: You can create a .yml file with the definition of the template and use the [`prototype builder`](./Prototype%20builder.md) feature to generate the source code from the command line.
+
 The `model` parameter is used to get the list of available columns and their properties (data type, title, ...).
 
-*Tip: You can create a .yml file with the definition of the template and use the [`prototype builder`](./Prototype%20builder.md) feature to generate the source code from the command line.*
 
 ## Hello world example
 
@@ -130,6 +132,9 @@ $theFormWithTabs = new \ADIOS\Core\Views\Form(
 )
 ```
 
+> :bulb: Check the `AddressBook/Contact/Add-Version2` action in the [AddressBook.yml](../examples/prototype-builder-yaml/AddressBook.yml)
+
+
 Would end up with the form rendered followingly:
 
 ![Hello world example form](../img/contact_add2.png)
@@ -173,6 +178,10 @@ $theFormWithTabs = new \ADIOS\Core\Views\Form(
   ]
 )
 ```
+
+> :bulb: Check the `AddressBook/Contact/Add-Version3` action in the [AddressBook.yml](../examples/prototype-builder-yaml/AddressBook.yml)
+
+
 ![Hello world example form](../img/contact_add3.png)
 
 ### Multiple columns
@@ -241,6 +250,9 @@ $theForm = new \ADIOS\Core\Views\Form(
   ]
 )
 ```
+
+> :bulb: Check the `AddressBook/Contact/Edit-Version2` action in the [AddressBook.yml](../examples/prototype-builder-yaml/AddressBook.yml)
+
 
 ### Inputs based on lookuped models
 
