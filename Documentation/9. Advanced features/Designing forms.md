@@ -33,6 +33,7 @@ $theForm = new \ADIOS\Core\Views\Form(
 ```
 
 > :bulb: Check the `AddressBook/Contact/Add-Version1` action in the [AddressBook.yml](../examples/prototype-builder-yaml/AddressBook.yml)
+
 > :bulb: You can create a .yml file with the definition of the template and use the [`prototype builder`](./Prototype%20builder.md) feature to generate the source code from the command line.
 
 The `model` parameter is used to get the list of available columns and their properties (data type, title, ...).
