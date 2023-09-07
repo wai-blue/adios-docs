@@ -21,7 +21,7 @@
         <a 
           href='#1. Introduction' class='dropdown-toggle' data-toggle='dropdown'>
           1. Introduction <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../1. Introduction/Framework-comparison.html'>Framework-comparison</a></li><li><a href='../1. Introduction/Introduction.html'>Introduction</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../1. Introduction/Framework-comparison.html'>Framework-comparison</a></li><li><a href='../1. Introduction/Introduction.html'>Introduction</a></li><li><a href='../1. Introduction/Sample simple CRM application.html'>Sample simple CRM application</a></li></ul></li><li class='dropdown'>
         <a 
           href='#2. Getting started' class='dropdown-toggle' data-toggle='dropdown'>
           2. Getting started <small style='float:right';padding-top:5px>﹀</small>
@@ -33,7 +33,7 @@
         <a 
           href='#4. The basics' class='dropdown-toggle' data-toggle='dropdown'>
           4. The basics <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../4. The basics/Designing forms.html'>Designing forms</a></li><li><a href='../4. The basics/Routing.html'>Routing</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../4. The basics/Routing.html'>Routing</a></li></ul></li><li class='dropdown'>
         <a 
           href='#5. Views' class='dropdown-toggle' data-toggle='dropdown'>
           5. Views <small style='float:right';padding-top:5px>﹀</small>
@@ -55,9 +55,13 @@
           8. Testing <small style='float:right';padding-top:5px>﹀</small>
         </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../8. Testing/Introduction.html'>Introduction</a></li></ul></li><li class='dropdown'>
         <a 
+          href='#9. Advanced features' class='dropdown-toggle' data-toggle='dropdown'>
+          9. Advanced features <small style='float:right';padding-top:5px>﹀</small>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../9. Advanced features/Designing forms.html'>Designing forms</a></li><li><a href='../9. Advanced features/FormComplex.html'>FormComplex</a></li><li><a href='../9. Advanced features/Prototype builder.html'>Prototype builder</a></li></ul></li><li class='dropdown'>
+        <a 
           href='#img' class='dropdown-toggle' data-toggle='dropdown'>
           img <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../img/contact_add.png.html'>contact_add.png</a></li></ul></li>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../img/contact_add1.png.html'>contact_add1.png</a></li><li><a href='../img/contact_add2.png.html'>contact_add2.png</a></li><li><a href='../img/contact_add3.png.html'>contact_add3.png</a></li></ul></li>
           </ul>
         </nav>
 
@@ -75,7 +79,262 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <p>TBA</p>
+<h2>Properties</h2>
+<p>TBA</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Path to model</td>
+</tr>
+<tr>
+<td>column</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Specific column in a database table</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Predefined types of a input. <strong>Options:</strong> <code>['char', 'varchar', 'int', 'float', 'text', 'password', 'date', 'datetime', 'lookup', 'image', 'file', 'color']</code></td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">The value of the input (bool values are interchangeable with 1,0 or Y,N)</td>
+</tr>
+<tr>
+<td>html_attributes</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Additional HTML atributes</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Greyed out hint text inside the input</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>bool</td>
+<td>false</td>
+<td style="text-align: left;">Enables/Disables the editing of a input</td>
+</tr>
+<tr>
+<td>default_date_value</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Default value of a Date input</td>
+</tr>
+<tr>
+<td>max_date</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">The maximum allowed date user can choose</td>
+</tr>
+<tr>
+<td>min_date</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">The minimum allowed date user can choose</td>
+</tr>
+<tr>
+<td>enum_values</td>
+<td>array</td>
+<td></td>
+<td style="text-align: left;">Values for a select input</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>int</td>
+<td></td>
+<td style="text-align: left;">Precision of decimal numbers</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Changes the text area to a specific editor. <strong>Options</strong>: <code>['text', 'plain_text', 'json_editor','formatted_text', 'single_line']</code></td>
+</tr>
+<tr>
+<td>show_file_browser</td>
+<td>bool</td>
+<td>true</td>
+<td style="text-align: left;">???</td>
+</tr>
+<tr>
+<td>show_download_url_button</td>
+<td>bool</td>
+<td>true</td>
+<td style="text-align: left;">???</td>
+</tr>
+<tr>
+<td>show_open_button</td>
+<td>bool</td>
+<td>true</td>
+<td style="text-align: left;">Enables/Disables the Show button after uploding a file</td>
+</tr>
+<tr>
+<td>show_delete_button</td>
+<td>bool</td>
+<td>true</td>
+<td style="text-align: left;">Enables/Disables the Delete button after uploding a file</td>
+</tr>
+<tr>
+<td>table</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Name of the database table</td>
+</tr>
+<tr>
+<td>not_selected_text</td>
+<td>string</td>
+<td>[Not Selected]</td>
+<td style="text-align: left;">Special first empty value for a select input</td>
+</tr>
+<tr>
+<td>input_style</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;"><strong>Options</strong>: <code>['slider' for type 'int'; 'autocomplete', 'select' for type 'lookup']</code></td>
+</tr>
+<tr>
+<td>max</td>
+<td>int</td>
+<td>100</td>
+<td style="text-align: left;">Sets the maximum value of a slider</td>
+</tr>
+<tr>
+<td>min</td>
+<td>int</td>
+<td>1</td>
+<td style="text-align: left;">Sets the minimum value of a slider</td>
+</tr>
+<tr>
+<td>step</td>
+<td>int</td>
+<td>2</td>
+<td style="text-align: left;">Sets the    step value of a slider</td>
+</tr>
+<tr>
+<td>onchange</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Custom Javascript function ⚠️warning! Only safe for input style slider</td>
+</tr>
+<tr>
+<td>lookup_detail_enabled</td>
+<td>bool</td>
+<td>true</td>
+<td style="text-align: left;">Enables/Disables the button to open the details of the selected entry</td>
+</tr>
+<tr>
+<td>lookup_detail_onclick</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Custom Javascript for the entry detail button</td>
+</tr>
+<tr>
+<td>lookup_search_enabled</td>
+<td>bool</td>
+<td>true</td>
+<td style="text-align: left;">Enables/Disables the search button</td>
+</tr>
+<tr>
+<td>lookup_search_onclick</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Custom Javascript for the search button</td>
+</tr>
+<tr>
+<td>lookup_add_enabled</td>
+<td>bool</td>
+<td>false</td>
+<td style="text-align: left;">Enables/Disables the button to add another entry to the table</td>
+</tr>
+<tr>
+<td>lookup_add_onclick</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Custom Javascript for the add button</td>
+</tr>
+<tr>
+<td>gc_function</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">???</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>string</td>
+<td></td>
+<td style="text-align: left;">Adds a hint for the unit of the values behind the input</td>
+</tr>
+<tr>
+<td>translate_value</td>
+<td>bool</td>
+<td>false</td>
+<td style="text-align: left;">Specifies the value to translate from the dictionary</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>bool</td>
+<td>false</td>
+<td style="text-align: left;">Disables the input and excludes it from form submitting</td>
+</tr>
+</tbody>
+</table>
+<h2>Usage</h2>
+<pre><code class="language-php">
+$this-&gt;adios-&gt;view-&gt;Input([
+
+  'model' =&gt; 'Path/To/Your/Model'
+
+])-&gt;render();
+</code></pre>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong>  Basic input for one line text</p>
+<pre><code class="language-php">
+    $adios-&gt;view-&gt;create('Input', [
+
+      'type' =&gt; 'varchar',
+      'value' =&gt; 'Hello World',
+
+    ]);
+    </code></pre>
+<p><strong>Example #2:</strong> Input for an autocomplete search bar for the VAT list  </p>
+<pre><code class="language-php">
+    $this-&gt;adios-&gt;view-&gt;Input([
+
+      'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+      'type' =&gt; 'lookup'
+
+    ]);
+</code></pre>
+<p><strong>Example #3:</strong> A select input with a list of values</p>
+<pre><code class="language-php">
+    $this-&gt;adios-&gt;view-&gt;Input([
+
+      'type' =&gt; 'varchar',
+      'enum_values' =&gt; ['One', 'Two', 'Three']
+
+    ]);
+</code></pre>
+<h2>Notes</h2>
               </div>
             </div>
           </div>
