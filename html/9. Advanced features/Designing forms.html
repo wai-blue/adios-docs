@@ -57,11 +57,7 @@
         <a 
           href='#9. Advanced features' class='dropdown-toggle' data-toggle='dropdown'>
           9. Advanced features <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../9. Advanced features/Designing forms.html'>Designing forms</a></li><li><a href='../9. Advanced features/FormComplex.html'>FormComplex</a></li><li><a href='../9. Advanced features/Prototype builder.html'>Prototype builder</a></li></ul></li><li class='dropdown'>
-        <a 
-          href='#img' class='dropdown-toggle' data-toggle='dropdown'>
-          img <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../img/contact_add1.png.html'>contact_add1.png</a></li><li><a href='../img/contact_add2.png.html'>contact_add2.png</a></li><li><a href='../img/contact_add3.png.html'>contact_add3.png</a></li></ul></li>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../9. Advanced features/Designing forms.html'>Designing forms</a></li><li><a href='../9. Advanced features/FormComplex.html'>FormComplex</a></li><li><a href='../9. Advanced features/Prototype builder.html'>Prototype builder</a></li></ul></li>
           </ul>
         </nav>
 
@@ -105,11 +101,14 @@
     ]
   ]
 )</code></pre>
+<blockquote>
+<p>:bulb: Check the <code>AddressBook/Contact/Add-Version1</code> action in the <a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+<p>:bulb: You can create a .yml file with the definition of the template and use the <a href="./Prototype%20builder.md"><code>prototype builder</code></a> feature to generate the source code from the command line.</p>
+</blockquote>
 <p>The <code>model</code> parameter is used to get the list of available columns and their properties (data type, title, ...).</p>
-<p><em>Tip: You can create a .yml file with the definition of the template and use the <a href="./Prototype%20builder.md"><code>prototype builder</code></a> feature to generate the source code from the command line.</em></p>
 <h2>Hello world example</h2>
 <p>The easiest configuration of the form's template is to provide the list of columns which we want to render into the form, in a form of an array. The form with the configuration from the previous example would be rendered by like this:</p>
-<p><img src="../img/contact_add1.png" alt="Hello world example form" /></p>
+<p><img src="../../resources/img/contact_add1.png" alt="Hello world example form" /></p>
 <p>You only need to launch the <code>render()</code> method:</p>
 <pre><code class="language-php">echo $theForm-&gt;render();</code></pre>
 <h2>Using model's configuration to render a form</h2>
@@ -179,8 +178,11 @@
     ]
   ]
 )</code></pre>
+<blockquote>
+<p>:bulb: Check the <code>AddressBook/Contact/Add-Version2</code> action in the <a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+</blockquote>
 <p>Would end up with the form rendered followingly:</p>
-<p><img src="../img/contact_add2.png" alt="Hello world example form" /></p>
+<p><img src="../../resources/img/contact_add2.png" alt="Hello world example form" /></p>
 <h3>Groupping inside a tab</h3>
 <pre><code class="language-php">$theFormWithTabs = new \ADIOS\Core\Views\Form(
   $adios,
@@ -217,7 +219,10 @@
     ]
   ]
 )</code></pre>
-<p><img src="../img/contact_add3.png" alt="Hello world example form" /></p>
+<blockquote>
+<p>:bulb: Check the <code>AddressBook/Contact/Add-Version3</code> action in the <a href="../examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+</blockquote>
+<p><img src="../../resources/img/contact_add3.png" alt="Hello world example form" /></p>
 <h3>Multiple columns</h3>
 <p>...</p>
 <h3>Tables linked via foreign keys (lookups)</h3>
@@ -277,6 +282,9 @@
     ]
   ]
 )</code></pre>
+<blockquote>
+<p>:bulb: Check the <code>AddressBook/Contact/Edit-Version2</code> action in the <a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+</blockquote>
 <h3>Inputs based on lookuped models</h3>
 <p><code>id_com_contact_person:LOOKUP:title_before</code></p>
               </div>
