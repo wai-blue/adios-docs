@@ -21,7 +21,7 @@ ApacheBench.
 
 ### ADIOS project
 
-When building the ADIOS project, we took the [11-simple-crm.json](https://github.com/wai-blue/ADIOS/blob/main/docs/Prototype/examples/11-simple-crm.json)
+When building the ADIOS project, we took the [11-simple-crm.json](../../resources/examples/11-simple-crm.json)
 and built the project according to the instructions in [Instalation.md](2. Getting started/Instalation.md).
 This installation usually takes only a few minutes even with editing the installation script to take our own prototype
 json as input. If you factor in building your own prototype, the time it takes until your CRM app is up and running may

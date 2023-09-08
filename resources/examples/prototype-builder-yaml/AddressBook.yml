@@ -1,0 +1,243 @@
+---
+models:
+  
+  # model: Contact
+  Contact:
+    sqlName: contacts
+    urlBase: sandbox/adios-docs/contacts
+    tableTitle: Contacts
+    formTitleForInserting: Add contact
+    formTitleForEditing: Edit contact
+    lookupSqlValue: concat({%TABLE%}.first_name, ' ', {%TABLE%}.last_name)
+    crud:
+      browse:
+        action: Sandbox/AdiosDocs/Contacts
+      add:
+        # TIP: comment/uncomment to try different forms for adding new contact
+        action: Sandbox/AdiosDocs/Contact/Add-Version1
+        # action: Sandbox/AdiosDocs/Contact/Add-Version2
+        # action: Sandbox/AdiosDocs/Contact/Add-Version3
+      edit:
+        # TIP: comment/uncomment to try different forms for editing an existing contact
+        action: Sandbox/AdiosDocs/Contact/Edit-Version1
+        # action: Sandbox/AdiosDocs/Contact/Edit-Version2
+    columns:
+      first_name:
+        type: varchar
+        title: First name
+        byte_size: 100
+      middle_name:
+        type: varchar
+        title: Middle name
+        byte_size: 100
+      last_name:
+        type: varchar
+        title: Last name
+        byte_size: 100
+      email:
+        type: varchar
+        title: Email
+        byte_size: 100
+      phone:
+        type: varchar
+        title: Phone
+        byte_size: 100
+      url_facebook:
+        type: varchar
+        title: Facebook profile URL
+        byte_size: 100
+      url_linkedin:
+        type: varchar
+        title: Linkedin profile URL
+        byte_size: 100
+
+  # model: ContactAddress
+  ContactAddress:
+    sqlName: contact_addresses
+    urlBase: sandbox/adios-docs/contacts/addresses
+    tableTitle: Contact addresses
+    formTitleForInserting: Add contact address
+    formTitleForEditing: Edit contact address
+    lookupSqlValue: concat({%TABLE%}.street, ' ', {%TABLE%}.city, ' ', {%TABLE%}.zip, ' ', {%TABLE%}.country)
+    columns:
+      id_contact:
+        type: lookup
+        model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+        title: Contact
+      street:
+        type: varchar
+        title: Street
+        byte_size: 100
+      city:
+        type: varchar
+        title: City
+        byte_size: 100
+      zip:
+        type: varchar
+        title: ZIP
+        byte_size: 100
+      country:
+        type: varchar
+        title: Country
+        byte_size: 100
+
+actions:
+
+  # action: AddressBook/Home
+  Home:
+    template: LargeButtons
+    params:
+      title: ADIOS-docs
+      buttons:
+        - title: Contacts
+          url: sandbox/adios-docs/contacts
+
+  # action: AddressBook/Contacts
+  Contacts:
+    phpTemplate: ViewRender
+    view: Table
+    params:
+      model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+      showColumns:
+        - first_name
+        - last_name
+        - email
+
+  # action: AddressBook/Contact/Add-Version1
+  Contact/Add-Version1:
+    phpTemplate: ViewRender
+    view: Form
+    params:
+      model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+      id: -1
+
+  # action: AddressBook/Contact/Add-Version2
+  Contact/Add-Version2:
+    phpTemplate: ViewRender
+    view: Form
+    params:
+      model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+      id: -1
+      template:
+        columns:
+          - tabs:
+              Basic information:
+                - first_name
+                - middle_name
+                - last_name
+                - email
+              Social profiles:
+                - url_facebook
+                - url_linkedin
+
+  # action: AddressBook/Contact/Add-Version3
+  Contact/Add-Version3:
+    phpTemplate: ViewRender
+    view: Form
+    params:
+      model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+      id: -1
+      template:
+        columns:
+          - tabs:
+              Basic information:
+                - group:
+                    title: Full name
+                    items:
+                      - first_name
+                      - middle_name
+                      - last_name
+                - group:
+                    title: Contact details
+                    items:
+                      - email
+                      - phone
+              Social profiles:
+                - url_facebook
+                - url_linkedin
+
+  # action: AddressBook/Contact/Edit-Version1
+  Contact/Edit-Version1:
+    phpTemplate: ViewRender
+    view: Form
+    params:
+      model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+      id: "{php $this->params['id'] php}"
+      template:
+        columns:
+          - items:
+              - group:
+                  title: Full name
+                  items:
+                    - first_name
+                    - middle_name
+                    - last_name
+              - group:
+                  title: Contact details
+                  items:
+                    - email
+                    - phone
+              - group:
+                  title: Social profiles
+                  items:
+                    - url_facebook
+                    - url_linkedin
+              - view: Table
+                params:
+                  model: App/Widgets/Sandbox/AdiosDocs/Models/ContactAddress
+                  filter:
+                    - id_contact
+                    - "="
+                    - "{php $this->params['id'] php}"
+                  showColumns:
+                    - id_contact
+                    - street
+                    - city
+                    - zip
+                    - country
+                  defaultValuesForNewRecords:
+                    id_contact: "{php $this->params['id'] php}"
+
+  # action: AddressBook/Contact/Edit-Version2
+  Contact/Edit-Version2:
+    phpTemplate: ViewRender
+    view: Form
+    params:
+      model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
+      id: "{php $this->params['id'] php}"
+      template:
+        columns:
+          - tabs:
+              Contact details:
+                - group:
+                    title: Full name
+                    items:
+                      - first_name
+                      - middle_name
+                      - last_name
+                - group:
+                    title: Contact details
+                    items:
+                      - email
+                      - phone
+                - group:
+                    title: Social profiles
+                    items:
+                      - url_facebook
+                      - url_linkedin
+              Addresses:
+                - view: Table
+                  params:
+                    model: App/Widgets/Sandbox/AdiosDocs/Models/ContactAddress
+                    filter:
+                      - id_contact
+                      - "="
+                      - "{php $this->params['id'] php}"
+                    showColumns:
+                      - id_contact
+                      - street
+                      - city
+                      - zip
+                      - country
+                    defaultValuesForNewRecords:
+                      id_contact: "{php $this->params['id'] php}"
