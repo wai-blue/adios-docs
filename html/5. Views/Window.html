@@ -75,7 +75,85 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <h1>Window</h1>
+<p>The Window view allows you to create side windows with customizable content, such as entry details, lookups and more.</p>
+<h2>Parameters</h2>
+<p>The Window view supports various parameters that can be utilized to meet specific design and functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Window</td>
+<td></td>
+</tr>
+<tr>
+<td>titleRaw</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td>string</td>
+<td>''</td>
+<td></td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>''</td>
+<td>Html string (This includes Html from rendered views)</td>
+</tr>
+<tr>
+<td>cssClass</td>
+<td>string</td>
+<td>''</td>
+<td>Custom css class of the Window view</td>
+</tr>
+</tbody>
+</table>
+<h2>Usage</h2>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Window([])-&gt;render();</code></pre>
+<h2>Functions</h2>
+<h3>setContent($content)</h3>
+<p>Sets the content inside the Window view. This can be any Html or <strong>rendered</strong> ADIOS view.</p>
+<p><strong>Example:</strong> Window view with a text field</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Window([
+  "content" =&gt; $this-&gt;adios-&gt;view-&gt;Input([
+    "type" =&gt; "text"
+  ])-&gt;render(),
+]);</code></pre>
+<h3>setTitle(string $title)</h3>
+<p>Sets the title.</p>
+<p><strong>Example:</strong> Window view with a title</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Window([])-&gt;setTitle("Example");</code></pre>
+<h3>setSubtitle(string $subtitle)</h3>
+<p>Sets the subtitle.</p>
+<p><strong>Example:</strong> Window view with a subtitle</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Window([])-&gt;setSubtitle("Example");</code></pre>
+<h3>setCloseButton(\ADIOS\Core\Views\Button $closeButton)</h3>
+<p>Sets the close button for the Window view.</p>
+<p><strong>Example:</strong> Window view with a close button</p>
+<pre><code class="language-php">$window = $this-&gt;adios-&gt;view-&gt;Window([]);
+$window-&gt;setCloseButton(
+      $this-&gt;adios-&gt;view-&gt;Button([
+      'type' =&gt; 'close',
+      'title' =&gt; 'close',
+      'onclick' =&gt; "window_close('{$window-&gt;params['uid']}');",
+  ]));</code></pre>
+<h3>setHeaderLeft(array $viewObjects = [])</h3>
+<p>Creates views inside the header aligned to the left</p>
+<h3>setHeaderRight(array $viewObjects = [])</h3>
+<p>Creates views inside the header aligned to the right</p>
               </div>
             </div>
           </div>
