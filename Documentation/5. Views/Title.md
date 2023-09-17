@@ -17,7 +17,15 @@ The Title view supports various properties that can be utilized to meet function
 $this->adios->view->Title()->setTitle("Header 1")->render();
 ```
 
-### setLeftContent()
+### setTitle(string $title)
+
+Sets the title
+
+```php
+$adios->view->Title()->setTitle("Header 1");
+```
+
+### setLeftContent(array $viewObjects = [])
 
 This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the left.
 
@@ -32,7 +40,7 @@ $adios->view->Title([])->setTitle("Header 1")->setLeftContent([
 ])
 ```
 
-### setRightContent()
+### setRightContent(array $viewObjects = [])
 
 This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the right.
 

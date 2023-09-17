@@ -99,7 +99,10 @@
 </table>
 <h2>Basic Usage</h2>
 <pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1")-&gt;render();</code></pre>
-<h3>setLeftContent()</h3>
+<h3>setTitle(string $title)</h3>
+<p>Sets the title</p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1");</code></pre>
+<h3>setLeftContent(array $viewObjects = [])</h3>
 <p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the left.</p>
 <p><strong>Example:</strong> A Title view with an Input view aligned to the left</p>
 <pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
@@ -108,7 +111,7 @@
     'enum_values' =&gt; ['One', 'Two', 'Three']
   ])
 ])</code></pre>
-<h3>setRightContent()</h3>
+<h3>setRightContent(array $viewObjects = [])</h3>
 <p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the right.</p>
 <p><strong>Example:</strong> A Title view with a Table view aligned to the right for the VAT list filtered by SQL condition where and order by condition </p>
 <pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
