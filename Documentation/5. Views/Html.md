@@ -15,7 +15,7 @@ The Html view supports various properties that can be utilized to meet functiona
 ```php
 $this->adios->view->Html([
   'html' => '<p>Example</p>'
-  ])->render();
+])->render();
 ```
 
 ## Examples
