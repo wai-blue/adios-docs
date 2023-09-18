@@ -16,6 +16,7 @@ The Title view supports various properties that can be utilized to meet function
 ```php
 $this->adios->view->Title()->setTitle("Header 1")->render();
 ```
+## Functions
 
 ### setTitle(string $title)
 
