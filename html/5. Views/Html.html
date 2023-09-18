@@ -98,26 +98,26 @@
 </tbody>
 </table>
 <h2>Usage</h2>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;create(
-  'html',
-  ['html' =&gt; '&lt;p&gt;Example&lt;/p&gt;']
-)-&gt;render();</code></pre>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Html([
+  'html' =&gt; '&lt;p&gt;Example&lt;/p&gt;'
+  ])-&gt;render();</code></pre>
 <h2>Examples</h2>
 <p><strong>Example #1:</strong> Html view with an image</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;create('html', [
+<pre><code class="language-php">$adios-&gt;view-&gt;Html([
   'html' =&gt; '&lt;img scr="path/to/image"&gt;',
 ]);</code></pre>
 <p><strong>Example #2:</strong> Html view with an ordered list</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;create('html', [
+<pre><code class="language-php">$adios-&gt;view-&gt;Html([
   'html' =&gt; '
   &lt;ol&gt;
     &lt;li&gt;Example 1&lt;/li&gt;
     &lt;li&gt;Example 2&lt;/li&gt;
     &lt;li&gt;Example 3&lt;/li&gt;
-  &lt;/ol&gt;'
+  &lt;/ol&gt;
+  '
 ]);</code></pre>
 <p><strong>Example #3:</strong> Html view with a paragraph with a link</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;create('html', [
+<pre><code class="language-php">$adios-&gt;view-&gt;Html([
   'html' =&gt; '&lt;p&gt;Example &lt;a href="url"&gt;paragraph&lt;/a&gt; &lt;/p&gt;',
 ]);</code></pre>
 <h2>Notes</h2>

@@ -13,10 +13,9 @@ The Html view supports various properties that can be utilized to meet functiona
 ## Usage
 
 ```php
-$this->adios->view->create(
-  'html',
-  ['html' => '<p>Example</p>']
-)->render();
+$this->adios->view->Html([
+  'html' => '<p>Example</p>'
+  ])->render();
 ```
 
 ## Examples
@@ -24,7 +23,7 @@ $this->adios->view->create(
 **Example #1:** Html view with an image
 
 ```php
-$adios->view->create('html', [
+$adios->view->Html([
   'html' => '<img scr="path/to/image">',
 ]);
 ```
@@ -32,20 +31,21 @@ $adios->view->create('html', [
 **Example #2:** Html view with an ordered list
 
 ```php
-$adios->view->create('html', [
+$adios->view->Html([
   'html' => '
   <ol>
     <li>Example 1</li>
     <li>Example 2</li>
     <li>Example 3</li>
-  </ol>'
+  </ol>
+  '
 ]);
 ```
 
 **Example #3:** Html view with a paragraph with a link
 
 ```php
-$adios->view->create('html', [
+$adios->view->Html([
   'html' => '<p>Example <a href="url">paragraph</a> </p>',
 ]);
 ```
