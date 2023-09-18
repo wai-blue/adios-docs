@@ -75,7 +75,57 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <h1>Title</h1>
+<p>The Title view adds an easy and fast way of adding headers to your application.</p>
+<h2>Properties</h2>
+<p>The Title view supports various properties that can be utilized to meet functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> fixed</td>
+<td>bool</td>
+<td></td>
+<td>Adds 'fixed' class to a Title</td>
+</tr>
+</tbody>
+</table>
+<h2>Basic Usage</h2>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1")-&gt;render();</code></pre>
+<h2>Functions</h2>
+<h3>setTitle(string $title)</h3>
+<p>Sets the title</p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1");</code></pre>
+<h3>setLeftContent(array $viewObjects = [])</h3>
+<p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the left.</p>
+<p><strong>Example:</strong> A Title view with an Input view aligned to the left</p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
+  $this-&gt;adios-&gt;view-&gt;Input([
+    'type' =&gt; 'varchar',
+    'enum_values' =&gt; ['One', 'Two', 'Three']
+  ])
+])</code></pre>
+<h3>setRightContent(array $viewObjects = [])</h3>
+<p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the right.</p>
+<p><strong>Example:</strong> A Title view with a Table view aligned to the right for the VAT list filtered by SQL condition where and order by condition </p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
+  $this-&gt;adios-&gt;view-&gt;Table([
+    'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+    'where' =&gt; [
+      ['ratio', '&gt;', 30]
+    ],
+    'orderBy' =&gt; 'ratio DESC'
+  ])
+])</code></pre>
+<h2>Notes</h2>
+<p><code>setLeftContent()</code> and <code>setRightContent()</code> functions can be used simultaneously on one Title view. </p>
               </div>
             </div>
           </div>
