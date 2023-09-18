@@ -367,21 +367,20 @@
 ])-&gt;render();</code></pre>
 <h2>Examples</h2>
 <p><strong>Example #1:</strong>  Basic input for one line text</p>
-<pre><code class="language-php">    $adios-&gt;view-&gt;create('Input', [
-      'type' =&gt; 'varchar',
-      'value' =&gt; 'Hello World',
-    ]);</code></pre>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Input([
+  'type' =&gt; 'varchar',
+  'value' =&gt; 'Hello World',
+]);</code></pre>
 <p><strong>Example #2:</strong> Input for an autocomplete search bar for VAT list</p>
-<pre><code class="language-php"> $this-&gt;adios-&gt;view-&gt;Input([
-      'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
-      'type' =&gt; 'lookup'
- ]);</code></pre>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Input([
+  'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+  'type' =&gt; 'lookup'
+]);</code></pre>
 <p><strong>Example #3:</strong> A select input with a list of values</p>
 <pre><code class="language-php"> $this-&gt;adios-&gt;view-&gt;Input([
-      'type' =&gt; 'varchar',
-      'enum_values' =&gt; ['One', 'Two', 'Three']
- ]);
-</code></pre>
+  'type' =&gt; 'varchar',
+  'enum_values' =&gt; ['One', 'Two', 'Three']
+]);</code></pre>
 <h2>Notes</h2>
               </div>
             </div>

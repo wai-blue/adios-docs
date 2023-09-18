@@ -67,29 +67,28 @@ $this->adios->view->Input([
 **Example #1:**  Basic input for one line text
 
 ```php
-    $adios->view->create('Input', [
-      'type' => 'varchar',
-      'value' => 'Hello World',
-    ]);
+$this->adios->view->Input([
+  'type' => 'varchar',
+  'value' => 'Hello World',
+]);
 ```
 
 **Example #2:** Input for an autocomplete search bar for VAT list
 
 ```php
- $this->adios->view->Input([
-      'model' => 'App/Widgets/Finance/MainBook/Models/Vat',
-      'type' => 'lookup'
- ]);
+$this->adios->view->Input([
+  'model' => 'App/Widgets/Finance/MainBook/Models/Vat',
+  'type' => 'lookup'
+]);
 ```
 
 **Example #3:** A select input with a list of values
 
 ```php
  $this->adios->view->Input([
-      'type' => 'varchar',
-      'enum_values' => ['One', 'Two', 'Three']
- ]);
-
+  'type' => 'varchar',
+  'enum_values' => ['One', 'Two', 'Three']
+]);
 ```
 
 ## Notes

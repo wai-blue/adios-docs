@@ -75,7 +75,52 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <p>Work in progress...</p>
+                <h1>Html</h1>
+<p>The Html view alows you to insert custom HTML into your pages.</p>
+<h2>Properties</h2>
+<p>The Html view supports various properties that can be utilized to meet functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>html</td>
+<td>string</td>
+<td></td>
+<td>Html string</td>
+</tr>
+</tbody>
+</table>
+<h2>Usage</h2>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Html([
+  'html' =&gt; '&lt;p&gt;Example&lt;/p&gt;'
+])-&gt;render();</code></pre>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong> Html view with an image</p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Html([
+  'html' =&gt; '&lt;img scr="path/to/image"&gt;',
+]);</code></pre>
+<p><strong>Example #2:</strong> Html view with an ordered list</p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Html([
+  'html' =&gt; '
+  &lt;ol&gt;
+    &lt;li&gt;Example 1&lt;/li&gt;
+    &lt;li&gt;Example 2&lt;/li&gt;
+    &lt;li&gt;Example 3&lt;/li&gt;
+  &lt;/ol&gt;
+  '
+]);</code></pre>
+<p><strong>Example #3:</strong> Html view with a paragraph with a link</p>
+<pre><code class="language-php">$adios-&gt;view-&gt;Html([
+  'html' =&gt; '&lt;p&gt;Example &lt;a href="url"&gt;paragraph&lt;/a&gt; &lt;/p&gt;',
+]);</code></pre>
+<h2>Notes</h2>
               </div>
             </div>
           </div>
