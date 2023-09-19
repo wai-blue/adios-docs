@@ -172,7 +172,7 @@ labelColumn and pass to it an array of labels (strings).</p>
   ],
 'dataColumns' =&gt; [
   'data_column' =&gt; ['type' =&gt; 'data']
-  ],
+],
 'where' =&gt; [
   'model_id',
   '=',
@@ -207,8 +207,8 @@ labelColumn and pass to it an array of labels (strings).</p>
 <p><strong>Note:</strong> In this case, you may not use the <code>labelColumns</code> property instead of <code>labels</code>.</p>
 <p><strong>2.2 Usage</strong> An example dataset may look like this:</p>
 <pre><code class="language-php">[
-'data' =&gt; [ /* ... */ ],
-'labels' =&gt; [ /* ... */ ]
+  'data' =&gt; [ /* ... */ ],
+  'labels' =&gt; [ /* ... */ ]
 ]</code></pre>
 <h2>Examples</h2>
 <p><strong>Example #1:</strong> Simple static chart with styling properties for Chart.js library</p>
@@ -228,42 +228,42 @@ labelColumn and pass to it an array of labels (strings).</p>
 ])-&gt;render();</code></pre>
 <p><strong>Example #2:</strong> Dynamic chart based on the ExchangeRate model</p>
 <pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Chart([
-      'type' =&gt; 'line',
-      'datasets' =&gt; [
-        [
-          'model' =&gt; 'App/Path/To/Model',
-          'labelColumn' =&gt; ['column' =&gt; 'date'],
-          'dataColumns' =&gt; [['rate' =&gt; ['type' =&gt; 'data']]],
-          'where' =&gt; ['currency_id', '=', '1'],
+  'type' =&gt; 'line',
+  'datasets' =&gt; [
+    [
+      'model' =&gt; 'App/Path/To/Model',
+      'labelColumn' =&gt; ['column' =&gt; 'date'],
+      'dataColumns' =&gt; [['rate' =&gt; ['type' =&gt; 'data']]],
+      'where' =&gt; ['currency_id', '=', '1'],
 
-          'label' =&gt; 'Exchange rate development'
-        ]
-      ]
-    ])-&gt;render();</code></pre>
+      'label' =&gt; 'Exchange rate development'
+    ]
+  ]
+])-&gt;render();</code></pre>
 <p><strong>Example #3:</strong> Chart.js example
 <a href="https://www.chartjs.org/docs/latest/samples/other-charts/combo-bar-line.html">combo bar/line chart</a> recreated in ADIOS</p>
 <pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Chart([
-      'type' =&gt; 'bar',
-      'datasets' =&gt; [
-        [
-          'label' =&gt; 'Dataset 1',
-          'data' =&gt; [10,30,40,-20,20,10,70],
-          'borderColor' =&gt; 'rgb(255, 99, 132)',
-          'labels' =&gt; ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-          'backgroundColor' =&gt; 'rgb(255, 99, 132, 0.5)',
-          'order' =&gt; 1,
-        ],
-        [
-          'label' =&gt; 'Dataset 2',
-          'data' =&gt; [50, 32, 68, 95, -20, -50, 0],
-          'borderColor' =&gt; 'rgb(99, 132, 255)',
-          'labels' =&gt; [], # Labels are always defined in the first dataset, but this property must stay
-          'backgroundColor' =&gt; 'rgb(99, 132, 255, 0.5)',
-          'type' =&gt; 'line',
-          'order' =&gt; 0,
-        ],
-      ],
-    ])-&gt;render();</code></pre>
+  'type' =&gt; 'bar',
+  'datasets' =&gt; [
+    [
+      'label' =&gt; 'Dataset 1',
+      'data' =&gt; [10,30,40,-20,20,10,70],
+      'borderColor' =&gt; 'rgb(255, 99, 132)',
+      'labels' =&gt; ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      'backgroundColor' =&gt; 'rgb(255, 99, 132, 0.5)',
+      'order' =&gt; 1,
+    ],
+    [
+      'label' =&gt; 'Dataset 2',
+      'data' =&gt; [50, 32, 68, 95, -20, -50, 0],
+      'borderColor' =&gt; 'rgb(99, 132, 255)',
+      'labels' =&gt; [], # Labels are always defined in the first dataset, but this property must stay
+      'backgroundColor' =&gt; 'rgb(99, 132, 255, 0.5)',
+      'type' =&gt; 'line',
+      'order' =&gt; 0,
+    ],
+  ],
+])-&gt;render();</code></pre>
 <h2>Notes</h2>
               </div>
             </div>

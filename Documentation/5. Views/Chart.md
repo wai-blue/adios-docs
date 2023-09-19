@@ -48,7 +48,7 @@ labelColumn and pass to it an array of labels (strings).
   ],
 'dataColumns' => [
   'data_column' => ['type' => 'data']
-  ],
+],
 'where' => [
   'model_id',
   '=',
@@ -70,8 +70,8 @@ labelColumn and pass to it an array of labels (strings).
 
 ```php
 [
-'data' => [ /* ... */ ],
-'labels' => [ /* ... */ ]
+  'data' => [ /* ... */ ],
+  'labels' => [ /* ... */ ]
 ]
 ```
 
@@ -100,18 +100,18 @@ $this->adios->view->Chart([
 
 ```php
 $this->adios->view->Chart([
-      'type' => 'line',
-      'datasets' => [
-        [
-          'model' => 'App/Path/To/Model',
-          'labelColumn' => ['column' => 'date'],
-          'dataColumns' => [['rate' => ['type' => 'data']]],
-          'where' => ['currency_id', '=', '1'],
+  'type' => 'line',
+  'datasets' => [
+    [
+      'model' => 'App/Path/To/Model',
+      'labelColumn' => ['column' => 'date'],
+      'dataColumns' => [['rate' => ['type' => 'data']]],
+      'where' => ['currency_id', '=', '1'],
 
-          'label' => 'Exchange rate development'
-        ]
-      ]
-    ])->render();
+      'label' => 'Exchange rate development'
+    ]
+  ]
+])->render();
 ```
 
 **Example #3:** Chart.js example 
@@ -119,27 +119,27 @@ $this->adios->view->Chart([
 
 ```php
 $this->adios->view->Chart([
-      'type' => 'bar',
-      'datasets' => [
-        [
-          'label' => 'Dataset 1',
-          'data' => [10,30,40,-20,20,10,70],
-          'borderColor' => 'rgb(255, 99, 132)',
-          'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-          'backgroundColor' => 'rgb(255, 99, 132, 0.5)',
-          'order' => 1,
-        ],
-        [
-          'label' => 'Dataset 2',
-          'data' => [50, 32, 68, 95, -20, -50, 0],
-          'borderColor' => 'rgb(99, 132, 255)',
-          'labels' => [], # Labels are always defined in the first dataset, but this property must stay
-          'backgroundColor' => 'rgb(99, 132, 255, 0.5)',
-          'type' => 'line',
-          'order' => 0,
-        ],
-      ],
-    ])->render();
+  'type' => 'bar',
+  'datasets' => [
+    [
+      'label' => 'Dataset 1',
+      'data' => [10,30,40,-20,20,10,70],
+      'borderColor' => 'rgb(255, 99, 132)',
+      'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      'backgroundColor' => 'rgb(255, 99, 132, 0.5)',
+      'order' => 1,
+    ],
+    [
+      'label' => 'Dataset 2',
+      'data' => [50, 32, 68, 95, -20, -50, 0],
+      'borderColor' => 'rgb(99, 132, 255)',
+      'labels' => [], # Labels are always defined in the first dataset, but this property must stay
+      'backgroundColor' => 'rgb(99, 132, 255, 0.5)',
+      'type' => 'line',
+      'order' => 0,
+    ],
+  ],
+])->render();
 ```
 
 ## Notes
