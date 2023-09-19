@@ -18,11 +18,11 @@ Additionally, you may utilize the GET variable **preset** with a number to speci
 ## Usage
 
 ```php
-    $this->adios->view->Dashboard([
-      'title' => 'View Title',
-      'saveAction' => '/Path/To/Action',
-      'addCardsAction' => '/Path/To/Action',
-    ])->render();
+$this->adios->view->Dashboard([
+  'title' => 'View Title',
+  'saveAction' => '/Path/To/Action',
+  'addCardsAction' => '/Path/To/Action',
+])->render();
 ```
 
 ## Examples
@@ -31,10 +31,10 @@ Additionally, you may utilize the GET variable **preset** with a number to speci
 
 ```php
 $this->adios->view->Dashboard([
-      'title' => 'Dashboard',
-      'saveAction' => '/UI/Dashboard/SaveConfig',
-      'addCardsAction' => '/UI/Dashboard/AddCards'
-    ])->render();
+  'title' => 'Dashboard',
+  'saveAction' => '/UI/Dashboard/SaveConfig',
+  'addCardsAction' => '/UI/Dashboard/AddCards'
+])->render();
 ```
 
 **Example #2:** Like in the example above, parameters can be optionally specified but are also set to their default values automatically.
@@ -56,20 +56,17 @@ $this->adios->view->Dashboard([])->render();
 like so:
 
 ```php
-  public function cards($cards = []) {
-    return parent::cards([
-        "Model/Card1" =>
-              array (
-          'action' => 'path/To/Action',
-          'params' => 
-          array (
-            'parameter_one' => 1,
-            'parameter_two' => 'lorem ipsum',
-          ),
-        )
-      ,
-      ]);
-  }
+public function cards($cards = []) {
+  return parent::cards([
+    "Model/Card1" => [
+      'action' => 'path/To/Action',
+      'params' => [
+        'parameter_one' => 1,
+        'parameter_two' => 'lorem ipsum',
+      ],
+    ]
+  ]);
+}
 ```
 
 ## Usage
@@ -77,33 +74,26 @@ like so:
 This example demonstrates how you can define cards inside a model
 
 ```php
-  class Currency extends \ADIOS\Core\Model {
+class Currency extends \ADIOS\Core\Model {
 
-    use \App\Widgets\Sandbox\Models\Callbacks\Currency;
-    
-    /* ... */
-
-    public function cards($cards = []) {
-      return parent::cards([
-          "Currency/Table" =>
-                array (
-            'action' => 'sandbox/Currency/Table',
-            'params' => 
-            array (
-              'currency_id' => 1,
-              'title' => 'Currency Table',
-            ),
-          )
-        ,
-          "Currency/Chart" =>
-                array (
-            'action' => 'sandbox/Currency/Chart',
-            'params' => 
-            array (
-              'currency_id' => 1,
-            ),
-          )
-        ,
-        ]);
-    }
+  use \App\Widgets\Sandbox\Models\Callbacks\Currency;
+  
+  public function cards($cards = []) {
+    return parent::cards([
+      'Currency/Table' => [
+        'action' => 'sandbox/Currency/Table',
+        'params' => [
+          'currency_id' => 1,
+          'title' => 'Currency Table',
+        ],
+      ],
+      'Currency/Chart' => [
+        'action' => 'sandbox/Currency/Chart',
+        'params' => [
+          'currency_id' => 1,
+        ],
+      ]
+    ]);
+  }
+}
 ```
