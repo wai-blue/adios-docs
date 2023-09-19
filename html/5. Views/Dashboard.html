@@ -75,93 +75,97 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>FormComplex</h1>
-<pre><code class="language-php">\ADIOS\Core\Views\FormComplex\Template-&gt;render() {
-  foreach (items) {
-    if (item is string) =&gt; Input
-    else adios-&gt;view-&gt;create()
+                <h1>Dashboard</h1>
+<p>The Dashboard view is a customizable workspace for every ADIOS user. It can be customized to your liking, and you can save presets for future use. The Dashboard also displays cards for each module that your application is working with.</p>
+<h2>Properties</h2>
+<p>The Dashboard view supports various properties that can be utilized to meet functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>'Dashboard'</td>
+<td>Title of the view</td>
+</tr>
+<tr>
+<td>saveAction</td>
+<td>string</td>
+<td>'/UI/Dashboard/SaveConfig'</td>
+<td>Path to action to save the current configuration</td>
+</tr>
+<tr>
+<td>addCardsAction</td>
+<td>string</td>
+<td>'/UI/Dashboard/AddCards'</td>
+<td>Path to action to add cards to the current preset</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, you may utilize the GET variable <strong>preset</strong> with a number to specify which preset should be loaded</p>
+<h2>Usage</h2>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Dashboard([
+  'title' =&gt; 'View Title',
+  'saveAction' =&gt; '/Path/To/Action',
+  'addCardsAction' =&gt; '/Path/To/Action',
+])-&gt;render();</code></pre>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong> Basic Dashboard view, this is also very dependent on saveAction and addCardsAction parameter</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Dashboard([
+  'title' =&gt; 'Dashboard',
+  'saveAction' =&gt; '/UI/Dashboard/SaveConfig',
+  'addCardsAction' =&gt; '/UI/Dashboard/AddCards'
+])-&gt;render();</code></pre>
+<p><strong>Example #2:</strong> Like in the example above, parameters can be optionally specified but are also set to their default values automatically.
+It is however recommended, to supply <code>$this-&gt;params</code>, in case you would like to change them later.</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Dashboard($this-&gt;params)-&gt;render();</code></pre>
+<p><strong>Example #3:</strong> Alternatively, an empty array also works just fine</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Dashboard([])-&gt;render();</code></pre>
+<h2>Creating Dashboard cards</h2>
+<p><em>Cards</em> function as a link to an already existing <em>Action</em>, which they display. You may specify them inside a model
+like so:</p>
+<pre><code class="language-php">public function cards($cards = []) {
+  return parent::cards([
+    "Model/Card1" =&gt; [
+      'action' =&gt; 'path/To/Action',
+      'params' =&gt; [
+        'parameter_one' =&gt; 1,
+        'parameter_two' =&gt; 'lorem ipsum',
+      ],
+    ]
+  ]);
+}</code></pre>
+<h2>Usage</h2>
+<p>This example demonstrates how you can define cards inside a model</p>
+<pre><code class="language-php">class Currency extends \ADIOS\Core\Model {
+
+  use \App\Widgets\Sandbox\Models\Callbacks\Currency;
+
+  public function cards($cards = []) {
+    return parent::cards([
+      'Currency/Table' =&gt; [
+        'action' =&gt; 'sandbox/Currency/Table',
+        'params' =&gt; [
+          'currency_id' =&gt; 1,
+          'title' =&gt; 'Currency Table',
+        ],
+      ],
+      'Currency/Chart' =&gt; [
+        'action' =&gt; 'sandbox/Currency/Chart',
+        'params' =&gt; [
+          'currency_id' =&gt; 1,
+        ],
+      ]
+    ]);
   }
 }</code></pre>
-<pre><code class="language-php">\ADIOS\Core\Views\FormComplex\Column-&gt;render() {
-  $html = "&lt;column&gt;";
-  $html .= parent::render();
-  $html .= "&lt;/column&gt;";
-}</code></pre>
-<pre><code class="language-php">$theForm = new \ADIOS\Core\Views\FormComplex(
-  $adios,
-  [
-    'model' =&gt; 'App/Widgets/AddressBook/Models/Contact',
-    'template' =&gt; [
-      [
-        'view' =&gt; \ADIOS\Core\Views\FormComplex\Column::class extends Template,
-        'params' =&gt; [
-          'cssClass' =&gt; 'col-8',
-          'items' =&gt; [
-            [
-              'view' =&gt; \ADIOS\Core\Views\FormComplex\Tabs::class extends Template,
-              'params' =&gt; [
-                'cssClass' =&gt; '...',
-                'title' =&gt; 'Basic information',
-                'items' =&gt; [
-                  [
-                    'view' =&gt; \ADIOS\Core\Views\FormComplex\Group::class extends Template,
-                    'params' =&gt; [
-                      'title' =&gt; 'Full name',
-                      'items' =&gt; [
-                        'first_name',
-                        'middle_name',
-                        'last_name',
-                        'id_com_contact_person:LOOKUP:title_before'
-                      ]
-                    ]
-                  ],
-                  [
-                    'view' =&gt; \ADIOS\Core\Views\FormComplex\Group::class extends Template,
-                    'params' =&gt; [
-                      'title' =&gt; 'Contact details',
-                      'items' =&gt; [
-                        'email',
-                        [
-                          'view' =&gt; \ADIOS\Core\Views\Input::class,
-                          'params' =&gt; [
-                            'column' =&gt; 'email',
-                          ],
-                        ]
-                        'phone'
-                      ]
-                    ],
-                  ],
-                  [
-                    'view' =&gt; \ADIOS\Core\Views\Table::class,
-                    'params' =&gt; [
-                      'model' =&gt; \App\Widgets\AddressBook\Models\ContactAddress::class,
-                      'where' =&gt; [
-                        'id_contact',
-                        '=',
-                        $this-&gt;params['id'],
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  ]
-);</code></pre>
-<pre><code class="language-yaml">view: \ADIOS\Core\Views\FormComplex
-template:
-  - view: \ADIOS\Core\Views\FormComplex\Column
-    params:
-      cssClass: col-8
-      items:
-        - view: \ADIOS\Core\Views\FormComplex\Tabs
-          title: Contact details
-          items:
-            - first_name
-            - last_name</code></pre>
               </div>
             </div>
           </div>
