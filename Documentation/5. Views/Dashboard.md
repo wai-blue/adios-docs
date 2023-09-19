@@ -18,7 +18,7 @@ Additionally, you may utilize the GET variable **preset** with a number to speci
 ## Usage
 
 ```php
-    return $this->adios->view->Dashboard([
+    $this->adios->view->Dashboard([
       'title' => 'View Title',
       'saveAction' => '/Path/To/Action',
       'addCardsAction' => '/Path/To/Action',
@@ -52,43 +52,58 @@ $this->adios->view->Dashboard([])->render();
 
 ## Creating Dashboard cards
 
-*Cards* function as a link to an already existing *Action*, which they display. You may specify them like so:
+*Cards* function as a link to an already existing *Action*, which they display. You may specify them inside a model
+like so:
 
-```yml
-  Model/CardName:
-    action: path/to/action
-    params:
-      firstParameter: 1
-      secondParameter: Hello World
+```php
+  public function cards($cards = []) {
+    return parent::cards([
+        "Model/Card1" =>
+              array (
+          'action' => 'path/To/Action',
+          'params' => 
+          array (
+            'parameter_one' => 1,
+            'parameter_two' => 'lorem ipsum',
+          ),
+        )
+      ,
+      ]);
+  }
 ```
-
-When defining models, you may define its cards under `cards:` in the YML files of your project like in the example below.
 
 ## Usage
 
 This example demonstrates how you can define cards inside a model
 
-```yml
----
-models:
-  Currency:
-    sqlName: currencies
-    urlBase: sandbox/currencies
-    columns:
-      name:
-        title: Name
+```php
+  class Currency extends \ADIOS\Core\Model {
+
+    use \App\Widgets\Sandbox\Models\Callbacks\Currency;
     
-    # ...  
-    
-    cards:
-      Currency/CardName1:
-        action: sandbox/Currency/Chart
-        params:
-          currencyId: 1
-          title: Currency Chart
-    Currency/CardName2:
-      # ...
-actions:
-  Currency/Chart:
-    # ...
+    /* ... */
+
+    public function cards($cards = []) {
+      return parent::cards([
+          "Currency/Table" =>
+                array (
+            'action' => 'sandbox/Currency/Table',
+            'params' => 
+            array (
+              'currency_id' => 1,
+              'title' => 'Currency Table',
+            ),
+          )
+        ,
+          "Currency/Chart" =>
+                array (
+            'action' => 'sandbox/Currency/Chart',
+            'params' => 
+            array (
+              'currency_id' => 1,
+            ),
+          )
+        ,
+        ]);
+    }
 ```
