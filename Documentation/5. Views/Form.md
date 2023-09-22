@@ -1,4 +1,4 @@
-# Table
+# Form 
 
 The Form view is one of the most important elements for data manipulating such a inserting and editing records from the database. Also it offers extensive customization options, allowing developers to adjust the entire form to their needs.
 
