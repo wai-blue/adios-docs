@@ -80,8 +80,10 @@
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
                 <h1>Designing forms</h1>
-<p>The <a href="../5.%20Views/Form.md">Form</a> view contains a flexible and easy-to-configure templating engine that can render complex forms for inserting or editing records in a <a href="../6.%20Database/Model.md">model</a>. With this templating engine and only a little coding, you will be able to create complex forms for manipulating your data.</p>
-<p>The definition of the Form's template can contain:</p>
+<p>The <a href="../5.%20Views/Form.md">Form</a> view contains a flexible and easy-to-configure templating engine that can render
+complex forms for inserting or editing records in a <a href="../6.%20Database/Model.md">model</a>. With this templating engine and
+only a little coding, you will be able to create complex forms for manipulating your data.</p>
+<p>The definition of the Form can contain:</p>
 <ul>
 <li>inputs to the columns of a model based on its <a href="../6.%20Database/Data%20types.md">data type</a>;</li>
 <li>lookups</li>
@@ -90,10 +92,12 @@
 <li>tabs</li>
 <li>custom fields</li>
 <li>custom buttons (by default, the <code>Save</code>, <code>Delete</code> and <code>Close</code> buttons are rendered)</li>
+<li>custom views</li>
 </ul>
-<p>In this chapter, we will learn how to configure the template.</p>
-<h2>Configuring the template</h2>
-<p>The configuration of the template is done by providing a <code>model</code> and <code>template</code> parameters to the <a href="../5.%20Views/Form.md">Form</a> view:</p>
+<p>In this chapter, we will learn how to configure it.</p>
+<h2>Configuring the Form</h2>
+<p>The configuration of the form is done by providing a <code>model</code> and <code>template</code> or <code>content</code> parameters to the
+<a href="../5.%20Views/Form.md">Form</a> view:</p>
 <pre><code class="language-php">$theForm = new \ADIOS\Core\Views\Form(
   $adios,
   [
@@ -106,57 +110,76 @@
   ]
 )</code></pre>
 <blockquote>
-<p>:bulb: Check the <code>AddressBook/Contact/Add-Version1</code> action in the <a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
-<p>:bulb: You can create a .yml file with the definition of the template and use the <a href="./Prototype%20builder.md"><code>prototype builder</code></a> feature to generate the source code from the command line.</p>
+<p>:bulb: Check the <code>AddressBook/Contact/Add-Version1</code> action in the
+<a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+<p>:bulb: You can create a .yml file with the definition of the template and use the
+<a href="./Prototype%20builder.md"><code>prototype builder</code></a> feature to generate the source code from the command line.</p>
 </blockquote>
 <p>The <code>model</code> parameter is used to get the list of available columns and their properties (data type, title, ...).</p>
 <h2>Hello world example</h2>
-<p>The easiest configuration of the form's template is to provide the list of columns which we want to render into the form, in a form of an array. The form with the configuration from the previous example would be rendered by like this:</p>
+<p>The easiest configuration of the form's template is to provide the list of columns which we want to render into the
+form, in a form of an array. The form with the configuration from the previous example would be rendered by like this:</p>
 <p><img src="../../resources/img/contact_add1.png" alt="Hello world example form" /></p>
 <p>You only need to launch the <code>render()</code> method:</p>
 <pre><code class="language-php">echo $theForm-&gt;render();</code></pre>
 <h2>Using model's configuration to render a form</h2>
-<p>You may ask, where the other information like the window title or the titles of the inputs come from. The answer is: from a <a href="../6.%20Database/Model.md">model</a>. The <em>model</em> contains several properties used by forms, e.g.:</p>
+<p>You may ask where the other information like the window title or the titles of the inputs come from. The answer is: from
+a <a href="../6.%20Database/Model.md">model</a>. The <em>model</em> contains several properties used by forms, e.g.:</p>
 <ul>
 <li>formTitleForInserting</li>
 <li>formTitleForEditing</li>
 </ul>
-<p>Additionaly, the definition of model's columns (provided by the <code>columns()</code> method of model) contains some other information used in rendering of the form, e.g.:</p>
+<p>Additionaly, the definition of model's columns (provided by the <code>columns()</code> method of model) contains some other
+information used in rendering of the form, e.g.:</p>
 <ul>
 <li>type</li>
 <li>title</li>
 <li>unit</li>
 </ul>
-<p>Check <a href="https://github.com/wai-blue/ADIOS/blob/main/src/Core/Model.php">\ADIOS\Core\Model class</a> for the list of all properies used.</p>
+<p>Check <a href="https://github.com/wai-blue/ADIOS/blob/main/src/Core/Model.php">\ADIOS\Core\Model class</a> for the list of all
+properies used.</p>
 <h2>Rendering views inside a form</h2>
-<p>Sometimes you need to include more complex views inside a form. A typical example is a table with the list of associated records.</p>
-<p>This can be achieved by providing the view class and parameters to the templating engine. In the example below, the view <a href="../5.%20Views/Table.md">Table</a> will be rendered.</p>
+<p>Sometimes you need to include more complex views inside a form. A typical example is a table with the list of associated
+records.</p>
+<p>This can be achieved by using the <code>content</code> property, which renders another view inside. In combination with the Grid
+view and other nested views, you are able to reach the desired result. In the example below, the view
+<a href="../5.%20Views/Table.md">Table</a> will be rendered.</p>
 <pre><code class="language-php">$theForm = new \ADIOS\Core\Views\Form(
   $adios,
   [
     'model' =&gt; 'App/Widgets/AddressBook/Models/Contact',
-    'template' =&gt; [
-      'columns' =&gt; [
-        'first_name',
-        'last_name',
-        [
-          'view' =&gt; 'Table',
-          'params' =&gt; [
-            'model' =&gt; 'App/Widgets/AddressBook/Models/ContactAddress',
-            'where' =&gt; [
-              'id_contact',
-              '=',
-              $this-&gt;params['id'],
-            ]
-          ]
-        ]
+    'content' =&gt; [
+      'view' =&gt; 'ADIOS/Core/Views/Grid',
+      'params' =&gt; [
+        'layout' =&gt; ['A B', 'C C'],
+        'layoutSm' =&gt; ['A', 'B', 'C'],
+        'cssClass' =&gt; 'no-area-borders',
+        'areas' =&gt; [
+          'A' =&gt; ['item' =&gt; 'first_name'],
+          'B' =&gt; ['item' =&gt; 'last_name'],
+          'C' =&gt; [
+            'item' =&gt; [
+              'view' =&gt; 'Table',
+              'params' =&gt; [
+                'model' =&gt; 'App/Widgets/AddressBook/Models/ContactAddress',
+                'where' =&gt; [
+                  'id_contact',
+                  '=',
+                  $this-&gt;params['id'],
+                ]
+              ]
+            ]  
+          ]   
+        ] 
       ]
     ]
   ]
 )</code></pre>
 <h2>More complex examples</h2>
 <h3>Tabs</h3>
-<p>Let's imagine, the model for storing the contacts could be far more complex and could contain lots of columns, somehow logically grouped. In such case, you may want to render a form using tabs. With the form's templating engine, this is very simple.</p>
+<p>Let's imagine, the model for storing the contacts could be far more complex and could contain lots of columns, somehow
+logically grouped. In such case, you may want to render a form using tabs. With the form's templating engine, this is
+very simple.</p>
 <p>For example, this configuration of the template:</p>
 <pre><code class="language-php">$theFormWithTabs = new \ADIOS\Core\Views\Form(
   $adios,
@@ -183,11 +206,12 @@
   ]
 )</code></pre>
 <blockquote>
-<p>:bulb: Check the <code>AddressBook/Contact/Add-Version2</code> action in the <a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+<p>:bulb: Check the <code>AddressBook/Contact/Add-Version2</code> action in the
+<a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
 </blockquote>
 <p>Would end up with the form rendered followingly:</p>
 <p><img src="../../resources/img/contact_add2.png" alt="Hello world example form" /></p>
-<h3>Groupping inside a tab</h3>
+<h3>Grouping inside a tab</h3>
 <pre><code class="language-php">$theFormWithTabs = new \ADIOS\Core\Views\Form(
   $adios,
   [
@@ -224,11 +248,53 @@
   ]
 )</code></pre>
 <blockquote>
-<p>:bulb: Check the <code>AddressBook/Contact/Add-Version3</code> action in the <a href="../examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
+<p>:bulb: Check the <code>AddressBook/Contact/Add-Version3</code> action in the
+<a href="../examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
 </blockquote>
 <p><img src="../../resources/img/contact_add3.png" alt="Hello world example form" /></p>
 <h3>Multiple columns</h3>
-<p>...</p>
+<p>To add more columns to a form, use the Grid view:</p>
+<pre><code class="language-php">$theFormWithTabs = new \ADIOS\Core\Views\Form(
+  $adios,
+  [
+    'model' =&gt; 'App/Widgets/AddressBook/Models/Contact',
+    'content' =&gt; [
+      'view' =&gt; 'ADIOS/Core/Views/Tabs',
+      'params' =&gt; [
+        'tabs' =&gt; [
+          [
+            'title' =&gt; 'Basic information',
+            'content' =&gt; [
+              'view' =&gt; '/ADIOS/Core/Views/Grid',
+              'params' =&gt; [
+                'layout' =&gt; ['A B', 'C D'],
+                'areas' =&gt; [
+                  'A' =&gt; ['item' =&gt; 'first_name'],
+                  'B' =&gt; ['item' =&gt; 'middle_name'],
+                  'C' =&gt; ['item' =&gt; 'last_name'],
+                  'D' =&gt; ['item' =&gt; 'email']
+                ]
+              ]
+            ]
+          ],
+          [
+            'title' =&gt; 'Social profiles',
+            'content' =&gt; [
+              'view' =&gt; '/ADIOS/Core/Views/Grid',
+              'params' =&gt; [
+                'layout' =&gt; ['A B'],
+                'areas' =&gt; [
+                  'A' =&gt; ['item' =&gt; 'url_facebook'],
+                  'B' =&gt; ['item' =&gt; 'url_linkedin'],
+                ]
+              ]
+            ]
+          ]
+        ]   
+      ]   
+    ]
+  ]
+)</code></pre>
 <h3>Tables linked via foreign keys (lookups)</h3>
 <p>Let's have a form to edit the contact and each contact can have several addresses associated.</p>
 <p>In this case, you would have two models:</p>
@@ -236,46 +302,80 @@
 <li><code>\App\Widgets\AddressBook\Models\Contact</code> to store the basic information about the contact like <code>first_name</code>, <code>last_name</code> or <code>email</code>.</li>
 <li><code>\App\Widgets\AddressBook\Models\ContactAddress</code> to store the associated addresses. This model would contain a <em>lookup</em> column <code>id_contact</code> - the foreign key to the Contact.</li>
 </ol>
-<p>The easiest way how to build a UI to manage this dataset, is to create a form for the <code>Contact</code> model, containing a table with the list of associated records from the <code>ContactAddress</code> model. And to make the form nice looking, we will split the form into two tabs, one for the contact details and the second for the table.</p>
+<p>The easiest way how to build a UI to manage this dataset, is to create a form for the <code>Contact</code> model, containing a
+table with the list of associated records from the <code>ContactAddress</code> model. And to make the form nice looking, we will
+split the form into two tabs, one for the contact details and the second for the table.</p>
 <pre><code class="language-php">$theForm = new \ADIOS\Core\Views\Form(
-  $adios,
-  [
-    'model' =&gt; 'App/Widgets/AddressBook/Models/Contact',
-    'template' =&gt; [
-
-      'columns' =&gt; [
-        [
-          'tabs' =&gt; [
-            'Basic information' =&gt; [
-              'group' =&gt; [
-                'title' =&gt; 'Full name',
-                'items' =&gt; [
-                  'first_name',
-                  'middle_name',
-                  'last_name'
-                ],
-              ],
-              'group' =&gt; [
-                'title' =&gt; 'Contact details',
-                'items' =&gt; [
-                  'email',
-                  'phone'
-                ]
-              ]
-            ],
-            'Social profiles' =&gt; [
-              'url_facebook',
-              'url_linkedin'
-            ],
-            'Addresses' =&gt; [
+      $adios,
+      [
+        'model' =&gt; 'App/Widgets/AddressBook/Models/Contact',
+        'content' =&gt; [
+          'view' =&gt; 'ADIOS/Core/Views/Tabs',
+          'params' =&gt; [
+            'tabs' =&gt; [
               [
-                'view' =&gt; 'Table',
-                'params' =&gt; [
-                  'model' =&gt; 'App/Widgets/AddressBook/Models/ContactAddress',
-                  'where' =&gt; [
-                    'id_contact',
-                    '=',
-                    $this-&gt;params['id'],
+                'title' =&gt; 'Basic information',
+                'content' =&gt; [
+                  'view' =&gt; 'ADIOS/Core/Views/Grid',
+                  'params' =&gt; [
+                    'title' =&gt; 'Full name',
+                    'layout' =&gt; ['A', 'B', 'C'],
+                    'areas' =&gt; [
+                      'A' =&gt; ['item' =&gt;
+                        [
+                          'view' =&gt; 'ADIOS/Core/Views/Grid',
+                          'params' =&gt; [
+                            'title' =&gt; 'Full name',
+                            'layout' =&gt; ['A', 'B', 'C'],
+                            'areas' =&gt; [
+                              'A' =&gt; ['item' =&gt; 'first_name'],
+                              'B' =&gt; ['item' =&gt; 'middle_name'],
+                              'C' =&gt; ['item' =&gt; 'last_name']
+                            ]
+                          ]
+                        ]
+                      ],
+                      'B' =&gt; ['item' =&gt;
+                        [
+                          'view' =&gt; 'ADIOS/Core/Views/Grid',
+                          'params' =&gt; [
+                            'title' =&gt; 'Contact details',
+                            'layout' =&gt; ['A', 'B'],
+                            'areas' =&gt; [
+                              'A' =&gt; ['item' =&gt; 'email'],
+                              'B' =&gt; ['item' =&gt; 'phone']
+                            ]
+                          ]
+                        ]
+                      ],
+                      'C' =&gt; ['item' =&gt;
+                        [
+                          'view' =&gt; 'ADIOS/Core/Views/Grid',
+                          'params' =&gt; [
+                            'title' =&gt; 'Social media',
+                            'layout' =&gt; ['A', 'B'],
+                            'areas' =&gt; [
+                              'A' =&gt; ['item' =&gt; 'url_facebook'],
+                              'B' =&gt; ['item' =&gt; 'url_linkedin']
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                'title' =&gt; 'Addresses',
+                'content' =&gt; [
+                  'view' =&gt; 'ADIOS/Core/Views/Table',
+                  'params' =&gt; [
+                    'model' =&gt; 'App/Widgets/AddressBook/Models/ContactAddress',
+                    'where' =&gt; [
+                      'id_contact',
+                      '=',
+                      $this-&gt;params['id'],
+                    ]
                   ]
                 ]
               ]
@@ -283,13 +383,11 @@
           ]
         ]
       ]
-    ]
-  ]
-)</code></pre>
+    );</code></pre>
 <blockquote>
 <p>:bulb: Check the <code>AddressBook/Contact/Edit-Version2</code> action in the <a href="../../resources/examples/prototype-builder-yaml/AddressBook.yml">AddressBook.yml</a></p>
 </blockquote>
-<h3>Inputs based on lookuped models</h3>
+<h3>Inputs based on lookup models</h3>
 <p><code>id_com_contact_person:LOOKUP:title_before</code></p>
               </div>
             </div>

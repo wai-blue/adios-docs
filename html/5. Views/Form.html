@@ -142,6 +142,12 @@
 <td></td>
 </tr>
 <tr>
+<td>content</td>
+<td>array</td>
+<td>[]</td>
+<td></td>
+</tr>
+<tr>
 <td>show_save_button</td>
 <td>bool</td>
 <td>true</td>
@@ -285,6 +291,57 @@
         ]
       ]
     ]
+  ]
+])</code></pre>
+<p><strong>Example #5:</strong> Form with Grid content</p>
+<p>By using the parameter content, you are able to insert another View inside the Form, which is then able to also display
+the form inputs. This way, you are able to reach recursion and nest any views indefinitely to your liking.</p>
+<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Form([
+  'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
+  'content' =&gt; [
+    'view' =&gt; 'ADIOS/Core/Views/Tabs',
+    'params' =&gt; [
+      'tabs' =&gt; [
+        [
+          'title' =&gt; 'First Tab',
+          'content' =&gt; [
+            'view' =&gt; '/ADIOS/Core/Views/Grid',
+            'params' =&gt; [
+              'layout' =&gt; ['A A', 'B C'],
+              'areas' =&gt; [
+                'A' =&gt; [
+                  'item' =&gt; [
+                    'view' =&gt; 'Table',
+                    'params' =&gt; [
+                      'model' =&gt; 'App/Widgets/Finance/MainBook/Models/AccountingPeriod',
+                      'showColumns' =&gt; ['name', 'start_date', 'end_date']
+                      ]
+                    ]
+                  ],
+                'B' =&gt; ['item' =&gt; 'id_fin_accounting_period'],
+                'C' =&gt; ['item' =&gt; 'id_fin_book_account'],
+              ]
+            ]
+          ]
+        ],
+        [
+          'title' =&gt; 'Second tab',
+          'content' =&gt; [
+            'view' =&gt; '/ADIOS/Core/Views/Grid',
+            'params' =&gt; [
+              'layout' =&gt; ['A B'],
+              'areas' =&gt; [
+                'A' =&gt; ['item' =&gt; 'ratio'],
+                'B' =&gt; ['item' =&gt; [
+                  'view' =&gt; 'Html',
+                  'html' =&gt; 'This is an example HTML View.'                
+                ]]
+              ]
+            ]
+          ]
+        ]
+      ]   
+    ]   
   ]
 ])</code></pre>
 <h2>Notes</h2>
