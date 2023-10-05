@@ -1,56 +1,58 @@
-# Html
+# ManyToMany
 
-The ManyToMany view generates a field with checkboxes from the set relational table.
+The ManyToMany view generates a field with checkboxes from the source and destination columns.
 
 ## Properties
 
 The ManyToMany view supports various properties that can be utilized to meet functionality requirements:
 
-| Property | Type   | Default value | Description |
-| -------- | ------ | ------------- | ----------- |
-| model     | string |               | Path to a model |
-| columns     | int |     3          | Choice for a list of column sizes **Options** `[1 for 12 columns, 2 for 6 columns, 3 for 4 columns, 4 for 3 columns, 6 for 2 columns]` |
-| relation[0]     | string |               | Source column |
-| relation[1]     | string |               | Destination column |
-| Order     | string |   id asc            | Column and order to order the table by |
-| Contraints     | string |   TRUE            | Constraints on the source and destination column |
+| Property   | Type             | Default value | Description                                                             |
+| ---------- | ---------------- | ------------- | ----------------------------------------------------------------------- |
+| model      | string           |               | Path to a model                                                         |
+| columns    | int              | 3             | Number of columns that will be generated to put checkboxes into (max 6) |
+| relation   | array of strings |               | Name of the lookup source and lookup destination columns                 |
+| order      | string           | id asc        | Column to order the table by                                            |
+| contraints | array of strings | TRUE          | Where clause constraints on the source and destination column           |
 
 ## Usage
 
 ```php
-(new \ADIOS\Core\Views\Inputs\ManyToMany($this->adios, []))->render();
+(new \ADIOS\Core\Views\Inputs\ManyToMany($this->adios, [
+  "model" => "Path/To/A/Model",
+  "relation" => ["lookup_column1", "lookup_column2"],
+]))->render();
 ```
 
 ## Examples
 
-**Example #1:** Html view with an image
+**Example #1:** ManyToMany view creating a checkbox field based on two lookup columns
 
 ```php
-$adios->view->Html([
-  'html' => '<img scr="path/to/image">',
-]);
+(new \ADIOS\Core\Views\Inputs\ManyToMany($this->adios, [
+  "model" => "App/Widgets/Finance/MainBook/Models/BookAccount",
+  "relation" => ["id_fin_accounting_period", "id_parent"],
+]))->render();
 ```
 
-**Example #2:** Html view with an ordered list
+**Example #2:** ManyToMany view creating a checkbox field based on two lookup columns while organizing checkboxes into 3 columns
 
 ```php
-$adios->view->Html([
-  'html' => '
-  <ol>
-    <li>Example 1</li>
-    <li>Example 2</li>
-    <li>Example 3</li>
-  </ol>
-  '
-]);
+(new \ADIOS\Core\Views\Inputs\ManyToMany($this->adios, [
+  "model" => "App/Widgets/Finance/MainBook/Models/BookAccount",
+  "relation" => ["id_fin_accounting_period", "id_parent"],
+  "columns" => 3
+]))->render();
 ```
 
-**Example #3:** Html view with a paragraph with a link
+**Example #3:** ManyToMany view creating a checkbox field with where clause constraints
 
 ```php
-$adios->view->Html([
-  'html' => '<p>Example <a href="url">paragraph</a> </p>',
-]);
+(new \ADIOS\Core\Views\Inputs\ManyToMany($this->adios, [
+  "model" => "App/Widgets/Finance/MainBook/Models/BookAccount",
+  "relation" => ["id_fin_accounting_period", "id_parent"],
+  "constraints" => ["id_fin_accounting_period" => 3, "id_parent" => NULL ]
+]))->render();
 ```
 
 ## Notes
+ - You need to have a minimun of two lookup columns in a model.
