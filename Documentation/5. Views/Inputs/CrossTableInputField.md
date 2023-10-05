@@ -49,7 +49,7 @@ return (new \ADIOS\Core\Views\Inputs\CrossTableInputField($this->adios, [
 
 In this example, ADIOS renders a CrossTableInputField of the `cross_model`, which is referenced in the column with the name `cross_key_column` in `model`.  It specifically chooses the model with id 15, as stated in `cross_key_value`. The final view will also be split into 4 columns, based on the `columns` property. The inputs rendered are defined by the `items` property.
 
-![[CrossTableInputField_example_01.png]]
+![Example 01](../../../resources/img/CrossTableInputField_example_01.png)
 
 ## input_callback function
 
