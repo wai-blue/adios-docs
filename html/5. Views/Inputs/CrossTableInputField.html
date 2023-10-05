@@ -21,7 +21,7 @@
         <a 
           href='#.obsidian' class='dropdown-toggle' data-toggle='dropdown'>
           .obsidian <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../.obsidian/app.json.html'>app.json</a></li><li><a href='../.obsidian/appearance.json.html'>appearance.json</a></li><li><a href='../.obsidian/core-plugins-migration.json.html'>core-plugins-migration.json</a></li><li><a href='../.obsidian/core-plugins.json.html'>core-plugins.json</a></li><li><a href='../.obsidian/graph.json.html'>graph.json</a></li><li><a href='../.obsidian/hotkeys.json.html'>hotkeys.json</a></li><li><a href='../.obsidian/workspace.json.html'>workspace.json</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'></ul></li><li class='dropdown'>
         <a 
           href='#1. Introduction' class='dropdown-toggle' data-toggle='dropdown'>
           1. Introduction <small style='float:right';padding-top:5px>﹀</small>
@@ -160,7 +160,7 @@
     ]
 ]))-&gt;render();</code></pre>
 <p>In this example, ADIOS renders a CrossTableInputField of the <code>cross_model</code>, which is referenced in the column with the name <code>cross_key_column</code> in <code>model</code>.  It specifically chooses the model with id 15, as stated in <code>cross_key_value</code>. The final view will also be split into 4 columns, based on the <code>columns</code> property. The inputs rendered are defined by the <code>items</code> property.</p>
-<p>![[CrossTableInputField_example_01.png]]</p>
+<p>![[(../../resources/img/CrossTableInputField_example_01)]]</p>
 <h2>input_callback function</h2>
 <p>To render a CrossTableInputField, you also need to code an input_callback function. You can use the following one to take inspiration. It is also required to render the examples.</p>
 <pre><code class="language-php">static function input_callback($view, $inputElementId, $itemUID, $itemValues): string  
