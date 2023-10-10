@@ -130,32 +130,32 @@ h4,
 h1,
 .modest-h1 {
   margin-top: 0;
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 h2,
 .modest-h2 {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 h3,
 .modest-h3 {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 h4,
 .modest-h4 {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 h5,
 .modest-h5 {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 h6,
 .modest-h6 {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 small,
@@ -304,11 +304,11 @@ padding: 0;
 }
 
 .sidebar-nav li a:hover {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 .dropdown-menu li a:hover {
-  color: #2F7AE5;
+  color: #ff6b35;
 }
 
 .sidebar-header {
@@ -320,7 +320,7 @@ padding: 0;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background: #fff;
-  border-top: 4px solid #1D63DC;
+  border-top: 4px solid #ff6b35;
   margin-bottom: 10px;
 }
 .sidebar-brand a {

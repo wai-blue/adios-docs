@@ -45,11 +45,12 @@ function buildSidebarHtmlRecursive(array $sidebarArray, string $url = '') {
         </a>"
       ;
       $html .= "<ul class='dropdown-menu animated fadeInLeft' role='menu'>";
-      $html .= buildSidebarHtmlRecursive($value, '../' . $key);
+      $html .= buildSidebarHtmlRecursive($value, $url . $key . '/');
       $html .= "</ul>";
       $html .= "</li>";
     } else {
-      $html .= "<li><a href='{$url}/{$value}.html'>{$value}</a></li>";
+      var_dump("{$url}{$value}");
+      $html .= "<li><a href='{$url}{$value}.html'>{$value}</a></li>";
     }
   }
 
@@ -86,7 +87,7 @@ function listFilesRecursively(string $documentationPath, int $depth = 0) {
   return $results;
 }
 
-function getAssetsRelativePath(string $markdownPathToRender) {
+function getRelativePaths(string $markdownPathToRender) {
   $assetsPath = '';
   $startPosition = strpos($markdownPathToRender, 'Documentation/') + strlen('Documentation/');
   $subString = substr($markdownPathToRender, $startPosition);
@@ -94,10 +95,11 @@ function getAssetsRelativePath(string $markdownPathToRender) {
   foreach (explode('/', $subString) as $path) {
     $assetsPath .= '../';
   }
-
-  $assetsPath .= 'resources/assets';
-
-  return $assetsPath;
+  
+  return [
+    'rootDirRelativePath' => $assetsPath,
+    'assetsPath' => $assetsPath .= 'resources/assets'
+  ];
 }
 
 function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
@@ -108,7 +110,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
 
   $mdHtml =  $mdHtml == '' ? '<p>Work in progress...</p>' : $mdHtml;
 
-  $assetsRelativePath = getAssetsRelativePath($markdownPathToRender);
+  $relatives = getRelativePaths($markdownPathToRender);
 
   $html = "
     <!DOCTYPE html>
@@ -116,7 +118,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='{$assetsRelativePath}/css/style.css'>
+        <link rel='stylesheet' href='{$relatives['assetsPath']}/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -155,7 +157,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
       </body>
     </html>
 
-    <script src='{$assetsRelativePath}/js/main.js'></script>
+    <script src='{$relatives['assetsPath']}/js/main.js'></script>
   ";
 
   $filePath = preg_replace('/\.md$/', '.html', $markdownPathToRender);
@@ -173,10 +175,11 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
 
 $files = listFilesRecursively($documentationPath);
 
-$sidebarItems = buildSidebarArrayRecursive($documentationPath);
-$sidebarsItemsHtml = buildSidebarHtmlRecursive($sidebarItems);
-
 foreach ($files['files'] as $file) {
+  $relatives = getRelativePaths($file['path']);
+  $sidebarItems = buildSidebarArrayRecursive($documentationPath);
+  $sidebarsItemsHtml = buildSidebarHtmlRecursive($sidebarItems, '../');
+
   renderHtml($file['path'], $sidebarsItemsHtml);
 }
 
