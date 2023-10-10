@@ -30,5 +30,6 @@ The Tags input view supports various properties that can be utilized to meet fun
   'tagColumn' => 'name'
 ]));
 ```
+![Example #1 Preview](./../../../resources/examples/inputs/tags/example_1.png)
 
 ## Notes

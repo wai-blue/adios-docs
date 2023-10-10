@@ -19,7 +19,7 @@ Thanks to the powerful form templating engine in ADIOS you can easily create com
 
 You have free hands over customization of your application.
 
-If you're curious about how ADIOS compares to other frameworks, we prepared a detailed comparison between ADIOS and Laravel in the [Framework comparison.md](Documentation/1.%20Getting%20started/Framework%20comparison.md) file.
+If you're curious about how ADIOS compares to other frameworks, we prepared a detailed comparison between ADIOS and Laravel in the [Framework comparison.md](Documentation/1.%20Introduction/Framework-comparison.md) file.
 
 ## Create your first CRM application (in a few minutes)
 
@@ -43,9 +43,7 @@ cd bin
 build.bat
 ```
 
-<img src="Documentation/Assets/Images/prototype-builder.png" />
-
-This will create an ADIOS application based on the [simple-crm.json prototype](Documentation/Prototype%20builder/Examples/10-simple-crm.json) which you can further customize.
+This will create an ADIOS application based on the [AddressBook.yml prototype](resources/examples/prototype-builder-yaml/AddressBook.yml) which you can further customize.
 
 Sounds interesting? The documentation will always be available here, ready for you.
 

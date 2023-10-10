@@ -125,8 +125,7 @@ function renderHtml(string $markdownPathToRender, string $sidebarsItemsHtml) {
           <ul class='nav sidebar-nav'>
             <div class='sidebar-header'>
               <div class='sidebar-brand'>
-                <img class='logo-img' src='{$assetsRelativePath}/adios.jpeg' />
-                <a href='#'>ADIOS</a>
+                <a href='#'>ADIOS Framework</a>
               </div>
             </div>
             {$sidebarsItemsHtml}
