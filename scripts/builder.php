@@ -49,7 +49,6 @@ function buildSidebarHtmlRecursive(array $sidebarArray, string $url = '') {
       $html .= "</ul>";
       $html .= "</li>";
     } else {
-      var_dump("{$url}{$value}");
       $html .= "<li><a href='{$url}{$value}.html'>{$value}</a></li>";
     }
   }
