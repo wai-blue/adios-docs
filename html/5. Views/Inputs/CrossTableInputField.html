@@ -19,10 +19,6 @@
             </div>
             <li class='dropdown'>
         <a 
-          href='#.obsidian' class='dropdown-toggle' data-toggle='dropdown'>
-          .obsidian <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'></ul></li><li class='dropdown'>
-        <a 
           href='#1. Introduction' class='dropdown-toggle' data-toggle='dropdown'>
           1. Introduction <small style='float:right';padding-top:5px>﹀</small>
         </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../1. Introduction/Framework-comparison.html'>Framework-comparison</a></li><li><a href='../1. Introduction/Introduction.html'>Introduction</a></li><li><a href='../1. Introduction/Sample simple CRM application.html'>Sample simple CRM application</a></li></ul></li><li class='dropdown'>
@@ -160,7 +156,7 @@
     ]
 ]))-&gt;render();</code></pre>
 <p>In this example, ADIOS renders a CrossTableInputField of the <code>cross_model</code>, which is referenced in the column with the name <code>cross_key_column</code> in <code>model</code>.  It specifically chooses the model with id 15, as stated in <code>cross_key_value</code>. The final view will also be split into 4 columns, based on the <code>columns</code> property. The inputs rendered are defined by the <code>items</code> property.</p>
-<p>![[(../../resources/img/CrossTableInputField_example_01)]]</p>
+<p><img src="../../../resources/img/CrossTableInputField_example_01.png" alt="Example 01" /></p>
 <h2>input_callback function</h2>
 <p>To render a CrossTableInputField, you also need to code an input_callback function. You can use the following one to take inspiration. It is also required to render the examples.</p>
 <pre><code class="language-php">static function input_callback($view, $inputElementId, $itemUID, $itemValues): string  
