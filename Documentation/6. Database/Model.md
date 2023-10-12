@@ -137,7 +137,8 @@ Returns an array of table items as enumeration values. The value of items is set
 ```php
 $model->findForeignKeyModels($params);
 ```
-### associateKey($input, $key) TODO
+### associateKey($input, $key)
+TODO
 
 Returns the associete key from an array.
 
@@ -352,53 +353,96 @@ Returns the `lookupSqlValue` parameter. If the `tableAlias` is not empty, return
 ```php
 $model->lookupSqlValue();
 ```
-
-
-
-
-
-
-
 ### tableParams($params, $table)
 
-TODO
+Allows you to modify the parameters of the model's table before rendering. For full list of table parameters see [Table view]("../5. Views/Table.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the table.
 
 ```php
 $model->tableParams($params, $table);
+
+OR
+
+public function tableParams($params, $table) {
+  if ((int) $params['id_staff'] > 0) {
+      $params["show_controls"] = FALSE;
+  }
+
+  return $params;
+};
+
 ```
 ### tableRowCSSFormatter($data)
 
-TODO
+Allows you to change the CSS of a table row by overriding this function in a model.
 
 ```php
-$model->tableRowCSSFormatter($data);
+public function tableCellCSSFormatter($data)
+  {
+    if ($data['column'] == "type"){
+      return "background-color: blue; color: white;";
+    }
+  }
 ```
 ### tableCellCSSFormatter($data)
 
-TODO
+Allows you to change the CSS of a table cell by overriding this function in a model.
 
 ```php
-$model->tableCellCSSFormatter($data);
+public function tableCellCSSFormatter($data)
+  {
+    if ($data['row']['date'] < date('Y-m-d H:i:s')) {
+      return "background-color: red; color: yellow;";
+    }
+  }
 ```
 ### tableCellHTMLFormatter($data)
 
+Allows you to modify the table cell value by overriding this function in a model.
 TODO
 
 ```php
-$model->tableCellCSVFormatter($data);
+public function tableCellHTMLFormatter($data)
+{
+  switch ($data['column']) {
+    case "id_staff":
+      if ($data['row']['id_staff'] > 5) {
+        return 'Access denied';
+      } else {
+        return $data['html'];
+      }
+      break;
+    default:
+      return $data['html'];
+      break;
+  }
+}
 ```
-### tableCellHTMLFormatter($data)
+### tableCellCSVFormatter($data)
 
+Allows you to modify the table cell value in the CSV export by overriding this function in a model.
 TODO
 
 ```php
-$model->tableCellCSVFormatter($data);
+public function tableCellCSVFormatter($data)
+{
+  switch ($data['column']) {
+    case "id_staff":
+      if ($data['row']['id_staff'] > 5) {
+        return '';
+      } else {
+        return $data['html'];
+      }
+      break;
+    default:
+      return $data['html'];
+      break;
+  }
+}
 ```
-
-
 
 ### onTableBeforeInit($tableObject)
 
+⚠️ **[deprecated]**
 TODO
 
 ```php
@@ -406,6 +450,7 @@ $model->onTableBeforeInit($tableObject);
 ```
 ### onTableAfterInit($tableObject)
 
+⚠️ **[deprecated]**
 TODO
 
 ```php
@@ -413,8 +458,263 @@ $model->onTableAfterInit($tableObject);
 ```
 ### onTableAfterDataLoaded($tableObject)
 
+⚠️ **[deprecated]**
 TODO
 
 ```php
 $model->onTableAfterDataLoaded($tableObject);
+```
+
+### columnValidate(string $column, $value)
+
+Checks the valitidy of a value for a column. Returns bool.
+
+```php
+$model->columnValidate("id_staff",$value);
+```
+
+### onFormBeforeInit($formObject)
+
+⚠️ **[deprecated]**
+TODO
+
+```php
+$model->onFormBeforeInit($formObject);
+```
+### onFormAfterInit($formObject)
+
+⚠️ **[deprecated]**
+TODO
+
+```php
+$model->onFormAfterInit($formObject);
+```
+### formParams($data, $params)
+
+Allows you to modify the parameters of the model's form before rendering. For full list of form parameters and additional information see [Form view]("../5. Views/Form.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the form.
+
+```php
+$model->formParams($data, $params);
+
+OR
+
+public function formParams($data, $params) {
+if ((int) $params['id_staff'] > 5) {
+    $params["columns"]["user_name"]["readonly"] = FALSE;
+}
+
+return $params;
+};
+```
+
+### recordValidate($data)
+
+Validates the form data. Validates if the types of the values are correct and if the values are required or not.
+
+```php
+$model->recordValidate($data)
+```
+### recordSave($data)
+
+Saves the form data to the model's database table. This function also validates the data.
+
+```php
+$model->recordSave($data)
+```
+### recordDelete(int $id)
+
+Deletes a specific row in the model's table.
+
+```php
+$model->recordDelete(5);
+```
+
+### cards(array $cards = [])
+
+TODO
+
+```php
+$model->cards([]);
+```
+### cardsParams($params)
+TODO
+
+Allows you to modify the parameters of the model's cards before rendering. For full list of cards parameters see [Cards view]("../5. Views/Cards.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the cards.
+
+```php
+$model->cardsParams($params);
+
+OR
+
+public function cardsParams($params) {
+  if ((int) $params['id_staff'] > 0) {
+      $params["show_controls"] = FALSE;
+  }
+
+  return $params;
+};
+```
+### treeParams($params)
+TODO
+
+Allows you to modify the parameters of the model's tree before rendering. For full list of tree parameters see [Tree view]("../5. Views/Tree.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the tree.
+
+```php
+$model->treeParams($params);
+
+OR
+
+public function treeParams($params) {
+  if ((int) $params['id_staff'] > 0) {
+      $params["show_controls"] = FALSE;
+  }
+
+  return $params;
+};
+```
+### onBeforeInsert(array $data)
+
+Allows you to manipulate the data before the insertion of a new row by overriding this function in the model.
+
+```php
+public function onBeforeInsert($data) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};
+```
+### onBeforeUpdate(array $data)
+
+Allows you to manipulate the data before the update of a row by overriding this function in the model.
+
+```php
+public function onBeforeUpdate($data) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};
+```
+### onBeforeSave(array $data)
+
+Allows you to manipulate the data before the insetion or update of a row by overriding this function in the model. Prefered method.
+
+```php
+public function onBeforeSave($data) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};
+```
+### onBeforeDelete(array $id)
+
+Allows you to manipulate the row id before deletion of the row by overriding this function in the model.
+
+```php
+public function onBeforeDelete($id) {
+
+  /*Your
+  Code*/
+
+  return $id;
+};
+```
+### onAfterInsert(array $data, $returnValue)
+
+Returns the new data after insertion and allows you to manipulate this new data by overriding this function in the model.
+
+```php
+public function onAfterInsert($data, $returnValue) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};
+```
+### onAfterUpdate(array $data, $returnValue)
+
+Returns the new data after a row update and allows you to manipulate this new data by overriding this function in the model.
+
+```php
+public function onAfterUpdate($data, $returnValue) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};
+```
+### onAfterSave(array $data, $returnValue)
+
+Returns the new data after a row update or insertion and allows you to manipulate this new data by overriding this function in the model.
+
+```php
+public function onAfterSave($data, $returnValue) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};
+```
+### onAfterDelete(int $id)
+
+Returns the id of a deleted row and allows you to manipulate with the id by overriding this function in the model.
+
+```php
+public function onAfterDelete($id) {
+
+  /*Your
+  Code*/
+
+  return $id;
+};
+```
+### getQuery($columns = NULL)
+
+Returns the id of a deleted row and allows you to manipulate with the id by overriding this function in the model.
+
+```php
+$model->getQuery([]);
+```
+### addLookupsToQuery($query, $lookupsToAdd = NULL)
+
+TODO
+
+```php
+$model->addLookupsToQuery($query,$lookupsToAdd);
+```
+### addCrossTableToQuery($query, $crossTableModelName, $resultKey = '')
+
+TODO
+
+```php
+$model->addCrossTableToQuery($query, $crossTableModelName, $resultKey);
+```
+### processLookupsInQueryResult($rows)
+
+TODO
+
+```php
+$model->processLookupsInQueryResult($rows);
+```
+### fetchRows($eloquentQuery, $keyBy = 'id', $processLookups = TRUE)
+
+TODO
+
+```php
+$model->fetchRows($eloquentQuery,'id', TRUE);
+```
+### countRowsInQuery($eloquentQuery)
+
+TODO
+
+```php
+$model->countRowsInQuery($eloquentQuery);
 ```
