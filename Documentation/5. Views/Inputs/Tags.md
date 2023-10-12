@@ -27,7 +27,8 @@ The Tags input view supports various properties that can be utilized to meet fun
 ```php
 (new \ADIOS\Core\Views\Inputs\Tags($this->adios, [
   'model' => 'App/Widgets/Common/AddressBook/Models/Category',
-  'tagColumn' => 'name'
+  'tagColumn' => 'name',
+  'initialsTags' => '["red", "blue", "orange"]'
 ]));
 ```
 ![Example #1 Preview](./../../../resources/examples/inputs/tags/example_1.png)
