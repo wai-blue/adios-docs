@@ -213,7 +213,7 @@ Customers:
       tableTitle: Customers
       formTitleForInserting: New customer
       formTitleForEditing: Edit customer
-      lookupSqlValue: "{%TABLE%}.name"
+      lookupSqlValue: "TABLE.name"
       columns:
         name:
           type: varchar
