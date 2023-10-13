@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -13,7 +13,7 @@
           <ul class='nav sidebar-nav'>
             <div class='sidebar-header'>
               <div class='sidebar-brand'>
-                <img class='logo-img' src='../../resources/assets/adios.jpeg' />
+                <img class='logo-img' src='../../../resources/assets/adios.jpeg' />
                 <a href='#'>ADIOS</a>
               </div>
             </div>
@@ -79,22 +79,35 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Installation</h1>
-<p>Before you start the installation of your ADIOS project, ensure that your local machine has PHP and Composer installed.</p>
-<p>Once you have installed PHP and Composer, you can proceed with the following steps to begin your journey with ADIOS:</p>
-<ol>
-<li>Navigate to the desired location where you want to create or save your project.</li>
-<li>Use the following commands to create your first CRM application:</li>
-</ol>
-<p>For linux:</p>
-<pre><code>composer create-project wai-blue/adios-app
-cd adios-app
-./bin/build.sh</code></pre>
-<p>For windows:</p>
-<pre><code>composer create-project wai-blue/adios-app
-cd adios-app
-cd bin
-build.bat</code></pre>
+                <p>⚠️ <strong>[deprecated]</strong> </p>
+<h1>DataTypeBool</h1>
+<p>DataType Bool is a deprecated boolean datatype. In SQL it is converted to <strong>char(1)</strong>, indexed by default.</p>
+<p>It's default value is FALSE <code>N</code>, otherwise it can also be <code>Y</code> for TRUE.
+It is rendered as a checkbox by the <strong>Views/Input</strong> view.</p>
+<h2>Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sql_definitions</td>
+<td>string</td>
+<td>Additional SQL parameters to be supplied when creating the column, optional</td>
+</tr>
+</tbody>
+</table>
+<h2>Example</h2>
+<p>A column with the datatype bool may be defined like this:</p>
+<pre><code class="language-php">"columnName" =&gt; [
+    "type" =&gt; "bool",
+    "title" =&gt; "A Bool Column",
+    "show_column" =&gt; False,
+]</code></pre>
               </div>
             </div>
           </div>
@@ -103,5 +116,5 @@ build.bat</code></pre>
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
