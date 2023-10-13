@@ -120,7 +120,8 @@
 <p><strong>Example #1:</strong> The Tags input for the model category, where the column name is defined as the tag column.</p>
 <pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\Tags($this-&gt;adios, [
   'model' =&gt; 'App/Widgets/Common/AddressBook/Models/Category',
-  'tagColumn' =&gt; 'name'
+  'tagColumn' =&gt; 'name',
+  'initialsTags' =&gt; '["red", "blue", "orange"]'
 ]));</code></pre>
 <p><img src="./../../../resources/examples/inputs/tags/example_1.png" alt="Example #1 Preview" /></p>
 <h2>Notes</h2>
