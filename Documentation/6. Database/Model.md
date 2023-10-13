@@ -38,10 +38,17 @@ Sets the value of configuration parameter.
 ```php
 $model->setConfig("configName", $value);
 ```
+### saveConfig(string $configName, $value)
 
-### translate(string $string, $context, $toLanguage,  array $vars = [])
+Persistantly saves the value of configuration parameter to the database.
 
-Shorthand for ADIOS core translate() function. Uses own language dictionary.
+```php
+$model->saveConfig("configName", $value);
+```
+
+### translate(string $string, array $vars = [])
+
+Shorthand for ADIOS core translate() function. Uses own language dictionary. Returns a translated string.
 
 ```php
 $model->translate("string", $arrayOfVariables);
@@ -49,7 +56,11 @@ $model->translate("string", $arrayOfVariables);
 
 ### hasSqlTable()
 
-CHECK: Check if the SQL table exists
+Checks if the SQL table exists for the model.
+
+```php
+$model->hasSqlTable();
+```
 
 ### isInstalled()
 
@@ -69,7 +80,7 @@ $model->getCurrentInstalledVersion();
 
 ### upgrades()
 
-Returns list of available upgrades. This method must be overriden by each model.
+Returns a list of available upgrades. This method must be overriden by each model.
 
 ```php
 $model->upgrades();
@@ -108,7 +119,7 @@ $model->getFullTableSqlName();
 ```
 ### createSqlForeignKeys()
 
-Returns full name of the model's SQL table
+Returns the full name of the model's SQL table
 
 ```php
 $model->getFullTableSqlName();
@@ -124,7 +135,7 @@ $model->getFullUrlBase($params);
 
 ### findForeignKeyModels()
 
-Searches for and returns the names of the models from the foreign keys of the model
+Searches for and returns the names of the models based on the foreign keys of the model
 
 ```php
 $model->findForeignKeyModels($params);
@@ -132,18 +143,17 @@ $model->findForeignKeyModels($params);
 
 ### getEnumValues()
 
-Returns an array of table items as enumeration values. The value of items is set based on the lookup value set in a model.
+Returns an array of table items as enumeration values. The value of items is set based on the lookup value set in the retrieved model.
 
 ```php
-$model->findForeignKeyModels($params);
+$model->getEnumValues();
 ```
 ### associateKey($input, $key)
-TODO
 
-Returns the associete key from an array.
+Reeindexes array items based on a specified key and returns the new array.
 
 ```php
-$model->associateKey($input, $key);
+$model->associateKey($input, "id");
 ```
 ### sqlQuery($query)
 
@@ -153,8 +163,42 @@ Executes the SQL query and returns the result.
 $model->sqlQuery($query);
 ```
 
-ROUTING
-TBA
+### routing($array $routing = [])
+
+Allows you to modify and add routing parameters. For more information see [Routing]("../4. The basics/Routing.md").
+
+```php
+public function routing(array $routing = [])
+  {
+    $routing = $this->addStandardCRUDRouting([], [
+      "urlBase" => 'Client\/Audit\/{{ idAudit }}\/Documents',
+      "params" => [
+          "idUserRole" => '$1',
+      ]
+    ]);
+
+    return parent::routing($routing);
+  }
+```
+### addStandardCRUDRouting($routing = [], $params = [])
+
+TODO
+
+```php
+$model->addStandardCRUDRouting([], [
+  "urlBase" => 'Client\/Audit\/{{ idAudit }}\/Documents',
+  "params" => [
+    "idUserRole" => '$1',
+  ]
+]);
+```
+### getStandardCRUDRoutes($urlBase, $urlParams, $varsInUrl)
+
+Returns an array of routing parameters of CRUD operations and other operations of the specified URL base.
+
+```php
+$model->getStandardCRUDRoutes($urlBase, $urlParams, $varsInUrl);
+```
 
 ### columns(array $columns = [])
 
@@ -207,18 +251,25 @@ $model->normalizeRowData($data, "tableName")
 
 ### getRelationships()
 
-⚠️ **[deprecated]**
+TODO
 
 ### getExtendedData($item)
 
-⚠️ **[deprecated]**
+TODO
 
 ### getById(int $id)
 
-Return the row of a table with the corresponding ID.
+Returns a row of a table with the corresponding ID.
 
 ```php
 $model->getById(1);
+```
+### getLookupSqlValueById(int $id)
+
+Returns a row of a table with the corresponding ID as a lookup value.
+
+```php
+$model->getLookupSqlValueById(1);
 ```
 
 ### getAll(string $keyBy = "id", $withLookups = FALSE, $processLookups = FALSE)
@@ -266,10 +317,10 @@ $model->insertRowWithId($data);
 ```
 ### insertOrUpdateRow($data)
 
-Creates new row or updates a row in a model's table. Ruturns TRUE if succesfull.
+Creates a new row or updates a row in a model's table. Ruturns TRUE if succesfull.
 
 ```php
-$model->insertRowWithId($data);
+$model->insertOrUpdateRow($data);
 ```
 ### insertRandomRow($data = [], $dictionary = [])
 
@@ -301,7 +352,7 @@ $model->copyRow(1)
 ```
 ### search($query)
 
-⚠️ **[deprecated]**
+TODO
 
 ### pdoPrepareAndExecute(string $query, array $variables)
 
@@ -320,28 +371,28 @@ $model->pdoPrepareExecuteAndFetch($queryString, [], "name");
 
 ### lookupWhere($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [])
 
-TODO
+Supporting function for SQL WHERE query creation.
 
 ```php
 $model->lookupWhere($initiatingModel, $initiatingColumn, $formData, $params);
 ```
 ### lookupOrder($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [])
 
-TODO
+Supporting function for SQL ORDER query creation.
 
 ```php
 $model->lookupOrder($initiatingModel, $initiatingColumn, $formData, $params);
 ```
 ### lookupQuery($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [],$having = "TRUE")
 
-TODO
+Supporting function for SQL query creation.
 
 ```php
 $model->lookupQuery($initiatingModel, $initiatingColumn, $formData, $params, "TRUE");
 ```
 ### lookupSqlQuery($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [],$having = "TRUE")
 
-TODO
+Returns an SQL query based on the lookup model.
 
 ```php
 $model->lookupSqlQuerys($initiatingModel, $initiatingColumn, $formData, $params, "TRUE");
@@ -353,55 +404,69 @@ Returns the `lookupSqlValue` parameter. If the `tableAlias` is not empty, return
 ```php
 $model->lookupSqlValue();
 ```
-### tableParams($params, $table)
+### onTableParams(\ADIOS\Core\Views\Table $tableObject, array $params)
 
 Allows you to modify the parameters of the model's table before rendering. For full list of table parameters see [Table view]("../5. Views/Table.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the table.
 
 ```php
-$model->tableParams($params, $table);
+$model->onTableParams($tableObject, $params);
 
 OR
 
-public function tableParams($params, $table) {
+public function onTableParams($tableObject, $params) {
   if ((int) $params['id_staff'] > 0) {
       $params["show_controls"] = FALSE;
   }
 
   return $params;
 };
-
 ```
-### tableRowCSSFormatter($data)
+### onTableRowParams(\ADIOS\Core\Views\Table $tableObject, array $params, array $data)
+
+Allows you to modify the parameters of the model's table rows before rendering. For full list of table parameters see [Table view]("../5. Views/Table.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the table.
+
+```php
+$model->onTableRowParams($tableObject, $params, $data);
+
+OR
+
+public function onTableRowParams($tableObject, $params, $data) {
+  /*Your
+  Code*/
+
+  return $params;
+};
+```
+### onTableCellCssFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)
 
 Allows you to change the CSS of a table row by overriding this function in a model.
 
 ```php
-public function tableCellCSSFormatter($data)
+public function onTableCellCssFormatter($tableObject, $data)
   {
     if ($data['column'] == "type"){
       return "background-color: blue; color: white;";
     }
   }
 ```
-### tableCellCSSFormatter($data)
+### onTableCellCssFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)
 
 Allows you to change the CSS of a table cell by overriding this function in a model.
 
 ```php
-public function tableCellCSSFormatter($data)
+public function onTableCellCssFormatter($tableObject, $data)
   {
     if ($data['row']['date'] < date('Y-m-d H:i:s')) {
       return "background-color: red; color: yellow;";
     }
   }
 ```
-### tableCellHTMLFormatter($data)
+### onTableCellHtmlFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)
 
 Allows you to modify the table cell value by overriding this function in a model.
-TODO
 
 ```php
-public function tableCellHTMLFormatter($data)
+public function tableCellHTMLFormatter($tableObject, $data)
 {
   switch ($data['column']) {
     case "id_staff":
@@ -417,13 +482,12 @@ public function tableCellHTMLFormatter($data)
   }
 }
 ```
-### tableCellCSVFormatter($data)
+### onTableCellCsvFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)
 
 Allows you to modify the table cell value in the CSV export by overriding this function in a model.
-TODO
 
 ```php
-public function tableCellCSVFormatter($data)
+public function onTableCellCsvFormatter($tableObject, $data)
 {
   switch ($data['column']) {
     case "id_staff":
@@ -442,27 +506,46 @@ public function tableCellCSVFormatter($data)
 
 ### onTableBeforeInit($tableObject)
 
-⚠️ **[deprecated]**
-TODO
+Allows you to modify the table object before its initialization. You can override this funtion to add additional functionality.
 
 ```php
-$model->onTableBeforeInit($tableObject);
-```
-### onTableAfterInit($tableObject)
+public function onTableBeforeInit($tableObject) {
 
-⚠️ **[deprecated]**
-TODO
+  /*Your
+  Code*/
+
+  return $tableObject;
+};
+```
 
 ```php
 $model->onTableAfterInit($tableObject);
 ```
-### onTableAfterDataLoaded($tableObject)
+### onTableAfterInit($tableObject)
 
-⚠️ **[deprecated]**
-TODO
+Allows you to modify the table object after it has been initialized. You can override this funtion to add additional functionality.
 
 ```php
-$model->onTableAfterDataLoaded($tableObject);
+public function onTableBeforeInit($tableObject) {
+
+  /*Your
+  Code*/
+
+  return $tableObject;
+};
+```
+### onTableAfterDataLoaded($tableObject)
+
+Allows you to modify the table object (including its data) after the table has been filled with data. You can override this funtion to add additional functionality.
+
+```php
+public function onTableAfterDataLoaded($tableObject) {
+
+  /*Your
+  Code*/
+
+  return $tableObject;
+};
 ```
 
 ### columnValidate(string $column, $value)
@@ -475,30 +558,40 @@ $model->columnValidate("id_staff",$value);
 
 ### onFormBeforeInit($formObject)
 
-⚠️ **[deprecated]**
-TODO
+Allows you to modify the form object before it is initialized. You can override this funtion to add additional functionality.
 
 ```php
-$model->onFormBeforeInit($formObject);
+public function onFormBeforeInit($formObject) {
+
+  /*Your
+  Code*/
+
+  return $formObject;
+};
 ```
 ### onFormAfterInit($formObject)
 
-⚠️ **[deprecated]**
-TODO
+Allows you to modify the form object after it has beed initialized. You can override this funtion to add additional functionality.
 
 ```php
-$model->onFormAfterInit($formObject);
+public function onFormAfterInit($formObject) {
+
+  /*Your
+  Code*/
+
+  return $formObject;
+};
 ```
-### formParams($data, $params)
+### onFormParams(\ADIOS\Core\Views\Form $formObject, array $params)
 
 Allows you to modify the parameters of the model's form before rendering. For full list of form parameters and additional information see [Form view]("../5. Views/Form.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the form.
 
 ```php
-$model->formParams($data, $params);
+$model->onFormParams($formObject, $params);
 
 OR
 
-public function formParams($data, $params) {
+public function onFormParams($formObject, $params) {
 if ((int) $params['id_staff'] > 5) {
     $params["columns"]["user_name"]["readonly"] = FALSE;
 }
@@ -506,10 +599,29 @@ if ((int) $params['id_staff'] > 5) {
 return $params;
 };
 ```
+### onFormChange(string $column, string $formUid, array $data)
+
+Allows you to modify the behaviour of the form when a change in the form happens. You can override this funtion for additional functionality.
+
+```php
+$model->onFormChange($column, $formUid, $data);
+
+OR
+
+public function onFormChange($column, $formUid, $data) {
+return [
+  'column_1' => ['value' => 'newColumnValue'],
+  'column_2' => ['inputHtml' => 'newInputHtml', 'inputCssClass' => 'newInputCssClass'],
+  'column_3' => ['alert' => 'This is just an alert.'],
+  'column_4' => ['warning' => 'Something is not correct.'],
+  'column_4' => ['fatal' => 'Ouch. Fatal error!'],
+  ];
+};
+```
 
 ### recordValidate($data)
 
-Validates the form data. Validates if the types of the values are correct and if the values are required or not.
+Validates the form data by checking if the types of the values are correct and if the values are required or not.
 
 ```php
 $model->recordValidate($data)
@@ -678,43 +790,64 @@ public function onAfterDelete($id) {
 ```
 ### getQuery($columns = NULL)
 
-Returns the id of a deleted row and allows you to manipulate with the id by overriding this function in the model.
+Creates a SQL query string with a list of columns for a SELECT query.
 
 ```php
-$model->getQuery([]);
+$model->getQuery($columns);
 ```
 ### addLookupsToQuery($query, $lookupsToAdd = NULL)
 
-TODO
+Creates a SQL query string with joined lookup tables.
 
 ```php
 $model->addLookupsToQuery($query,$lookupsToAdd);
 ```
 ### addCrossTableToQuery($query, $crossTableModelName, $resultKey = '')
 
-TODO
+Creates a SQL query string with a added cross table.
 
 ```php
 $model->addCrossTableToQuery($query, $crossTableModelName, $resultKey);
 ```
 ### processLookupsInQueryResult($rows)
 
-TODO
+Support function for processing of the fetched rows.
 
 ```php
 $model->processLookupsInQueryResult($rows);
 ```
 ### fetchRows($eloquentQuery, $keyBy = 'id', $processLookups = TRUE)
 
-TODO
+Fetches rows of the model's table.
 
 ```php
 $model->fetchRows($eloquentQuery,'id', TRUE);
 ```
 ### countRowsInQuery($eloquentQuery)
 
-TODO
+Retrieves the number of fetched rows.
 
 ```php
 $model->countRowsInQuery($eloquentQuery);
+```
+### getNewRecordInfo()
+
+Support function that generates placeholder information about a new record creation.
+
+```php
+$model->getNewRecordInfo();
+```
+### setRecordInfoCreated(array $recordInfo)
+
+Creates the datetime and author information about a newly created record and returns the record information data.
+
+```php
+$model->setRecordInfoCreated($recordInfo);
+```
+### setRecordInfoUpdated(array $data)
+
+Updates the datetime and author information about the updated record and returns the record information data.
+
+```php
+$model->setRecordInfoUpdated($data);
 ```
