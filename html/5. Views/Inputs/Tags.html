@@ -78,10 +78,10 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>FileBrowser</h1>
-<p>The FileBrowser view alows you access, browse and modify your Upload folder.</p>
+                <h1>Tags</h1>
+<p>Tags are one of the existing types for displaying input. The Tags input provides a dynamic input for inserting tags or selected tags from already initialized set of tags.</p>
 <h2>Properties</h2>
-<p>The FileBrowser view supports various properties that can be utilized to meet functionality requirements:</p>
+<p>The Tags input view supports various properties that can be utilized to meet functionality requirements:</p>
 <table>
 <thead>
 <tr>
@@ -93,51 +93,38 @@
 </thead>
 <tbody>
 <tr>
-<td>mode</td>
+<td>model</td>
 <td>string</td>
-<td></td>
-<td>Mode for the file browser <strong>Options</strong>: <code>[select' , 'browse']</code></td>
+<td>''</td>
+<td>Path to model</td>
 </tr>
 <tr>
-<td>subdir</td>
+<td>tagColumn</td>
 <td>string</td>
-<td></td>
-<td>Relative path to a subdirectory in the Upload folder</td>
+<td>'tag'</td>
+<td>A column from the model into which the entered tags will be inserted</td>
 </tr>
 <tr>
-<td>onchange</td>
-<td>string</td>
-<td></td>
-<td>Custom Javascript code executing when selecting a file in <code>select</code> mode</td>
-</tr>
-<tr>
-<td>value</td>
-<td>string</td>
-<td></td>
-<td>Path to a file</td>
+<td>initialsTags</td>
+<td>string(json)</td>
+<td>'[&quot;&quot;]'</td>
+<td>Initial tags to be displayed on initialization of the Tags input</td>
 </tr>
 </tbody>
 </table>
 <h2>Usage</h2>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, []))-&gt;render();</code></pre>
+<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\Tags($this-&gt;adios, [
+  'model' =&gt; 'Path/To/Your/Model',
+]))-&gt;render();</code></pre>
 <h2>Examples</h2>
-<p><strong>Example #1:</strong> File browser in the <code>browse</code> mode</p>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, [
-  'mode' =&gt; 'browse'
-]))</code></pre>
-<p><strong>Example #2:</strong> File browser in the <code>select</code> mode pointing to an image subdirectory</p>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, [
-  'mode' =&gt; 'select',
-  'subdir' =&gt; '/img'
-]))</code></pre>
-<p><strong>Example #3:</strong> File browser with a preselected file </p>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, [
-  'value' =&gt; '/file.txt',
-]))</code></pre>
+<p><strong>Example #1:</strong> The Tags input for the model category, where the column name is defined as the tag column.</p>
+<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\Tags($this-&gt;adios, [
+  'model' =&gt; 'App/Widgets/Common/AddressBook/Models/Category',
+  'tagColumn' =&gt; 'name',
+  'initialsTags' =&gt; '["red", "blue", "orange"]'
+]));</code></pre>
+<p><img src="./../../../resources/examples/inputs/tags/example_1.png" alt="Example #1 Preview" /></p>
 <h2>Notes</h2>
-<ul>
-<li>If the file browser has the <code>subdir</code> parameter set, the user won't be able to move up the file directory, only to the set folder's subdirectories</li>
-</ul>
               </div>
             </div>
           </div>

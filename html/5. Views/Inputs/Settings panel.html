@@ -78,66 +78,119 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>FileBrowser</h1>
-<p>The FileBrowser view alows you access, browse and modify your Upload folder.</p>
-<h2>Properties</h2>
-<p>The FileBrowser view supports various properties that can be utilized to meet functionality requirements:</p>
+                <h1>Settings Panel</h1>
+<p>The Setting Panel input allows you to generate settings forms for your widgets at ease. The settings form consists of
+inputs with descriptions / titles and inputs. You may also split it up into more tabs to avoid making the form too
+cluttered or complicated.</p>
+<h2>Writing the template</h2>
+<p>To achieve the intended functionality of the Settings Panel you may use the <code>template</code> property.
+The object supplied to <code>template</code> property should contain a list of <code>items</code> or a list of <code>tabs</code>, if you'd like to split
+the form into multiple tabs, as mentioned above.</p>
+<ul>
+<li>A tab object inside the <code>tabs</code> property may contain the following properties:</li>
+</ul>
 <table>
 <thead>
 <tr>
 <th>Property</th>
-<th>Type</th>
-<th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>mode</td>
-<td>string</td>
-<td></td>
-<td>Mode for the file browser <strong>Options</strong>: <code>[select' , 'browse']</code></td>
+<td>title</td>
+<td>Title of the tab</td>
 </tr>
 <tr>
-<td>subdir</td>
-<td>string</td>
-<td></td>
-<td>Relative path to a subdirectory in the Upload folder</td>
-</tr>
-<tr>
-<td>onchange</td>
-<td>string</td>
-<td></td>
-<td>Custom Javascript code executing when selecting a file in <code>select</code> mode</td>
-</tr>
-<tr>
-<td>value</td>
-<td>string</td>
-<td></td>
-<td>Path to a file</td>
+<td>items</td>
+<td>List of items inside the tab</td>
 </tr>
 </tbody>
 </table>
-<h2>Usage</h2>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, []))-&gt;render();</code></pre>
-<h2>Examples</h2>
-<p><strong>Example #1:</strong> File browser in the <code>browse</code> mode</p>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, [
-  'mode' =&gt; 'browse'
-]))</code></pre>
-<p><strong>Example #2:</strong> File browser in the <code>select</code> mode pointing to an image subdirectory</p>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, [
-  'mode' =&gt; 'select',
-  'subdir' =&gt; '/img'
-]))</code></pre>
-<p><strong>Example #3:</strong> File browser with a preselected file </p>
-<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\FileBrowser($this-&gt;adios, [
-  'value' =&gt; '/file.txt',
-]))</code></pre>
-<h2>Notes</h2>
 <ul>
-<li>If the file browser has the <code>subdir</code> parameter set, the user won't be able to move up the file directory, only to the set folder's subdirectories</li>
+<li>An item object inside the <code>items</code> property (whether inside a tab or not) may contain the following properties:</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>Title of the item</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Additional description to the item</td>
+</tr>
+<tr>
+<td>input</td>
+<td>ADIOS view to render inside the item (e.g. Input or any other view)</td>
+</tr>
+<tr>
+<td>html</td>
+<td>If <code>input</code> property isn't supplied: raw HTML code to render instead</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>:bulb: The Settings Panel may have tabs, each with items containing the inputs. Each item contains one input.
+Additionally you may also add items directly to the template without any tabs.</p>
+</blockquote>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong> Simple settings panel with an HTML code</p>
+<pre><code class="language-php">$settingsPanel = new \ADIOS\Core\Views\Inputs\SettingsPanel($adios, [
+  'template' =&gt; [
+    'items' =&gt; [
+      [
+        'title' =&gt; 'Announcement title',
+        'input' =&gt; new Input($this-&gt;adios, ['type' =&gt; 'varchar']),
+        'description' =&gt; '* max. length: 256 characters'
+      ],
+      '&lt;p&gt;Announcement description&lt;/p&gt;&lt;textarea&gt;&lt;/textarea&gt;'
+    ]
+  ]
+]);</code></pre>
+<blockquote>
+<p>:bulb: You may insert an HTML item also simply as a string.</p>
+</blockquote>
+<p><strong>Example #2:</strong> More comprehensive Settings panel split into 2 tabs</p>
+<pre><code class="language-php">$settingsPanel = new \ADIOS\Core\Views\Inputs\SettingsPanel($this-&gt;adios, [
+  'template' =&gt; [
+    'tabs' =&gt; [
+      [
+        'title' =&gt; 'Content',
+        'items' =&gt; [
+          [
+            'title' =&gt; 'Announcement title',
+            'input' =&gt; new Input($this-&gt;adios, ['type' =&gt; 'varchar']),
+            'description' =&gt; '* max. length: 256 characters'
+          ],
+          [
+            'title' =&gt; 'Announcement description',
+            'html' =&gt; '&lt;textarea&gt;&lt;/textarea&gt;'
+          ],
+          '&lt;p&gt;Release date&lt;/p&gt;&lt;input type="date"&gt;'
+        ]
+      ],
+      [
+        'title' =&gt; 'Settings',
+        'items' =&gt; [
+          [
+            'title' =&gt; 'Priority?',
+            'input' =&gt; new Input($this-&gt;adios, ['type' =&gt; 'bool']),
+            'description' =&gt; 'Announcement will be pinned to top'
+          ]
+        ]
+      ]
+    ]
+  ]
+]);</code></pre>
+<p><strong>Note:</strong> To test the examples, don't forget to use the <code>render()</code> method:</p>
+<pre><code class="language-php">$settingsPanel-&gt;render();</code></pre>
               </div>
             </div>
           </div>

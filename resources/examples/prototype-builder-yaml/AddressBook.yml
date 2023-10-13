@@ -1,6 +1,6 @@
 ---
 models:
-  
+
   # model: Contact
   Contact:
     sqlName: contacts
@@ -163,40 +163,31 @@ actions:
     params:
       model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
       id: "{php $this->params['id'] php}"
-      template:
-        columns:
-          - items:
-              - group:
-                  title: Full name
-                  items:
-                    - first_name
-                    - middle_name
-                    - last_name
-              - group:
-                  title: Contact details
-                  items:
-                    - email
-                    - phone
-              - group:
-                  title: Social profiles
-                  items:
-                    - url_facebook
-                    - url_linkedin
-              - view: Table
+      content:
+        view: ADIOS/Core/Views/Grid
+        params:
+          layout:
+            - A B
+            - C C
+          layoutSm:
+            - A
+            - B
+            - C
+          cssClass: no-area-borders
+          areas:
+            A:
+              item: first_name
+            B:
+              item: last_name
+            C:
+              item:
+                view: ADIOS/Core/Views/Table
                 params:
-                  model: App/Widgets/Sandbox/AdiosDocs/Models/ContactAddress
-                  filter:
+                  model: App/Widgets/AddressBook/Models/ContactAddress
+                  where:
                     - id_contact
-                    - "="
-                    - "{php $this->params['id'] php}"
-                  showColumns:
-                    - id_contact
-                    - street
-                    - city
-                    - zip
-                    - country
-                  defaultValuesForNewRecords:
-                    id_contact: "{php $this->params['id'] php}"
+                    - =
+                    - {php $this->params['id'] php}
 
   # action: AddressBook/Contact/Edit-Version2
   Contact/Edit-Version2:
@@ -205,39 +196,68 @@ actions:
     params:
       model: App/Widgets/Sandbox/AdiosDocs/Models/Contact
       id: "{php $this->params['id'] php}"
-      template:
-        columns:
-          - tabs:
-              Contact details:
-                - group:
-                    title: Full name
-                    items:
-                      - first_name
-                      - middle_name
-                      - last_name
-                - group:
-                    title: Contact details
-                    items:
-                      - email
-                      - phone
-                - group:
-                    title: Social profiles
-                    items:
-                      - url_facebook
-                      - url_linkedin
-              Addresses:
-                - view: Table
-                  params:
-                    model: App/Widgets/Sandbox/AdiosDocs/Models/ContactAddress
-                    filter:
-                      - id_contact
-                      - "="
-                      - "{php $this->params['id'] php}"
-                    showColumns:
-                      - id_contact
-                      - street
-                      - city
-                      - zip
-                      - country
-                    defaultValuesForNewRecords:
-                      id_contact: "{php $this->params['id'] php}"
+      content:
+        view: ADIOS/Core/Views/Tabs
+        params:
+          tabs:
+            - title: Basic information
+              content:
+                view: ADIOS/Core/Views/Grid
+                params:
+                  title: Full name
+                  layout:
+                    - A
+                    - B
+                    - C
+                  areas:
+                    A:
+                      item:
+                        view: ADIOS/Core/Views/Grid
+                        params:
+                          title: Full name
+                          layout:
+                            - A
+                            - B
+                            - C
+                          areas:
+                            A:
+                              item: first_name
+                            B:
+                              item: middle_name
+                            C:
+                              item: last_name
+                    B:
+                      item:
+                        view: ADIOS/Core/Views/Grid
+                        params:
+                          title: Contact details
+                          layout:
+                            - A
+                            - B
+                          areas:
+                            A:
+                              item: email
+                            B:
+                              item: phone
+                    C:
+                      item:
+                        view: ADIOS/Core/Views/Grid
+                        params:
+                          title: Social media
+                          layout:
+                            - A
+                            - B
+                          areas:
+                            A:
+                              item: url_facebook
+                            B:
+                              item: url_linkedin
+            - title: Addresses
+              content:
+                view: ADIOS/Core/Views/Table
+                params:
+                  model: App/Widgets/AddressBook/Models/ContactAddress
+                  where:
+                    - id_contact
+                    - =
+                    - "{php $this->params['id'] php}"
