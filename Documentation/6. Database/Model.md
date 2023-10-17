@@ -7,18 +7,28 @@ The Model class supports various class variables that can be utilized to meet sp
 
 | Property                               | Type   | Default value | Description                                                                                                                                                           |
 | -------------------------------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| primaryKey                               | string | 'id'            | Primary key of the model                                                                                                                |
 | fullName                               | string | ''            | Full name of the model. Useful for getModel() function                                                                                                                |
 | shortName                              | string | ''            | Short name of the model. Useful for debugging purposes                                                                                                                |
 | adios                                  | mixed  | ''            | Reference to ADIOS object                                                                                                                                             |
 | gtp                                    | string | ''            | Shorthand for "global table prefix"                                                                                                                                   |
 | sqlName                                | string | ''            | Name of the table in SQL database. Used together with global table prefix.                                                                                            |
 | urlBase                                | string | ''            | URL base for management of the content of the table. If not empty, ADIOS automatically creates URL addresses for listing the content, adding and editing the content. |
+| crud                                | array | ''            | Contains information about the model's CRUD operations, e.g. controllers, routes. |
 | tableTitle                             | string | ''            | Readable title for the table listing.                                                                                                                                 |
 | formTitleForEditing                    | string | ''            | Readable title for the form when editing content.                                                                                                                     |
 | formTitleForInserting                  | string | ''            | Readable title for the form when inserting content.                                                                                                                   |
 | lookupSqlValue                         | string | ''            | SQL-compatible string used to render displayed value of the record when used as a lookup.                                                                             |
 | isJunctionTable                        | bool   | FALSE         | If set to TRUE, the SQL table will not contain the ID autoincrement column                                                                                            |
 | storeRecordInfo                        | bool   | FALSE         | If set to TRUE, the SQL table will contain the `record_info` column of type JSON                                                                                      |
+| pdo                        | TODO   | ''         | Contains the PDO database connection                                                                                      |
+| recordSaveOriginalData                        | bool   | ''         | Property used to store original data when recordSave() method is called                                                                                      |
+| fullTableSqlName                        | string   | ''         | A concatenated string of the gtp and sqlName parameter. It is automaticly generated.                                                                                       |
+| allItemsCache                        | array   | ''         | A variable that stores fetched and cached rows of the model's table                                                                                       |
+| junctions                        | array   | ''         | A variable that stores the model's junction tables                                                                                       |
+| ⚠️ **[deprecated]** addButtonText                        | string   | ''         | Text for an Add Button that initiates a new record creation                                                                                       |
+| ⚠️ **[deprecated]** formSaveButtonText                        | string   | ''         | Text for a Save Button inside the model's form                                                                                       |
+| ⚠️ **[deprecated]** formAddButtonText                        | string   | ''         | Text for a Add Button inside the model's form                                                                                       |
 | ⚠️ **[deprecated]** languageDictionary | array  | ''            | Language dictionary for the context of the model                                                                                                                      |
 
 ## Functions
@@ -96,10 +106,17 @@ $model->install();
 
 ### hasAvailableUpgrades()
 
-Check if there are updates to the model.
+Checks if there are updates to the model.
 
 ```php
 $model->hasAvailableUpgrades();
+```
+### installUpgrades()
+
+Installs all upgrades of the model. Internaly stores current version and compares it to list of available upgrades.
+
+```php
+$model->installUpgrades();
 ```
 
 ### dropTableIfExists()
@@ -112,12 +129,12 @@ $model->dropTableIfExists();
 
 ### createSqlForeignKeys()
 
-Create foreign keys for the SQL table. Called when all models are installed.
+Creates foreign keys for the SQL table. Called when all models are installed.
 
 ```php
-$model->getFullTableSqlName();
+$model->createSqlForeignKeys();
 ```
-### createSqlForeignKeys()
+### getFullTableSqlName()
 
 Returns the full name of the model's SQL table
 
@@ -143,7 +160,7 @@ $model->findForeignKeyModels($params);
 
 ### getEnumValues()
 
-Returns an array of table items as enumeration values. The value of items is set based on the lookup value set in the retrieved model.
+Returns an array of table items as enumeration values. The value of items is set based on the lookup column set in the retrieved model.
 
 ```php
 $model->getEnumValues();
@@ -164,6 +181,7 @@ $model->sqlQuery($query);
 ```
 
 ### routing($array $routing = [])
+TODO
 
 Allows you to modify and add routing parameters. For more information see [Routing]("../4. The basics/Routing.md").
 
@@ -230,7 +248,7 @@ $model->columnNames();
 Creates new indexes for the model and return TRUE/FALSE upon copletion
 
 ```php
-$model->indexes([])
+$model->indexes()
 ```
 
 ### indexNames()
@@ -251,22 +269,29 @@ $model->normalizeRowData($data, "tableName")
 
 ### getRelationships()
 
-TODO
+Joins and returns the rows of models that the model has a relation with.
 
+```php
+$model->getRelationships()
+```
 ### getExtendedData($item)
 
 TODO
 
+```php
+$model->getExtendedData($item)
+```
+
 ### getById(int $id)
 
-Returns a row of a table with the corresponding ID.
+Returns a row of a model's table with the corresponding ID.
 
 ```php
 $model->getById(1);
 ```
 ### getLookupSqlValueById(int $id)
 
-Returns a row of a table with the corresponding ID as a lookup value.
+Returns a row of a model's table with the corresponding ID as a lookup value.
 
 ```php
 $model->getLookupSqlValueById(1);
@@ -291,12 +316,16 @@ $model->getAllCached();
 
 TODO
 
+Support function that returns a SQL string query with joined lookup tables.
+
 ```php
 $model->getQueryWithLookups();
 ```
 ### getWithLookups($callback = NULL, $keyBy = 'id', $processLookups = FALSE)
 
 TODO
+
+Fetches the rows of the SQL query with lookups.
 
 ```php
 $model->getWithLookups();
@@ -356,7 +385,7 @@ TODO
 
 ### pdoPrepareAndExecute(string $query, array $variables)
 
-Prepares and executes an SQL query like Insert, Delete, etc.. and return TRUE if success.
+Prepares and executes an SQL query like Insert, Delete, etc.. and return TRUE if successful.
 
 ```php
 $model->pdoPrepareAndExecute($queryString, []);
@@ -392,7 +421,7 @@ $model->lookupQuery($initiatingModel, $initiatingColumn, $formData, $params, "TR
 ```
 ### lookupSqlQuery($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [],$having = "TRUE")
 
-Returns an SQL query based on the lookup model.
+Returns an SQL query based on the lookup value of the model.
 
 ```php
 $model->lookupSqlQuerys($initiatingModel, $initiatingColumn, $formData, $params, "TRUE");
@@ -437,12 +466,12 @@ public function onTableRowParams($tableObject, $params, $data) {
   return $params;
 };
 ```
-### onTableCellCssFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)
+### onTableRowCssFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)
 
 Allows you to change the CSS of a table row by overriding this function in a model.
 
 ```php
-public function onTableCellCssFormatter($tableObject, $data)
+public function onTableRowCssFormatter($tableObject, $data)
   {
     if ($data['column'] == "type"){
       return "background-color: blue; color: white;";
@@ -509,6 +538,10 @@ public function onTableCellCsvFormatter($tableObject, $data)
 Allows you to modify the table object before its initialization. You can override this funtion to add additional functionality.
 
 ```php
+$model->onTableAfterInit($tableObject);
+
+OR
+
 public function onTableBeforeInit($tableObject) {
 
   /*Your
@@ -516,10 +549,6 @@ public function onTableBeforeInit($tableObject) {
 
   return $tableObject;
 };
-```
-
-```php
-$model->onTableAfterInit($tableObject);
 ```
 ### onTableAfterInit($tableObject)
 
@@ -550,7 +579,7 @@ public function onTableAfterDataLoaded($tableObject) {
 
 ### columnValidate(string $column, $value)
 
-Checks the valitidy of a value for a column. Returns bool.
+Checks the valitidy of a value of a column. Returns bool.
 
 ```php
 $model->columnValidate("id_staff",$value);
@@ -666,6 +695,31 @@ public function cardsParams($params) {
   return $params;
 };
 ```
+
+### cardsCardHtmlFormatter($cardsObject, $data)
+
+TODO
+
+Allows you to modify the card value by overriding this function in a model.
+
+```php
+public function cardsCardHtmlFormatter($cardsObject, $data)
+{
+  switch ($data['column']) {
+    case "id_staff":
+      if ($data['row']['id_staff'] > 5) {
+        return 'Access denied';
+      } else {
+        return $data['html'];
+      }
+      break;
+    default:
+      return $data['html'];
+      break;
+  }
+}
+```
+
 ### treeParams($params)
 TODO
 
@@ -804,7 +858,7 @@ $model->addLookupsToQuery($query,$lookupsToAdd);
 ```
 ### addCrossTableToQuery($query, $crossTableModelName, $resultKey = '')
 
-Creates a SQL query string with a added cross table.
+Creates a SQL query string with added cross table.
 
 ```php
 $model->addCrossTableToQuery($query, $crossTableModelName, $resultKey);
