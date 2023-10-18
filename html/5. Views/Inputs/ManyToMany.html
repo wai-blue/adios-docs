@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -78,10 +78,10 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Title</h1>
-<p>The Title view adds an easy and fast way of adding headers to your application.</p>
+                <h1>ManyToMany</h1>
+<p>The ManyToMany view generates a field with checkboxes from the source and destination columns.</p>
 <h2>Properties</h2>
-<p>The Title view supports various properties that can be utilized to meet functionality requirements:</p>
+<p>The ManyToMany view supports various properties that can be utilized to meet functionality requirements:</p>
 <table>
 <thead>
 <tr>
@@ -93,42 +93,64 @@
 </thead>
 <tbody>
 <tr>
-<td>⚠️ <strong>[deprecated]</strong> fixed</td>
-<td>bool</td>
+<td>model</td>
+<td>string</td>
 <td></td>
-<td>Adds 'fixed' class to a Title</td>
+<td>Path to a model</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>int</td>
+<td>3</td>
+<td>Number of columns that will be generated to put checkboxes into (max 6)</td>
+</tr>
+<tr>
+<td>relation</td>
+<td>array of strings</td>
+<td></td>
+<td>Name of the lookup source and lookup destination columns</td>
+</tr>
+<tr>
+<td>order</td>
+<td>string</td>
+<td>id asc</td>
+<td>Column to order the table by</td>
+</tr>
+<tr>
+<td>contraints</td>
+<td>array of strings</td>
+<td>TRUE</td>
+<td>Where clause constraints on the source and destination column</td>
 </tr>
 </tbody>
 </table>
-<h2>Basic Usage</h2>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1")-&gt;render();</code></pre>
-<h2>Functions</h2>
-<h3>setTitle(string $title)</h3>
-<p>Sets the title</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1");</code></pre>
-<h3>setLeftContent(array $viewObjects = [])</h3>
-<p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the left.</p>
-<p><strong>Example:</strong> A Title view with an Input view aligned to the left</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
-  $this-&gt;adios-&gt;view-&gt;Input([
-    'type' =&gt; 'varchar',
-    'enum_values' =&gt; ['One', 'Two', 'Three']
-  ])
-])</code></pre>
-<h3>setRightContent(array $viewObjects = [])</h3>
-<p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the right.</p>
-<p><strong>Example:</strong> A Title view with a Table view aligned to the right for the VAT list filtered by SQL condition where and order by condition </p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
-  $this-&gt;adios-&gt;view-&gt;Table([
-    'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
-    'where' =&gt; [
-      ['ratio', '&gt;', 30]
-    ],
-    'orderBy' =&gt; 'ratio DESC'
-  ])
-])</code></pre>
+<h2>Usage</h2>
+<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\ManyToMany($this-&gt;adios, [
+  "model" =&gt; "Path/To/A/Model",
+  "relation" =&gt; ["lookup_column1", "lookup_column2"],
+]))-&gt;render();</code></pre>
+<h2>Examples</h2>
+<p><strong>Example #1:</strong> ManyToMany view creating a checkbox field based on two lookup columns</p>
+<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\ManyToMany($this-&gt;adios, [
+  "model" =&gt; "App/Widgets/Finance/MainBook/Models/BookAccount",
+  "relation" =&gt; ["id_fin_accounting_period", "id_parent"],
+]))-&gt;render();</code></pre>
+<p><strong>Example #2:</strong> ManyToMany view creating a checkbox field based on two lookup columns while organizing checkboxes into 3 columns</p>
+<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\ManyToMany($this-&gt;adios, [
+  "model" =&gt; "App/Widgets/Finance/MainBook/Models/BookAccount",
+  "relation" =&gt; ["id_fin_accounting_period", "id_parent"],
+  "columns" =&gt; 3
+]))-&gt;render();</code></pre>
+<p><strong>Example #3:</strong> ManyToMany view creating a checkbox field with where clause constraints</p>
+<pre><code class="language-php">(new \ADIOS\Core\Views\Inputs\ManyToMany($this-&gt;adios, [
+  "model" =&gt; "App/Widgets/Finance/MainBook/Models/BookAccount",
+  "relation" =&gt; ["id_fin_accounting_period", "id_parent"],
+  "constraints" =&gt; ["id_fin_accounting_period" =&gt; 3, "id_parent" =&gt; NULL ]
+]))-&gt;render();</code></pre>
 <h2>Notes</h2>
-<p><code>setLeftContent()</code> and <code>setRightContent()</code> functions can be used simultaneously on one Title view. </p>
+<ul>
+<li>You need to have a minimun of two lookup columns in a model.</li>
+</ul>
               </div>
             </div>
           </div>
@@ -137,5 +159,5 @@
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   

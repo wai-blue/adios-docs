@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -48,7 +48,7 @@
         <a 
           href='#Data Types' class='dropdown-toggle' data-toggle='dropdown'>
           Data Types <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../6. Database/Data Types/Date.html'>Date</a></li><li><a href='../6. Database/Data Types/Integer.html'>Integer</a></li></ul></li><li><a href='../6. Database/Data types.html'>Data types</a></li><li><a href='../6. Database/Introduction.html'>Introduction</a></li><li><a href='../6. Database/Model.html'>Model</a></li><li><a href='../6. Database/Query builder.html'>Query builder</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../6. Database/Data Types/Bool.html'>Bool</a></li><li><a href='../6. Database/Data Types/Boolean.html'>Boolean</a></li><li><a href='../6. Database/Data Types/Color.html'>Color</a></li><li><a href='../6. Database/Data Types/Integer.html'>Integer</a></li></ul></li><li><a href='../6. Database/Data types.html'>Data types</a></li><li><a href='../6. Database/Introduction.html'>Introduction</a></li><li><a href='../6. Database/Model.html'>Model</a></li><li><a href='../6. Database/Query builder.html'>Query builder</a></li></ul></li><li class='dropdown'>
         <a 
           href='#7. Security' class='dropdown-toggle' data-toggle='dropdown'>
           7. Security <small style='float:right';padding-top:5px>﹀</small>
@@ -78,57 +78,41 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Title</h1>
-<p>The Title view adds an easy and fast way of adding headers to your application.</p>
-<h2>Properties</h2>
-<p>The Title view supports various properties that can be utilized to meet functionality requirements:</p>
+                <h1>Color</h1>
+<p>This data type represents a color in ADIOS. It is saved as a <strong>char(10)</strong>.  </p>
+<p><img src="../../../resources/img/color_example.png" alt="Preview of the color data type" /></p>
+<blockquote>
+<p>:bulb: When you render the data type in a form, you can choose from a set of predefined colors or even choose your own by clicking the selected color on the left (an OS/browser built-in color picker pops up)</p>
+</blockquote>
+<p><strong>Properties</strong></p>
+<ul>
+<li>default value: ''</li>
+</ul>
+<h2>Parameters</h2>
 <table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Type</th>
+<th>Parameter Name</th>
+<th>Used in</th>
 <th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>⚠️ <strong>[deprecated]</strong> fixed</td>
-<td>bool</td>
+<td>sql_definitions</td>
+<td>create SQL table</td>
 <td></td>
-<td>Adds 'fixed' class to a Title</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2>Basic Usage</h2>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1")-&gt;render();</code></pre>
-<h2>Functions</h2>
-<h3>setTitle(string $title)</h3>
-<p>Sets the title</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Title()-&gt;setTitle("Header 1");</code></pre>
-<h3>setLeftContent(array $viewObjects = [])</h3>
-<p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the left.</p>
-<p><strong>Example:</strong> A Title view with an Input view aligned to the left</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
-  $this-&gt;adios-&gt;view-&gt;Input([
-    'type' =&gt; 'varchar',
-    'enum_values' =&gt; ['One', 'Two', 'Three']
-  ])
-])</code></pre>
-<h3>setRightContent(array $viewObjects = [])</h3>
-<p>This function allows you to add views below a Title view, for example a leading paragraph. This view is then aligned to the right.</p>
-<p><strong>Example:</strong> A Title view with a Table view aligned to the right for the VAT list filtered by SQL condition where and order by condition </p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Title([])-&gt;setTitle("Header 1")-&gt;setLeftContent([
-  $this-&gt;adios-&gt;view-&gt;Table([
-    'model' =&gt; 'App/Widgets/Finance/MainBook/Models/Vat',
-    'where' =&gt; [
-      ['ratio', '&gt;', 30]
-    ],
-    'orderBy' =&gt; 'ratio DESC'
-  ])
-])</code></pre>
-<h2>Notes</h2>
-<p><code>setLeftContent()</code> and <code>setRightContent()</code> functions can be used simultaneously on one Title view. </p>
+<h2>Example</h2>
+<pre><code class="language-php">"columnName" =&gt; [  
+    "type" =&gt; "color",  
+    "title" =&gt; "A Color(ful) Column",  
+    "show_column" =&gt; TRUE,  
+]</code></pre>
               </div>
             </div>
           </div>
@@ -137,5 +121,5 @@
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
