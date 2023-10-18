@@ -34,6 +34,10 @@
           4. The basics <small style='float:right';padding-top:5px>﹀</small>
         </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../4. The basics/Routing.html'>Routing</a></li></ul></li><li class='dropdown'>
         <a 
+          href='#5. Core Components' class='dropdown-toggle' data-toggle='dropdown'>
+          5. Core Components <small style='float:right';padding-top:5px>﹀</small>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'></ul></li><li class='dropdown'>
+        <a 
           href='#5. Views' class='dropdown-toggle' data-toggle='dropdown'>
           5. Views <small style='float:right';padding-top:5px>﹀</small>
         </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../5. Views/Button.html'>Button</a></li><li><a href='../5. Views/Cards.html'>Cards</a></li><li><a href='../5. Views/Chart.html'>Chart</a></li><li><a href='../5. Views/Dashboard.html'>Dashboard</a></li><li><a href='../5. Views/Data table.html'>Data table</a></li><li><a href='../5. Views/File browser.html'>File browser</a></li><li><a href='../5. Views/Form.html'>Form</a></li><li><a href='../5. Views/Grid.html'>Grid</a></li><li><a href='../5. Views/Html.html'>Html</a></li><li><a href='../5. Views/Input.html'>Input</a></li><li class='dropdown'>
@@ -48,7 +52,7 @@
         <a 
           href='#Data Types' class='dropdown-toggle' data-toggle='dropdown'>
           Data Types <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../6. Database/Data Types/Date.html'>Date</a></li><li><a href='../6. Database/Data Types/Integer.html'>Integer</a></li></ul></li><li><a href='../6. Database/Data types.html'>Data types</a></li><li><a href='../6. Database/Introduction.html'>Introduction</a></li><li><a href='../6. Database/Model.html'>Model</a></li><li><a href='../6. Database/Query builder.html'>Query builder</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../6. Database/Data Types/Bool.html'>Bool</a></li><li><a href='../6. Database/Data Types/Boolean.html'>Boolean</a></li><li><a href='../6. Database/Data Types/Color.html'>Color</a></li><li><a href='../6. Database/Data Types/Date.html'>Date</a></li><li><a href='../6. Database/Data Types/Integer.html'>Integer</a></li></ul></li><li><a href='../6. Database/Data types.html'>Data types</a></li><li><a href='../6. Database/Introduction.html'>Introduction</a></li><li><a href='../6. Database/Model.html'>Model</a></li><li><a href='../6. Database/Query builder.html'>Query builder</a></li></ul></li><li class='dropdown'>
         <a 
           href='#7. Security' class='dropdown-toggle' data-toggle='dropdown'>
           7. Security <small style='float:right';padding-top:5px>﹀</small>
@@ -79,7 +83,648 @@
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
                 <h1>Model</h1>
-<p>Work in progress...</p>
+<p>Core implementation of database model. Extends from Eloquent's model and adds own functionalities. You can see more about Eloquent <a href="https://laravel.com/docs/10.x/eloquent">here</a>.</p>
+<h2>Properties</h2>
+<p>The Model class supports various class variables that can be utilized to meet specific design and functionality requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>primaryKey</td>
+<td>string</td>
+<td>'id'</td>
+<td>Primary key of the model</td>
+</tr>
+<tr>
+<td>fullName</td>
+<td>string</td>
+<td>''</td>
+<td>Full name of the model. Useful for getModel() function</td>
+</tr>
+<tr>
+<td>shortName</td>
+<td>string</td>
+<td>''</td>
+<td>Short name of the model. Useful for debugging purposes</td>
+</tr>
+<tr>
+<td>adios</td>
+<td>mixed</td>
+<td>''</td>
+<td>Reference to ADIOS object</td>
+</tr>
+<tr>
+<td>gtp</td>
+<td>string</td>
+<td>''</td>
+<td>Shorthand for &quot;global table prefix&quot;</td>
+</tr>
+<tr>
+<td>sqlName</td>
+<td>string</td>
+<td>''</td>
+<td>Name of the table in SQL database. Used together with global table prefix.</td>
+</tr>
+<tr>
+<td>urlBase</td>
+<td>string</td>
+<td>''</td>
+<td>URL base for management of the content of the table. If not empty, ADIOS automatically creates URL addresses for listing the content, adding and editing the content.</td>
+</tr>
+<tr>
+<td>crud</td>
+<td>array</td>
+<td>''</td>
+<td>Contains information about the model's CRUD operations, e.g. controllers, routes.</td>
+</tr>
+<tr>
+<td>tableTitle</td>
+<td>string</td>
+<td>''</td>
+<td>Readable title for the table listing.</td>
+</tr>
+<tr>
+<td>formTitleForEditing</td>
+<td>string</td>
+<td>''</td>
+<td>Readable title for the form when editing content.</td>
+</tr>
+<tr>
+<td>formTitleForInserting</td>
+<td>string</td>
+<td>''</td>
+<td>Readable title for the form when inserting content.</td>
+</tr>
+<tr>
+<td>lookupSqlValue</td>
+<td>string</td>
+<td>''</td>
+<td>SQL-compatible string used to render displayed value of the record when used as a lookup.</td>
+</tr>
+<tr>
+<td>isJunctionTable</td>
+<td>bool</td>
+<td>FALSE</td>
+<td>If set to TRUE, the SQL table will not contain the ID autoincrement column</td>
+</tr>
+<tr>
+<td>storeRecordInfo</td>
+<td>bool</td>
+<td>FALSE</td>
+<td>If set to TRUE, the SQL table will contain the <code>record_info</code> column of type JSON</td>
+</tr>
+<tr>
+<td>pdo</td>
+<td>TODO</td>
+<td>''</td>
+<td>Contains the PDO database connection</td>
+</tr>
+<tr>
+<td>recordSaveOriginalData</td>
+<td>bool</td>
+<td>''</td>
+<td>Property used to store original data when recordSave() method is called</td>
+</tr>
+<tr>
+<td>fullTableSqlName</td>
+<td>string</td>
+<td>''</td>
+<td>A concatenated string of the gtp and sqlName parameter. It is automaticly generated.</td>
+</tr>
+<tr>
+<td>allItemsCache</td>
+<td>array</td>
+<td>''</td>
+<td>A variable that stores fetched and cached rows of the model's table</td>
+</tr>
+<tr>
+<td>junctions</td>
+<td>array</td>
+<td>''</td>
+<td>A variable that stores the model's junction tables</td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> addButtonText</td>
+<td>string</td>
+<td>''</td>
+<td>Text for an Add Button that initiates a new record creation</td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> formSaveButtonText</td>
+<td>string</td>
+<td>''</td>
+<td>Text for a Save Button inside the model's form</td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> formAddButtonText</td>
+<td>string</td>
+<td>''</td>
+<td>Text for a Add Button inside the model's form</td>
+</tr>
+<tr>
+<td>⚠️ <strong>[deprecated]</strong> languageDictionary</td>
+<td>array</td>
+<td>''</td>
+<td>Language dictionary for the context of the model</td>
+</tr>
+</tbody>
+</table>
+<h2>Functions</h2>
+<h3>getConfig(string $configName)</h3>
+<p>Retrieves value of configuration parameter.</p>
+<pre><code class="language-php">$model-&gt;getConfig("configName");</code></pre>
+<h3>setConfig(string $configName, $value)</h3>
+<p>Sets the value of configuration parameter.</p>
+<pre><code class="language-php">$model-&gt;setConfig("configName", $value);</code></pre>
+<h3>saveConfig(string $configName, $value)</h3>
+<p>Persistantly saves the value of configuration parameter to the database.</p>
+<pre><code class="language-php">$model-&gt;saveConfig("configName", $value);</code></pre>
+<h3>translate(string $string, array $vars = [])</h3>
+<p>Shorthand for ADIOS core translate() function. Uses own language dictionary. Returns a translated string.</p>
+<pre><code class="language-php">$model-&gt;translate("string", $arrayOfVariables);</code></pre>
+<h3>hasSqlTable()</h3>
+<p>Checks if the SQL table exists for the model.</p>
+<pre><code class="language-php">$model-&gt;hasSqlTable();</code></pre>
+<h3>isInstalled()</h3>
+<p>Checks whether model is installed.</p>
+<pre><code class="language-php">$model-&gt;isInstalled();</code></pre>
+<h3>getCurrentInstalledVersion()</h3>
+<p>Gets the current installed version of the model. Used during installing upgrades.</p>
+<pre><code class="language-php">$model-&gt;getCurrentInstalledVersion();</code></pre>
+<h3>upgrades()</h3>
+<p>Returns a list of available upgrades. This method must be overriden by each model.</p>
+<pre><code class="language-php">$model-&gt;upgrades();</code></pre>
+<h3>install()</h3>
+<p>Installs the first version of the model into SQL database. Automatically creates indexes.</p>
+<pre><code class="language-php">$model-&gt;install();</code></pre>
+<h3>hasAvailableUpgrades()</h3>
+<p>Checks if there are updates to the model.</p>
+<pre><code class="language-php">$model-&gt;hasAvailableUpgrades();</code></pre>
+<h3>installUpgrades()</h3>
+<p>Installs all upgrades of the model. Internaly stores current version and compares it to list of available upgrades.</p>
+<pre><code class="language-php">$model-&gt;installUpgrades();</code></pre>
+<h3>dropTableIfExists()</h3>
+<p>Drops the database table of the model, if it exists.</p>
+<pre><code class="language-php">$model-&gt;dropTableIfExists();</code></pre>
+<h3>createSqlForeignKeys()</h3>
+<p>Creates foreign keys for the SQL table. Called when all models are installed.</p>
+<pre><code class="language-php">$model-&gt;createSqlForeignKeys();</code></pre>
+<h3>getFullTableSqlName()</h3>
+<p>Returns the full name of the model's SQL table</p>
+<pre><code class="language-php">$model-&gt;getFullTableSqlName();</code></pre>
+<h3>getFullUrlBase($params)</h3>
+<p>Returns full relative URL path for model. Used when generating URL paths for tables, forms, etc...</p>
+<pre><code class="language-php">$model-&gt;getFullUrlBase($params);</code></pre>
+<h3>findForeignKeyModels()</h3>
+<p>Searches for and returns the names of the models based on the foreign keys of the model</p>
+<pre><code class="language-php">$model-&gt;findForeignKeyModels($params);</code></pre>
+<h3>getEnumValues()</h3>
+<p>Returns an array of table items as enumeration values. The value of items is set based on the lookup column set in the retrieved model.</p>
+<pre><code class="language-php">$model-&gt;getEnumValues();</code></pre>
+<h3>associateKey($input, $key)</h3>
+<p>Reeindexes array items based on a specified key and returns the new array.</p>
+<pre><code class="language-php">$model-&gt;associateKey($input, "id");</code></pre>
+<h3>sqlQuery($query)</h3>
+<p>Executes the SQL query and returns the result.</p>
+<pre><code class="language-php">$model-&gt;sqlQuery($query);</code></pre>
+<h3>routing($array $routing = [])</h3>
+<p>TODO</p>
+<p>Allows you to modify and add routing parameters. For more information see [Routing](&quot;../4. The basics/Routing.md&quot;).</p>
+<pre><code class="language-php">public function routing(array $routing = [])
+  {
+    $routing = $this-&gt;addStandardCRUDRouting([], [
+      "urlBase" =&gt; 'Client\/Audit\/{{ idAudit }}\/Documents',
+      "params" =&gt; [
+          "idUserRole" =&gt; '$1',
+      ]
+    ]);
+
+    return parent::routing($routing);
+  }</code></pre>
+<h3>addStandardCRUDRouting($routing = [], $params = [])</h3>
+<p>TODO</p>
+<pre><code class="language-php">$model-&gt;addStandardCRUDRouting([], [
+  "urlBase" =&gt; 'Client\/Audit\/{{ idAudit }}\/Documents',
+  "params" =&gt; [
+    "idUserRole" =&gt; '$1',
+  ]
+]);</code></pre>
+<h3>getStandardCRUDRoutes($urlBase, $urlParams, $varsInUrl)</h3>
+<p>Returns an array of routing parameters of CRUD operations and other operations of the specified URL base.</p>
+<pre><code class="language-php">$model-&gt;getStandardCRUDRoutes($urlBase, $urlParams, $varsInUrl);</code></pre>
+<h3>columns(array $columns = [])</h3>
+<p>Defines the model's columns and returns them. Byte size of the type is automaticaly set if not defined. <code>char</code> type is ⚠️ <strong>[deprecated]</strong>.</p>
+<pre><code class="language-php">$model-&gt;columns([
+  "company_name" =&gt;
+    array (
+      'title' =&gt; 'Company Name',
+      'type' =&gt; 'varchar',
+      'byte_size' =&gt; 150,
+      'required' =&gt; true,
+      'showColumn' =&gt; true,
+    )
+]);</code></pre>
+<h3>columnNames()</h3>
+<p>Returns an array of the model's column names.</p>
+<pre><code class="language-php">$model-&gt;columnNames();</code></pre>
+<h3>indexes(array $indexes = [])</h3>
+<p>Creates new indexes for the model and return TRUE/FALSE upon copletion</p>
+<pre><code class="language-php">$model-&gt;indexes()</code></pre>
+<h3>indexNames()</h3>
+<p>Returns the names of the model's indexes.</p>
+<pre><code class="language-php">$model-&gt;indexNames()</code></pre>
+<h3>normalizeRowData(array $data, string $lookupKeyPrefix = &quot;&quot;)</h3>
+<p>Parses the $data containing strings as a result of DB fetch operation and converts the value of each column to the appropriate PHP type. E.g. columns of type 'int' or 'lookup' will have integer values.</p>
+<pre><code class="language-php">$model-&gt;normalizeRowData($data, "tableName")</code></pre>
+<h3>getRelationships()</h3>
+<p>Joins and returns the rows of models that the model has a relation with.</p>
+<pre><code class="language-php">$model-&gt;getRelationships()</code></pre>
+<h3>getExtendedData($item)</h3>
+<p>TODO</p>
+<pre><code class="language-php">$model-&gt;getExtendedData($item)</code></pre>
+<h3>getById(int $id)</h3>
+<p>Returns a row of a model's table with the corresponding ID.</p>
+<pre><code class="language-php">$model-&gt;getById(1);</code></pre>
+<h3>getLookupSqlValueById(int $id)</h3>
+<p>Returns a row of a model's table with the corresponding ID as a lookup value.</p>
+<pre><code class="language-php">$model-&gt;getLookupSqlValueById(1);</code></pre>
+<h3>getAll(string $keyBy = &quot;id&quot;, $withLookups = FALSE, $processLookups = FALSE)</h3>
+<p>Returns all rows of a model's table.</p>
+<pre><code class="language-php">$model-&gt;getAll();</code></pre>
+<h3>getAllCached()</h3>
+<p>Returns all rows of a model's table and caches the results.</p>
+<pre><code class="language-php">$model-&gt;getAllCached();</code></pre>
+<h3>getQueryWithLookups($callback = NULL)</h3>
+<p>TODO</p>
+<p>Support function that returns a SQL string query with joined lookup tables.</p>
+<pre><code class="language-php">$model-&gt;getQueryWithLookups();</code></pre>
+<h3>getWithLookups($callback = NULL, $keyBy = 'id', $processLookups = FALSE)</h3>
+<p>TODO</p>
+<p>Fetches the rows of the SQL query with lookups.</p>
+<pre><code class="language-php">$model-&gt;getWithLookups();</code></pre>
+<h3>insertRow($data)</h3>
+<p>Creates a new row in a model's table. Ruturns TRUE if succesfull.</p>
+<pre><code class="language-php">$model-&gt;insertRow($data);</code></pre>
+<h3>insertRowWithId($data)</h3>
+<p>Creates a new row in a model's table with a set ID. Ruturns TRUE if succesfull.</p>
+<pre><code class="language-php">$model-&gt;insertRowWithId($data);</code></pre>
+<h3>insertOrUpdateRow($data)</h3>
+<p>Creates a new row or updates a row in a model's table. Ruturns TRUE if succesfull.</p>
+<pre><code class="language-php">$model-&gt;insertOrUpdateRow($data);</code></pre>
+<h3>insertRandomRow($data = [], $dictionary = [])</h3>
+<p>Generates and inserts a row into a model's table with random values acoording to a column's type.</p>
+<pre><code class="language-php">$model-&gt;insertRandomRow($data,$dictionary);</code></pre>
+<h3>updateRow($data, $id)</h3>
+<p>Updates a specific row in a model's table.</p>
+<pre><code class="language-php">$model-&gt;updateRow($data, 5);</code></pre>
+<h3>deleteRow($id)</h3>
+<p>Deletes a specific row in a model's table.</p>
+<pre><code class="language-php">$model-&gt;deleteRow(1)</code></pre>
+<h3>copyRow($id)</h3>
+<p>Copies and creates a row in a model's table. Returns TRUE if succesfull.</p>
+<pre><code class="language-php">$model-&gt;copyRow(1)</code></pre>
+<h3>search($query)</h3>
+<p>TODO</p>
+<h3>pdoPrepareAndExecute(string $query, array $variables)</h3>
+<p>Prepares and executes an SQL query like Insert, Delete, etc.. and return TRUE if successful.</p>
+<pre><code class="language-php">$model-&gt;pdoPrepareAndExecute($queryString, []);</code></pre>
+<h3>pdoPrepareExecuteAndFetch(string $query, array $variables, string $keyBy = &quot;&quot;)</h3>
+<p>Prepares and executes an SQL Select statment and returns the rows.</p>
+<pre><code class="language-php">$model-&gt;pdoPrepareExecuteAndFetch($queryString, [], "name");</code></pre>
+<h3>lookupWhere($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [])</h3>
+<p>Supporting function for SQL WHERE query creation.</p>
+<pre><code class="language-php">$model-&gt;lookupWhere($initiatingModel, $initiatingColumn, $formData, $params);</code></pre>
+<h3>lookupOrder($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [])</h3>
+<p>Supporting function for SQL ORDER query creation.</p>
+<pre><code class="language-php">$model-&gt;lookupOrder($initiatingModel, $initiatingColumn, $formData, $params);</code></pre>
+<h3>lookupQuery($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [],$having = &quot;TRUE&quot;)</h3>
+<p>Supporting function for SQL query creation.</p>
+<pre><code class="language-php">$model-&gt;lookupQuery($initiatingModel, $initiatingColumn, $formData, $params, "TRUE");</code></pre>
+<h3>lookupSqlQuery($initiatingModel = NULL,$initiatingColumn = NULL,$formData = [],$params = [],$having = &quot;TRUE&quot;)</h3>
+<p>Returns an SQL query based on the lookup value of the model.</p>
+<pre><code class="language-php">$model-&gt;lookupSqlQuerys($initiatingModel, $initiatingColumn, $formData, $params, "TRUE");</code></pre>
+<h3>lookupSqlValue($tableAlias = NULL)</h3>
+<p>Returns the <code>lookupSqlValue</code> parameter. If the <code>tableAlias</code> is not empty, returns a modified <code>lookupSqlValue</code> string.</p>
+<pre><code class="language-php">$model-&gt;lookupSqlValue();</code></pre>
+<h3>onTableParams(\ADIOS\Core\Views\Table $tableObject, array $params)</h3>
+<p>Allows you to modify the parameters of the model's table before rendering. For full list of table parameters see [Table view](&quot;../5. Views/Table.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the table.</p>
+<pre><code class="language-php">$model-&gt;onTableParams($tableObject, $params);
+
+OR
+
+public function onTableParams($tableObject, $params) {
+  if ((int) $params['id_staff'] &gt; 0) {
+      $params["show_controls"] = FALSE;
+  }
+
+  return $params;
+};</code></pre>
+<h3>onTableRowParams(\ADIOS\Core\Views\Table $tableObject, array $params, array $data)</h3>
+<p>Allows you to modify the parameters of the model's table rows before rendering. For full list of table parameters see [Table view](&quot;../5. Views/Table.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the table.</p>
+<pre><code class="language-php">$model-&gt;onTableRowParams($tableObject, $params, $data);
+
+OR
+
+public function onTableRowParams($tableObject, $params, $data) {
+  /*Your
+  Code*/
+
+  return $params;
+};</code></pre>
+<h3>onTableRowCssFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)</h3>
+<p>Allows you to change the CSS of a table row by overriding this function in a model.</p>
+<pre><code class="language-php">public function onTableRowCssFormatter($tableObject, $data)
+  {
+    if ($data['column'] == "type"){
+      return "background-color: blue; color: white;";
+    }
+  }</code></pre>
+<h3>onTableCellCssFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)</h3>
+<p>Allows you to change the CSS of a table cell by overriding this function in a model.</p>
+<pre><code class="language-php">public function onTableCellCssFormatter($tableObject, $data)
+  {
+    if ($data['row']['date'] &lt; date('Y-m-d H:i:s')) {
+      return "background-color: red; color: yellow;";
+    }
+  }</code></pre>
+<h3>onTableCellHtmlFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)</h3>
+<p>Allows you to modify the table cell value by overriding this function in a model.</p>
+<pre><code class="language-php">public function tableCellHTMLFormatter($tableObject, $data)
+{
+  switch ($data['column']) {
+    case "id_staff":
+      if ($data['row']['id_staff'] &gt; 5) {
+        return 'Access denied';
+      } else {
+        return $data['html'];
+      }
+      break;
+    default:
+      return $data['html'];
+      break;
+  }
+}</code></pre>
+<h3>onTableCellCsvFormatter(\ADIOS\Core\Views\Table $tableObject, array $data)</h3>
+<p>Allows you to modify the table cell value in the CSV export by overriding this function in a model.</p>
+<pre><code class="language-php">public function onTableCellCsvFormatter($tableObject, $data)
+{
+  switch ($data['column']) {
+    case "id_staff":
+      if ($data['row']['id_staff'] &gt; 5) {
+        return '';
+      } else {
+        return $data['html'];
+      }
+      break;
+    default:
+      return $data['html'];
+      break;
+  }
+}</code></pre>
+<h3>onTableBeforeInit($tableObject)</h3>
+<p>Allows you to modify the table object before its initialization. You can override this funtion to add additional functionality.</p>
+<pre><code class="language-php">$model-&gt;onTableAfterInit($tableObject);
+
+OR
+
+public function onTableBeforeInit($tableObject) {
+
+  /*Your
+  Code*/
+
+  return $tableObject;
+};</code></pre>
+<h3>onTableAfterInit($tableObject)</h3>
+<p>Allows you to modify the table object after it has been initialized. You can override this funtion to add additional functionality.</p>
+<pre><code class="language-php">public function onTableBeforeInit($tableObject) {
+
+  /*Your
+  Code*/
+
+  return $tableObject;
+};</code></pre>
+<h3>onTableAfterDataLoaded($tableObject)</h3>
+<p>Allows you to modify the table object (including its data) after the table has been filled with data. You can override this funtion to add additional functionality.</p>
+<pre><code class="language-php">public function onTableAfterDataLoaded($tableObject) {
+
+  /*Your
+  Code*/
+
+  return $tableObject;
+};</code></pre>
+<h3>columnValidate(string $column, $value)</h3>
+<p>Checks the valitidy of a value of a column. Returns bool.</p>
+<pre><code class="language-php">$model-&gt;columnValidate("id_staff",$value);</code></pre>
+<h3>onFormBeforeInit($formObject)</h3>
+<p>Allows you to modify the form object before it is initialized. You can override this funtion to add additional functionality.</p>
+<pre><code class="language-php">public function onFormBeforeInit($formObject) {
+
+  /*Your
+  Code*/
+
+  return $formObject;
+};</code></pre>
+<h3>onFormAfterInit($formObject)</h3>
+<p>Allows you to modify the form object after it has beed initialized. You can override this funtion to add additional functionality.</p>
+<pre><code class="language-php">public function onFormAfterInit($formObject) {
+
+  /*Your
+  Code*/
+
+  return $formObject;
+};</code></pre>
+<h3>onFormParams(\ADIOS\Core\Views\Form $formObject, array $params)</h3>
+<p>Allows you to modify the parameters of the model's form before rendering. For full list of form parameters and additional information see [Form view](&quot;../5. Views/Form.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the form.</p>
+<pre><code class="language-php">$model-&gt;onFormParams($formObject, $params);
+
+OR
+
+public function onFormParams($formObject, $params) {
+if ((int) $params['id_staff'] &gt; 5) {
+    $params["columns"]["user_name"]["readonly"] = FALSE;
+}
+
+return $params;
+};</code></pre>
+<h3>onFormChange(string $column, string $formUid, array $data)</h3>
+<p>Allows you to modify the behaviour of the form when a change in the form happens. You can override this funtion for additional functionality.</p>
+<pre><code class="language-php">$model-&gt;onFormChange($column, $formUid, $data);
+
+OR
+
+public function onFormChange($column, $formUid, $data) {
+return [
+  'column_1' =&gt; ['value' =&gt; 'newColumnValue'],
+  'column_2' =&gt; ['inputHtml' =&gt; 'newInputHtml', 'inputCssClass' =&gt; 'newInputCssClass'],
+  'column_3' =&gt; ['alert' =&gt; 'This is just an alert.'],
+  'column_4' =&gt; ['warning' =&gt; 'Something is not correct.'],
+  'column_4' =&gt; ['fatal' =&gt; 'Ouch. Fatal error!'],
+  ];
+};</code></pre>
+<h3>recordValidate($data)</h3>
+<p>Validates the form data by checking if the types of the values are correct and if the values are required or not.</p>
+<pre><code class="language-php">$model-&gt;recordValidate($data)</code></pre>
+<h3>recordSave($data)</h3>
+<p>Saves the form data to the model's database table. This function also validates the data.</p>
+<pre><code class="language-php">$model-&gt;recordSave($data)</code></pre>
+<h3>recordDelete(int $id)</h3>
+<p>Deletes a specific row in the model's table.</p>
+<pre><code class="language-php">$model-&gt;recordDelete(5);</code></pre>
+<h3>cards(array $cards = [])</h3>
+<p>TODO</p>
+<pre><code class="language-php">$model-&gt;cards([]);</code></pre>
+<h3>cardsParams($params)</h3>
+<p>TODO</p>
+<p>Allows you to modify the parameters of the model's cards before rendering. For full list of cards parameters see [Cards view](&quot;../5. Views/Cards.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the cards.</p>
+<pre><code class="language-php">$model-&gt;cardsParams($params);
+
+OR
+
+public function cardsParams($params) {
+  if ((int) $params['id_staff'] &gt; 0) {
+      $params["show_controls"] = FALSE;
+  }
+
+  return $params;
+};</code></pre>
+<h3>cardsCardHtmlFormatter($cardsObject, $data)</h3>
+<p>TODO</p>
+<p>Allows you to modify the card value by overriding this function in a model.</p>
+<pre><code class="language-php">public function cardsCardHtmlFormatter($cardsObject, $data)
+{
+  switch ($data['column']) {
+    case "id_staff":
+      if ($data['row']['id_staff'] &gt; 5) {
+        return 'Access denied';
+      } else {
+        return $data['html'];
+      }
+      break;
+    default:
+      return $data['html'];
+      break;
+  }
+}</code></pre>
+<h3>treeParams($params)</h3>
+<p>TODO</p>
+<p>Allows you to modify the parameters of the model's tree before rendering. For full list of tree parameters see [Tree view](&quot;../5. Views/Tree.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the tree.</p>
+<pre><code class="language-php">$model-&gt;treeParams($params);
+
+OR
+
+public function treeParams($params) {
+  if ((int) $params['id_staff'] &gt; 0) {
+      $params["show_controls"] = FALSE;
+  }
+
+  return $params;
+};</code></pre>
+<h3>onBeforeInsert(array $data)</h3>
+<p>Allows you to manipulate the data before the insertion of a new row by overriding this function in the model.</p>
+<pre><code class="language-php">public function onBeforeInsert($data) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};</code></pre>
+<h3>onBeforeUpdate(array $data)</h3>
+<p>Allows you to manipulate the data before the update of a row by overriding this function in the model.</p>
+<pre><code class="language-php">public function onBeforeUpdate($data) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};</code></pre>
+<h3>onBeforeSave(array $data)</h3>
+<p>Allows you to manipulate the data before the insetion or update of a row by overriding this function in the model. Prefered method.</p>
+<pre><code class="language-php">public function onBeforeSave($data) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};</code></pre>
+<h3>onBeforeDelete(array $id)</h3>
+<p>Allows you to manipulate the row id before deletion of the row by overriding this function in the model.</p>
+<pre><code class="language-php">public function onBeforeDelete($id) {
+
+  /*Your
+  Code*/
+
+  return $id;
+};</code></pre>
+<h3>onAfterInsert(array $data, $returnValue)</h3>
+<p>Returns the new data after insertion and allows you to manipulate this new data by overriding this function in the model.</p>
+<pre><code class="language-php">public function onAfterInsert($data, $returnValue) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};</code></pre>
+<h3>onAfterUpdate(array $data, $returnValue)</h3>
+<p>Returns the new data after a row update and allows you to manipulate this new data by overriding this function in the model.</p>
+<pre><code class="language-php">public function onAfterUpdate($data, $returnValue) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};</code></pre>
+<h3>onAfterSave(array $data, $returnValue)</h3>
+<p>Returns the new data after a row update or insertion and allows you to manipulate this new data by overriding this function in the model.</p>
+<pre><code class="language-php">public function onAfterSave($data, $returnValue) {
+
+  /*Your
+  Code*/
+
+  return $data;
+};</code></pre>
+<h3>onAfterDelete(int $id)</h3>
+<p>Returns the id of a deleted row and allows you to manipulate with the id by overriding this function in the model.</p>
+<pre><code class="language-php">public function onAfterDelete($id) {
+
+  /*Your
+  Code*/
+
+  return $id;
+};</code></pre>
+<h3>getQuery($columns = NULL)</h3>
+<p>Creates a SQL query string with a list of columns for a SELECT query.</p>
+<pre><code class="language-php">$model-&gt;getQuery($columns);</code></pre>
+<h3>addLookupsToQuery($query, $lookupsToAdd = NULL)</h3>
+<p>Creates a SQL query string with joined lookup tables.</p>
+<pre><code class="language-php">$model-&gt;addLookupsToQuery($query,$lookupsToAdd);</code></pre>
+<h3>addCrossTableToQuery($query, $crossTableModelName, $resultKey = '')</h3>
+<p>Creates a SQL query string with added cross table.</p>
+<pre><code class="language-php">$model-&gt;addCrossTableToQuery($query, $crossTableModelName, $resultKey);</code></pre>
+<h3>processLookupsInQueryResult($rows)</h3>
+<p>Support function for processing of the fetched rows.</p>
+<pre><code class="language-php">$model-&gt;processLookupsInQueryResult($rows);</code></pre>
+<h3>fetchRows($eloquentQuery, $keyBy = 'id', $processLookups = TRUE)</h3>
+<p>Fetches rows of the model's table.</p>
+<pre><code class="language-php">$model-&gt;fetchRows($eloquentQuery,'id', TRUE);</code></pre>
+<h3>countRowsInQuery($eloquentQuery)</h3>
+<p>Retrieves the number of fetched rows.</p>
+<pre><code class="language-php">$model-&gt;countRowsInQuery($eloquentQuery);</code></pre>
+<h3>getNewRecordInfo()</h3>
+<p>Support function that generates placeholder information about a new record creation.</p>
+<pre><code class="language-php">$model-&gt;getNewRecordInfo();</code></pre>
+<h3>setRecordInfoCreated(array $recordInfo)</h3>
+<p>Creates the datetime and author information about a newly created record and returns the record information data.</p>
+<pre><code class="language-php">$model-&gt;setRecordInfoCreated($recordInfo);</code></pre>
+<h3>setRecordInfoUpdated(array $data)</h3>
+<p>Updates the datetime and author information about the updated record and returns the record information data.</p>
+<pre><code class="language-php">$model-&gt;setRecordInfoUpdated($data);</code></pre>
               </div>
             </div>
           </div>
