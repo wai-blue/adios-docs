@@ -13,8 +13,7 @@
           <ul class='nav sidebar-nav'>
             <div class='sidebar-header'>
               <div class='sidebar-brand'>
-                <img class='logo-img' src='../../resources/assets/adios.jpeg' />
-                <a href='#'>ADIOS</a>
+                <a href='#'>ADIOS Framework</a>
               </div>
             </div>
             <li class='dropdown'>
@@ -41,7 +40,7 @@
         <a 
           href='#Inputs' class='dropdown-toggle' data-toggle='dropdown'>
           Inputs <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../Inputs/FileBrowser.html'>FileBrowser</a></li><li><a href='../Inputs/Settings panel.html'>Settings panel</a></li><li><a href='../Inputs/Tags.html'>Tags</a></li></ul></li><li><a href='../5. Views/Introduction.html'>Introduction</a></li><li><a href='../5. Views/Table.html'>Table</a></li><li><a href='../5. Views/Tabs.html'>Tabs</a></li><li><a href='../5. Views/Title.html'>Title</a></li><li><a href='../5. Views/Tree.html'>Tree</a></li><li><a href='../5. Views/Window.html'>Window</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../5. Views/Inputs/CrossTableInputField.html'>CrossTableInputField</a></li><li><a href='../5. Views/Inputs/FileBrowser.html'>FileBrowser</a></li><li><a href='../5. Views/Inputs/ManyToMany.html'>ManyToMany</a></li><li><a href='../5. Views/Inputs/Settings panel.html'>Settings panel</a></li><li><a href='../5. Views/Inputs/Tags.html'>Tags</a></li></ul></li><li><a href='../5. Views/Introduction.html'>Introduction</a></li><li><a href='../5. Views/Table.html'>Table</a></li><li><a href='../5. Views/Tabs.html'>Tabs</a></li><li><a href='../5. Views/Title.html'>Title</a></li><li><a href='../5. Views/Tree.html'>Tree</a></li><li><a href='../5. Views/Window.html'>Window</a></li></ul></li><li class='dropdown'>
         <a 
           href='#6. Database' class='dropdown-toggle' data-toggle='dropdown'>
           6. Database <small style='float:right';padding-top:5px>﹀</small>
@@ -49,7 +48,7 @@
         <a 
           href='#Data Types' class='dropdown-toggle' data-toggle='dropdown'>
           Data Types <small style='float:right';padding-top:5px>﹀</small>
-        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../Data Types/Boolean.html'>Boolean</a></li><li><a href='../Data Types/Integer.html'>Integer</a></li></ul></li><li><a href='../6. Database/Data types.html'>Data types</a></li><li><a href='../6. Database/Introduction.html'>Introduction</a></li><li><a href='../6. Database/Model.html'>Model</a></li><li><a href='../6. Database/Query builder.html'>Query builder</a></li></ul></li><li class='dropdown'>
+        </a><ul class='dropdown-menu animated fadeInLeft' role='menu'><li><a href='../6. Database/Data Types/Bool.html'>Bool</a></li><li><a href='../6. Database/Data Types/Boolean.html'>Boolean</a></li><li><a href='../6. Database/Data Types/Integer.html'>Integer</a></li></ul></li><li><a href='../6. Database/Data types.html'>Data types</a></li><li><a href='../6. Database/Introduction.html'>Introduction</a></li><li><a href='../6. Database/Model.html'>Model</a></li><li><a href='../6. Database/Query builder.html'>Query builder</a></li></ul></li><li class='dropdown'>
         <a 
           href='#7. Security' class='dropdown-toggle' data-toggle='dropdown'>
           7. Security <small style='float:right';padding-top:5px>﹀</small>
@@ -81,6 +80,7 @@
               <div class='col-lg-8 col-lg-offset-2'>
                 <h1>Chart</h1>
 <p>The Chart view displays data in charts using the <a href="https://www.chartjs.org/">Chart.js</a> Javascript library.</p>
+<p><img src="../../../resources/img/chart_general.png" alt="Chart Functionality Preview" /></p>
 <h2>Properties</h2>
 <p>The Chart view supports various properties that can be used to meet its functionality requirements:</p>
 <table>
@@ -230,6 +230,7 @@ labelColumn and pass to it an array of labels (strings).</p>
     ]
   ]
 ])-&gt;render();</code></pre>
+<p><img src="../../../resources/img/chart_basic.png" alt="Example #1 preview" /></p>
 <p><strong>Example #2:</strong> Dynamic chart based on the ExchangeRate model</p>
 <pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Chart([
   'type' =&gt; 'line',
@@ -268,6 +269,7 @@ labelColumn and pass to it an array of labels (strings).</p>
     ],
   ],
 ])-&gt;render();</code></pre>
+<p><img src="../../../resources/img/chart_combined.png" alt="Combined Chart preview" /></p>
 <h2>Notes</h2>
               </div>
             </div>
