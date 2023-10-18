@@ -1,10 +1,13 @@
-⚠️ **[deprecated]** 
 # DataTypeBool
 
-DataType Bool is a deprecated boolean datatype. In SQL it is converted to **char(1)**, indexed by default.
+This is a bool data type in ADIOS. It is saved as a **bool** (in comparison to Bool) in the SQL database.
 
-It's default value is FALSE `N`, otherwise it can also be `Y` for TRUE.
-It is rendered as a checkbox by the **Views/Input** view.
+**Properties**
+- indexed by default
+- default value: 0
+- NOT NULL
+
+The **View/Input** renders this data type as a checkbox.
 
 ## Parameters
 | Name  | Type   | Description         |
@@ -19,6 +22,6 @@ A column with the datatype bool may be defined like this:
 "columnName" => [
 	"type" => "bool",
 	"title" => "A Bool Column",
-	"show_column" => False,
+	"show_column" => false,
 ]
 ```

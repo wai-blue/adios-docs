@@ -14,7 +14,6 @@ The **View/Input** renders this data type as a checkbox.
 | Parameter Name  | Used in          | Default value | Description                                                    |
 | --------------- | ---------------- | ------------- | -------------------------------------------------------------- |
 | sql_definitions | create SQL table |               | Additional SQL definitions to be used when creating the column |
-| defaultValue    | create SQL table |               | Default value of the column                                    |
 
 ## Example
 
@@ -22,6 +21,6 @@ The **View/Input** renders this data type as a checkbox.
 "columnName" => [  
       "type" => "boolean",  
       "title" => "A Boolean Column",  
-      "show_column" => FALSE,  
+      "show_column" => false,  
 ]
 ```
