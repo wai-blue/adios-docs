@@ -2,6 +2,7 @@
 
 The Chart view displays data in charts using the [Chart.js](https://www.chartjs.org/) Javascript library.
 
+![Chart Functionality Preview](../../../resources/img/chart_general.png)
 ## Properties
 
 The Chart view supports various properties that can be used to meet its functionality requirements:
@@ -96,6 +97,9 @@ $this->adios->view->Chart([
 ])->render();
 ```
 
+![Example #1 preview](../../../resources/img/chart_basic.png)
+
+
 **Example #2:** Dynamic chart based on the ExchangeRate model
 
 ```php
@@ -141,5 +145,7 @@ $this->adios->view->Chart([
   ],
 ])->render();
 ```
+
+![Combined Chart preview](../../../resources/img/chart_combined.png)
 
 ## Notes
