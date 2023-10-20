@@ -82,12 +82,15 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>DataTypeBool</h1>
-<p>This is a bool data type in ADIOS. It is saved as a <strong>bool</strong> (in comparison to Bool) in the SQL database.</p>
+                <h1>DataTypeMapPoint</h1>
+<p>This is a special ADIOS type defined as MapPoint. It is saved as a <strong>json</strong> in the SQL database. Json consists of two parameters namely <strong>latitude</strong> and <strong>longitude</strong>.</p>
+<p><img src="../../../resources/examples/datatypes/mappoint.png" alt="Preview of the MapPoint data type" /></p>
+<blockquote>
+<p>:bulb: Rendered output of the MapPoint is provided by <a href="https://github.com/json-editor/json-editor">JSON Editor library</a>. </p>
+</blockquote>
 <p><strong>Properties</strong></p>
 <ul>
-<li>indexed by default</li>
-<li>default value: 0</li>
+<li>default value: '{&quot;latitude&quot;: 0,&quot;longitude&quot;: 0}'</li>
 <li>NOT NULL</li>
 </ul>
 <p>The <strong>View/Input</strong> renders this data type as a checkbox.</p>
@@ -108,12 +111,11 @@
 </tr>
 </tbody>
 </table>
-<h2>Example</h2>
-<p>A column with the datatype bool may be defined like this:</p>
-<pre><code class="language-php">"columnName" =&gt; [
-    "type" =&gt; "bool",
-    "title" =&gt; "A Bool Column",
-    "show_column" =&gt; false,
+<h2>Example 1</h2>
+<p>A column with the datatype MapPoint may be defined for e.g.::</p>
+<pre><code class="language-php">"gps_location" =&gt; [
+  "type" =&gt; "MapPoint",
+  "title" =&gt; "GPS Location"
 ]</code></pre>
               </div>
             </div>
