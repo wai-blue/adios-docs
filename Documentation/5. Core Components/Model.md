@@ -10,31 +10,31 @@ ADIOS Model also brings some additional features as routing, columns definition,
 
 The Model class supports various class variables that can be utilized to meet specific design and functionality requirements:
 
-| Property                               | Type   | Default value | Description                                                                                                                                                           |
-| -------------------------------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| primaryKey                               | string | 'id'            | Primary key of the model                                                                                                                |
-| fullName                               | string | ''            | Full name of the model. Useful for getModel() function                                                                                                                |
-| shortName                              | string | ''            | Short name of the model. Useful for debugging purposes                                                                                                                |
-| adios                                  | ?\ADIOS\Core\Loader   | null            | Reference to ADIOS object                                                                                                                                             |
-| gtp                                    | ?string | null            | Shorthand for "global table prefix"                                                                                                                                   |
-| sqlName                                | string | ''            | Name of the table in SQL database. Used together with global table prefix.                                                                                            |
-| urlBase                                | string | ''            | URL base for management of the content of the table. If not empty, ADIOS automatically creates URL addresses for listing the content, adding and editing the content. |
-| crud                                | array | []            | Contains information about the model's CRUD operations, e.g. controllers, routes. |
-| tableTitle                             | string | ''            | Readable title for the table listing.                                                                                                                                 |
-| formTitleForEditing                    | string | ''            | Readable title for the form when editing content.                                                                                                                     |
-| formTitleForInserting                  | string | ''            | Readable title for the form when inserting content.                                                                                                                   |
-| lookupSqlValue                         | ?string | null            | SQL-compatible string used to render displayed value of the record when used as a lookup.                                                                             |
-| isJunctionTable                        | bool   | FALSE         | If set to TRUE, the SQL table will not contain the ID autoincrement column                                                                                            |
-| storeRecordInfo                        | bool   | FALSE         | If set to TRUE, the SQL table will contain the `record_info` column of type JSON                                                                                      |
-| pdo                        | TODO   | ''         | Contains the PDO database connection                                                                                      |
-| recordSaveOriginalData                        | bool   | ''         | Property used to store original data when recordSave() method is called                                                                                      |
-| fullTableSqlName                        | string   | ''         | A concatenated string of the gtp and sqlName parameter. It is automaticly generated.                                                                                       |
-| allItemsCache                        | ?array   | null         | A variable that stores fetched and cached rows of the model's table                                                                                       |
-| junctions                        | ?array   | []         | A variable that stores the model's junction tables                                                                                       |
-| ⚠️ **[deprecated]** addButtonText                        | ?string   | null         | Text for an Add Button that initiates a new record creation                                                                                       |
-| ⚠️ **[deprecated]** formSaveButtonText                        | ?string   | null         | Text for a Save Button inside the model's form                                                                                       |
-| ⚠️ **[deprecated]** formAddButtonText                        | ?string   | null         | Text for a Add Button inside the model's form                                                                                       |
-| ⚠️ **[deprecated]** languageDictionary | array  | []            | Language dictionary for the context of the model                                                                                                                      |
+| Property                              | Type                | Default value | Description                                                                                                                                                           |
+| ------------------------------------- | ------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| primaryKey                            | string              | 'id'          | Primary key of the model                                                                                                                                              |
+| fullName                              | string              | ''            | Full name of the model. Useful for getModel() function                                                                                                                |
+| shortName                             | string              | ''            | Short name of the model. Useful for debugging purposes                                                                                                                |
+| adios                                 | ?\ADIOS\Core\Loader | null          | Reference to ADIOS object                                                                                                                                             |
+| gtp                                   | ?string             | null          | Shorthand for "global table prefix"                                                                                                                                   |
+| sqlName                               | string              | ''            | Name of the table in SQL database. Used together with global table prefix.                                                                                            |
+| urlBase                               | string              | ''            | URL base for management of the content of the table. If not empty, ADIOS automatically creates URL addresses for listing the content, adding and editing the content. |
+| crud                                  | array               | []            | Contains information about the model's CRUD operations, e.g. controllers, routes.                                                                                     |
+| tableTitle                            | string              | ''            | Readable title for the table listing.                                                                                                                                 |
+| formTitleForEditing                   | string              | ''            | Readable title for the form when editing content.                                                                                                                     |
+| formTitleForInserting                 | string              | ''            | Readable title for the form when inserting content.                                                                                                                   |
+| lookupSqlValue                        | ?string             | null          | SQL-compatible string used to render displayed value of the record when used as a lookup.                                                                             |
+| isJunctionTable                       | bool                | FALSE         | If set to TRUE, the SQL table will not contain the ID autoincrement column                                                                                            |
+| storeRecordInfo                       | bool                | FALSE         | If set to TRUE, the SQL table will contain the `record_info` column of type JSON                                                                                      |
+| pdo                                   | TODO                | ''            | Contains the PDO database connection                                                                                                                                  |
+| recordSaveOriginalData                | bool                | ''            | Property used to store original data when recordSave() method is called                                                                                               |
+| fullTableSqlName                      | string              | ''            | A concatenated string of the gtp and sqlName parameter. It is automaticly generated.                                                                                  |
+| allItemsCache                         | ?array              | null          | A variable that stores fetched and cached rows of the model's table                                                                                                   |
+| junctions                             | ?array              | []            | A variable that stores the model's junction tables                                                                                                                    |
+| ⚠️ **[deprecated]** addButtonText      | ?string             | null          | Text for an Add Button that initiates a new record creation                                                                                                           |
+| ⚠️ **[deprecated]** formSaveButtonText | ?string             | null          | Text for a Save Button inside the model's form                                                                                                                        |
+| ⚠️ **[deprecated]** formAddButtonText  | ?string             | null          | Text for a Add Button inside the model's form                                                                                                                         |
+| ⚠️ **[deprecated]** languageDictionary | array               | []            | Language dictionary for the context of the model                                                                                                                      |
 
 ## Functions
 
@@ -280,7 +280,6 @@ $model->getRelationships()
 ```
 ### getExtendedData($item)
 
-TODO
 
 ```php
 $model->getExtendedData($item)
@@ -318,16 +317,12 @@ $model->getAllCached();
 
 ### getQueryWithLookups($callback = NULL)
 
-TODO
-
 Support function that returns a SQL string query with joined lookup tables.
 
 ```php
 $model->getQueryWithLookups();
 ```
 ### getWithLookups($callback = NULL, $keyBy = 'id', $processLookups = FALSE)
-
-TODO
 
 Fetches the rows of the SQL query with lookups.
 
@@ -384,8 +379,6 @@ Copies and creates a row in a model's table. Returns TRUE if succesfull.
 $model->copyRow(1)
 ```
 ### search($query)
-
-TODO
 
 ### pdoPrepareAndExecute(string $query, array $variables)
 
@@ -676,15 +669,14 @@ $model->recordDelete(5);
 
 ### cards(array $cards = [])
 
-TODO
+Cards are used for displaying defined actions in the [Dashboard]("../6. Views/Dashboard.html") 
 
 ```php
 $model->cards([]);
 ```
 ### cardsParams($params)
-TODO
 
-Allows you to modify the parameters of the model's cards before rendering. For full list of cards parameters see [Cards view]("../5. Views/Cards.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the cards.
+Allows you to modify the parameters of the model's cards before rendering. For full list of cards parameters see [Cards view]("../6. Views/Cards.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the cards.
 
 ```php
 $model->cardsParams($params);
@@ -701,8 +693,6 @@ public function cardsParams($params) {
 ```
 
 ### cardsCardHtmlFormatter($cardsObject, $data)
-
-TODO
 
 Allows you to modify the card value by overriding this function in a model.
 
@@ -725,9 +715,8 @@ public function cardsCardHtmlFormatter($cardsObject, $data)
 ```
 
 ### treeParams($params)
-TODO
 
-Allows you to modify the parameters of the model's tree before rendering. For full list of tree parameters see [Tree view]("../5. Views/Tree.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the tree.
+Allows you to modify the parameters of the model's tree before rendering. For full list of tree parameters see [Tree view]("../6. Views/Tree.html"). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the tree.
 
 ```php
 $model->treeParams($params);

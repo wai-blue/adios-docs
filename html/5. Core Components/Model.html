@@ -350,7 +350,6 @@ You can see more about Eloquent <a href="https://laravel.com/docs/10.x/eloquent"
 <p>Joins and returns the rows of models that the model has a relation with.</p>
 <pre><code class="language-php">$model-&gt;getRelationships()</code></pre>
 <h3>getExtendedData($item)</h3>
-<p>TODO</p>
 <pre><code class="language-php">$model-&gt;getExtendedData($item)</code></pre>
 <h3>getById(int $id)</h3>
 <p>Returns a row of a model's table with the corresponding ID.</p>
@@ -365,11 +364,9 @@ You can see more about Eloquent <a href="https://laravel.com/docs/10.x/eloquent"
 <p>Returns all rows of a model's table and caches the results.</p>
 <pre><code class="language-php">$model-&gt;getAllCached();</code></pre>
 <h3>getQueryWithLookups($callback = NULL)</h3>
-<p>TODO</p>
 <p>Support function that returns a SQL string query with joined lookup tables.</p>
 <pre><code class="language-php">$model-&gt;getQueryWithLookups();</code></pre>
 <h3>getWithLookups($callback = NULL, $keyBy = 'id', $processLookups = FALSE)</h3>
-<p>TODO</p>
 <p>Fetches the rows of the SQL query with lookups.</p>
 <pre><code class="language-php">$model-&gt;getWithLookups();</code></pre>
 <h3>insertRow($data)</h3>
@@ -394,7 +391,6 @@ You can see more about Eloquent <a href="https://laravel.com/docs/10.x/eloquent"
 <p>Copies and creates a row in a model's table. Returns TRUE if succesfull.</p>
 <pre><code class="language-php">$model-&gt;copyRow(1)</code></pre>
 <h3>search($query)</h3>
-<p>TODO</p>
 <h3>pdoPrepareAndExecute(string $query, array $variables)</h3>
 <p>Prepares and executes an SQL query like Insert, Delete, etc.. and return TRUE if successful.</p>
 <pre><code class="language-php">$model-&gt;pdoPrepareAndExecute($queryString, []);</code></pre>
@@ -581,11 +577,10 @@ return [
 <p>Deletes a specific row in the model's table.</p>
 <pre><code class="language-php">$model-&gt;recordDelete(5);</code></pre>
 <h3>cards(array $cards = [])</h3>
-<p>TODO</p>
+<p>Cards are used for displaying defined actions in the [Dashboard](&quot;../6. Views/Dashboard.html&quot;) </p>
 <pre><code class="language-php">$model-&gt;cards([]);</code></pre>
 <h3>cardsParams($params)</h3>
-<p>TODO</p>
-<p>Allows you to modify the parameters of the model's cards before rendering. For full list of cards parameters see [Cards view](&quot;../5. Views/Cards.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the cards.</p>
+<p>Allows you to modify the parameters of the model's cards before rendering. For full list of cards parameters see [Cards view](&quot;../6. Views/Cards.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the cards.</p>
 <pre><code class="language-php">$model-&gt;cardsParams($params);
 
 OR
@@ -598,7 +593,6 @@ public function cardsParams($params) {
   return $params;
 };</code></pre>
 <h3>cardsCardHtmlFormatter($cardsObject, $data)</h3>
-<p>TODO</p>
 <p>Allows you to modify the card value by overriding this function in a model.</p>
 <pre><code class="language-php">public function cardsCardHtmlFormatter($cardsObject, $data)
 {
@@ -616,8 +610,7 @@ public function cardsParams($params) {
   }
 }</code></pre>
 <h3>treeParams($params)</h3>
-<p>TODO</p>
-<p>Allows you to modify the parameters of the model's tree before rendering. For full list of tree parameters see [Tree view](&quot;../5. Views/Tree.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the tree.</p>
+<p>Allows you to modify the parameters of the model's tree before rendering. For full list of tree parameters see [Tree view](&quot;../6. Views/Tree.html&quot;). You can override this funtion for additional functionality, for example based on the result of an IF statment you can change a parameter of the tree.</p>
 <pre><code class="language-php">$model-&gt;treeParams($params);
 
 OR
