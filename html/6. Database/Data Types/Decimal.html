@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -78,8 +78,61 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Model</h1>
-<p>Work in progress...</p>
+                <h1>Decimal</h1>
+<p>Decimal is a ADIOS data type for representing decimal numbers. Their visual representation by the <strong>UI/Input</strong> class is exactly the same as of <em>Integers</em>. Will be saved in SQL as type <em>decimal</em> if not specified otherwise.</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Default value: 0</li>
+</ul>
+<h2>Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Used in</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sql_definitions</td>
+<td>create SQL table</td>
+<td></td>
+<td>Additional SQL properties</td>
+</tr>
+<tr>
+<td>byte_size</td>
+<td>create SQL table</td>
+<td>1</td>
+<td>Max byte size of the column</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>form + table</td>
+<td>1</td>
+<td>How many decimal places should the saved numbers have</td>
+</tr>
+<tr>
+<td>sql_data_type</td>
+<td>create SQL table</td>
+<td>decimal</td>
+<td>How the column should be stored (double, float, decimal, numeric)</td>
+</tr>
+<tr>
+<td>format</td>
+<td>table</td>
+<td></td>
+<td>Determines the format how the decimal number should be displayed</td>
+</tr>
+</tbody>
+</table>
+<h2>Example</h2>
+<pre><code class="language-php">"columnName" =&gt; [  
+    "type" =&gt; "decimal",  
+    "title" =&gt; "A Decimal Column",  
+    "show_column" =&gt; TRUE,  
+]</code></pre>
               </div>
             </div>
           </div>
@@ -88,5 +141,5 @@
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
