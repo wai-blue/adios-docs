@@ -82,40 +82,58 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>DataTypeMapPoint</h1>
-<p>This is a special ADIOS type defined as MapPoint. It is saved as a <strong>json</strong> in the SQL database. Json consists of two parameters namely <strong>latitude</strong> and <strong>longitude</strong>.</p>
-<p><img src="../../../resources/examples/datatypes/mappoint.png" alt="Preview of the MapPoint data type" /></p>
+                <h1>Varchar</h1>
+<p>This data type represents a varchar in ADIOS. It is saved as a <strong>varchar</strong> in the SQL database.  </p>
 <blockquote>
-<p>:bulb: Rendered output of the MapPoint is provided by <a href="https://github.com/json-editor/json-editor">JSON Editor library</a>. </p>
+<p>💡 When you render the Varchar data type in a form, the Varchar column is rendered as an input text box where you can enter text.</p>
 </blockquote>
+<p><img src="../../../resources/examples/datatypes/varchar.png" alt="Preview of the color data type" /></p>
 <p><strong>Properties</strong></p>
 <ul>
-<li>default value: '{&quot;latitude&quot;: 0,&quot;longitude&quot;: 0}'</li>
-<li>NOT NULL</li>
+<li>default value: ''</li>
 </ul>
-<p>The <strong>View/Input</strong> renders this data type as a checkbox.</p>
 <h2>Parameters</h2>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
+<th>Parameter Name</th>
+<th>Used in</th>
+<th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>sql_definitions</td>
-<td>string</td>
-<td>Additional SQL parameters to be supplied when creating the column, optional</td>
+<td>create SQL table</td>
+<td></td>
+<td>Additional SQL definitions to be specified</td>
+</tr>
+<tr>
+<td>null_value</td>
+<td>create SQL table</td>
+<td>false</td>
+<td>Determines if NULL value is allowed in the column of the SQL table</td>
+</tr>
+<tr>
+<td>byte_size</td>
+<td>create SQL table</td>
+<td>255</td>
+<td>Byte size of the allowed input string</td>
+</tr>
+<tr>
+<td>required</td>
+<td>create SQL table, form + table</td>
+<td>false</td>
+<td>Determines if the column is required</td>
 </tr>
 </tbody>
 </table>
-<h2>Example 1</h2>
-<p>A column with the datatype MapPoint may be defined for e.g.:</p>
-<pre><code class="language-php">"gps_location" =&gt; [
-  "type" =&gt; "MapPoint",
-  "title" =&gt; "GPS Location"
+<h2>Example</h2>
+<pre><code class="language-php">"columnName" =&gt; [  
+    "type" =&gt; "varchar",
+    "byte_size" =&gt; 100,
+    "required" =&gt; TRUE,
 ]</code></pre>
               </div>
             </div>
