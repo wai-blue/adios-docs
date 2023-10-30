@@ -82,17 +82,16 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Color</h1>
-<p>This data type represents a color in ADIOS. It is saved as a <strong>char(10)</strong>.  </p>
-<p><img src="../../../resources/img/color_example.png" alt="Preview of the color data type" /></p>
+                <h1>Text</h1>
+<p>Text is an ADIOS data type to display longer text. It is saved in the SQL database as <strong>text</strong>.</p>
+<p><img src="../../../resources/examples/datatypes/text.png" alt="Preview of the text column rendered in a form" /></p>
 <blockquote>
-<p>:bulb: When you render the data type in a form, you can choose from a set of predefined colors or even choose your own by clicking the selected color on the left (an OS/browser built-in color picker pops up)</p>
+<p>💡 The text column is rendered as a text area where you can enter your text.</p>
 </blockquote>
-<p><strong>Properties</strong></p>
+<p><strong>Properties:</strong></p>
 <ul>
-<li>default value: ''</li>
+<li><strong>Default value:</strong> null (unless specified otherwise)</li>
 </ul>
-<h2>Parameters</h2>
 <table>
 <thead>
 <tr>
@@ -104,17 +103,28 @@
 </thead>
 <tbody>
 <tr>
-<td>sql_definitions</td>
+<td>sql_definition</td>
 <td>create SQL table</td>
 <td></td>
-<td></td>
+<td>Additional SQL definitions to be specified</td>
+</tr>
+<tr>
+<td>sql_data_type</td>
+<td>create SQL table</td>
+<td>text</td>
+<td>Specific data type of the text data type <strong>Options:</strong> <code>["tinytext", "text", "mediumtext", "longtext"]</code></td>
+</tr>
+<tr>
+<td>required</td>
+<td>create SQL table</td>
+<td>false</td>
+<td>Determines whether the column should be required</td>
 </tr>
 </tbody>
 </table>
-<h2>Example</h2>
 <pre><code class="language-php">"columnName" =&gt; [  
-    "type" =&gt; "color",  
-    "title" =&gt; "A Color(ful) Column",  
+    "type" =&gt; "text",
+    "sql_data_type" =&gt; "longtext",
     "show_column" =&gt; TRUE,  
 ]</code></pre>
               </div>
