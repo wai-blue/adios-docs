@@ -82,52 +82,52 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Html</h1>
-<p>The Html view alows you to insert custom HTML into your pages.</p>
-<h2>Properties</h2>
-<p>The Html view supports various properties that can be utilized to meet functionality requirements:</p>
+                <h1>Year</h1>
+<p>This data type represents a year in ADIOS. It is saved as a <strong>year</strong> in the SQL database.  </p>
+<blockquote>
+<p>💡 When you render the Year data type in a form, the Year column is rendered as an input text box where you can enter a specific year.</p>
+</blockquote>
+<p><img src="../../../resources/examples/datatypes/YearType.png" alt="Preview of the color data type" /></p>
+<p><strong>Properties</strong></p>
+<ul>
+<li>default value: '00:00:00'</li>
+</ul>
+<h2>Parameters</h2>
 <table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Type</th>
+<th>Parameter Name</th>
+<th>Used in</th>
 <th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>html</td>
-<td>string</td>
+<td>sql_definitions</td>
+<td>create SQL table</td>
 <td></td>
-<td>Html string</td>
+<td>Additional SQL definitions to be specified</td>
+</tr>
+<tr>
+<td>null value</td>
+<td>create SQL table</td>
+<td>false</td>
+<td>Determines if NULL value is allowed in the column of the SQL table</td>
+</tr>
+<tr>
+<td>required</td>
+<td>create SQL table, form + table</td>
+<td>false</td>
+<td>Determines if the column is required</td>
 </tr>
 </tbody>
 </table>
-<h2>Usage</h2>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Html([
-  'html' =&gt; '&lt;p&gt;Example&lt;/p&gt;'
-])-&gt;render();</code></pre>
-<h2>Examples</h2>
-<p><strong>Example #1:</strong> Html view with an image</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Html([
-  'html' =&gt; '&lt;img scr="path/to/image"&gt;',
-]);</code></pre>
-<p><strong>Example #2:</strong> Html view with an ordered list</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Html([
-  'html' =&gt; '
-  &lt;ol&gt;
-    &lt;li&gt;Example 1&lt;/li&gt;
-    &lt;li&gt;Example 2&lt;/li&gt;
-    &lt;li&gt;Example 3&lt;/li&gt;
-  &lt;/ol&gt;
-  '
-]);</code></pre>
-<p><strong>Example #3:</strong> Html view with a paragraph with a link</p>
-<pre><code class="language-php">$adios-&gt;view-&gt;Html([
-  'html' =&gt; '&lt;p&gt;Example &lt;a href="url"&gt;paragraph&lt;/a&gt; &lt;/p&gt;',
-]);</code></pre>
-<h2>Notes</h2>
+<h2>Example</h2>
+<pre><code class="language-php">"columnName" =&gt; [  
+    "type" =&gt; "year",
+    "show_column" =&gt; TRUE,  
+]</code></pre>
               </div>
             </div>
           </div>
