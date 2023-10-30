@@ -7,7 +7,7 @@ This data type represents a year in ADIOS. It is saved as a **year** in the SQL 
 ![Preview of the color data type](../../../resources/examples/datatypes/YearType.png)
 
 **Properties**
-- default value: '00:00:00'
+- default value: ''
 
 ## Parameters
 
