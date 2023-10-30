@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -82,170 +82,43 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Controller</h1>
-<p>Core implementation of ADIOS controller.
-Controller is fundamendal class for generating HTML content of each ADIOS call.
-Controllers can be rendered using Twig template or using custom render() method.</p>
-<h2>Properties</h2>
-<p>The Controller class supports various class variables that can be utilized to meet specific design and functionality requirements:</p>
+                <h1>Enum</h1>
+<p>Enum is an ADIOS data type which is used to save predefined, distinct values. It is saved as an <em>Enum</em> in the SQL Database.</p>
+<blockquote>
+<p>⚠️ This data type is <strong>deprecated</strong>! It also isn't rendered by the <strong>UI/Input</strong> at all.</p>
+</blockquote>
+<h2>Parameters</h2>
 <table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Type</th>
+<th>Parameter Name</th>
+<th>Used in</th>
 <th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>adios</td>
-<td>?\ADIOS\Core\Loader</td>
-<td>null</td>
-<td>Reference to ADIOS object</td>
+<td>sql_definitions</td>
+<td>create SQL table</td>
+<td></td>
+<td>Additional definitions to the column when creating the SQL table</td>
 </tr>
 <tr>
-<td>gtp</td>
-<td>?string</td>
-<td>null</td>
-<td>Shorthand for &quot;global table prefix&quot;</td>
-</tr>
-<tr>
-<td>params</td>
-<td>array</td>
-<td>[]</td>
-<td>Array of parameters (arguments) passed to the controller</td>
-</tr>
-<tr>
-<td>permissionsByUserRole</td>
-<td>array</td>
-<td>[]</td>
-<td>TRUE/FALSE array with permissions for the user role</td>
-</tr>
-<tr>
-<td>requiresUserAuthentication</td>
-<td>bool</td>
-<td>TRUE</td>
-<td>If set to FALSE, the rendered content of controller is available to public</td>
-</tr>
-<tr>
-<td>hideDefaultDesktop</td>
-<td>bool</td>
-<td>FALSE</td>
-<td>If set to TRUE, the default ADIOS desktop will not be added to the rendered content</td>
-</tr>
-<tr>
-<td>cliSAPIEnabled</td>
-<td>bool</td>
-<td>TRUE</td>
-<td>If set to FALSE, the controller will not be rendered in CLI</td>
-</tr>
-<tr>
-<td>webSAPIEnabled</td>
-<td>bool</td>
-<td>TRUE</td>
-<td>If set to FALSE, the controller will not be rendered in WEB</td>
-</tr>
-<tr>
-<td>dictionary</td>
-<td>array</td>
-<td>[]</td>
-<td>TODO</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>''</td>
-<td>Full name of the controller.</td>
-</tr>
-<tr>
-<td>shortName</td>
-<td>string</td>
-<td>''</td>
-<td>Short name of the controller. Useful for debugging purposes</td>
-</tr>
-<tr>
-<td>uid</td>
-<td>string</td>
-<td>''</td>
-<td>Unique ID generated for the controller</td>
-</tr>
-<tr>
-<td>controller</td>
-<td>string</td>
-<td>''</td>
-<td>Language dictionary for the context of the controller</td>
-</tr>
-<tr>
-<td>myRootFolder</td>
-<td>string</td>
-<td>''</td>
-<td>Root folder of the controller</td>
-</tr>
-<tr>
-<td>twigTemplate</td>
-<td>string</td>
-<td>''</td>
-<td>Twig template file that the controller belongs to</td>
+<td>enum_values</td>
+<td>everywhere</td>
+<td></td>
+<td>List of possible values of the column, string with values separated by a comma</td>
 </tr>
 </tbody>
 </table>
-<h2>Functions</h2>
-<h3>init()</h3>
-<p>Initializes the controller.</p>
-<pre><code class="language-php">$controller-&gt;init();</code></pre>
-<h3>overrideConfig($config, $params)</h3>
-<p>Used to change the current ADIOS configuration before calling preRender(). Returns the changed ADIOS configuration.</p>
-<pre><code class="language-php">$controller-&gt;overrideConfig($config, $params);
-
-Example:
-public static function overrideConfig($config, $params = [])
-{
-  $config['hide_default_desktop'] = TRUE;
-  return $config;
-}</code></pre>
-<h3>renderJson()</h3>
-<p>If the controller shall only return JSON, this method must be overriden.</p>
-<pre><code class="language-php">$controller-&gt;renderJson();</code></pre>
-<h3>prepareViewAndParams()</h3>
-<p>If the controller shall return the HTML of the view, this method must be overriden. Returns the view to be used to render the HTML.</p>
-<pre><code class="language-php">$controller-&gt;prepareViewAndParams();</code></pre>
-<h3>preRender()</h3>
-<p>Used to return values for TWIG renderer. Applies only in TWIG template of the controller. Returns the values for controller's TWIG template.</p>
-<pre><code class="language-php">$controller-&gt;preRender();
-
-Example:
-public function preRender()
-{
-  $this-&gt;cascada-&gt;setTwigParams([
-    "idLogin" =&gt; $id,
-  ]);
-}</code></pre>
-<h3>onAfterDesktopPreRender($params)</h3>
-<p>Callback to modify TWIG params for Desktop.twig template. Returns the values for controller's TWIG template.</p>
-<pre><code class="language-php">$controller-&gt;onAfterDesktopPreRender($params);
-
-Example:
-public function onAfterDesktopPreRender($params)
-{
-  $params["searchButton"] = [
-    "display" =&gt; TRUE
-  ];
-  return $params;
-}</code></pre>
-<h3>translate(string $string, array $vars = [])</h3>
-<p>Shorthand for ADIOS core translate() function. Uses own language dictionary. Returns a translated string.</p>
-<pre><code class="language-php">$controller-&gt;translate("Example text");</code></pre>
-<h3>render()</h3>
-<p>Renders the content of requested controller using Twig template. In most cases is this method overriden.</p>
-<pre><code class="language-php">$controller-&gt;render();
-
-OR 
-
-public function render() {
-  /*Your
-  Code*/
-}</code></pre>
+<h2>Example</h2>
+<pre><code class="language-php">"columnName" =&gt; [
+    "type" =&gt; "enum",
+    "title" =&gt; "An Enum Column",
+    "enum_values" =&gt; 'Red,Green,Blue'
+    "show_column" =&gt; TRUE,
+]</code></pre>
               </div>
             </div>
           </div>
@@ -254,5 +127,5 @@ public function render() {
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
