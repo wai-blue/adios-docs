@@ -16,7 +16,6 @@ This data type represents time in ADIOS. It is saved as a **time** in the SQL da
 | sql_definitions | create SQL table |               | Additional SQL definitions to be specified |
 | format          | form + table     | "H:i:s" | Determines the PHP format of displaying the time |
 | null value          | create SQL table     | false | Determines if NULL value is allowed in the column of the SQL table |
-| null value          | create SQL table     | false | Determines if NULL value is allowed in the column of the SQL table |
 | required          | create SQL table, form + table     | false | Determines if the column is required |
 ## Example
 
