@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -82,8 +82,90 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Introduction</h1>
-<p>Work in progress...</p>
+                <h1>Float</h1>
+<p>Float data type is used to store and display decimal numbers in ADIOS. It is saved as type <strong>double</strong> in SQL. If <em>required</em> is not defined, then the default value will be null.</p>
+<p><img src="../../../resources/img/float_input.png" alt="Float data type render by UI/Input" /></p>
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Used in</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sql_definitions</td>
+<td>create SQL table</td>
+<td></td>
+<td>Additional SQL definitions to be used when creating the column</td>
+</tr>
+<tr>
+<td>byte_size</td>
+<td>create SQL table</td>
+<td></td>
+<td>Defines the size limit of the number</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>create SQL table</td>
+<td>1</td>
+<td>How many decimal places should be stored</td>
+</tr>
+<tr>
+<td>sql_data_type</td>
+<td>create SQL table</td>
+<td>double</td>
+<td>Defines how the data type should be saved in SQL (double, float, decimal, numberic)</td>
+</tr>
+<tr>
+<td>required</td>
+<td>form</td>
+<td>false</td>
+<td>Defines if the field should be able to be null or not</td>
+</tr>
+<tr>
+<td>escape_string</td>
+<td>insert, update</td>
+<td>defined in config</td>
+<td>Defines the escape string</td>
+</tr>
+<tr>
+<td>format</td>
+<td>table</td>
+<td></td>
+<td>Defines how the value should be formatted (use {%VALUE%} in place of the column value)</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>table, form</td>
+<td></td>
+<td>Defines the unit of the value</td>
+</tr>
+<tr>
+<td>dumping_data</td>
+<td>table, form</td>
+<td>false</td>
+<td></td>
+</tr>
+<tr>
+<td>null_value</td>
+<td>table, form</td>
+<td>false</td>
+<td>Sets the display value of the column to NULL</td>
+</tr>
+</tbody>
+</table>
+<h3>Example</h3>
+<pre><code class="language-php">"columnName" =&gt; [  
+    "type" =&gt; "float",  
+    "title" =&gt; "A Float Column",  
+    "show_column" =&gt; TRUE,
+    "unit" =&gt; "kg",
+    "decimals" =&gt; 2  
+]</code></pre>
               </div>
             </div>
           </div>
@@ -92,5 +174,5 @@
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
