@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -82,24 +82,35 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Sample simple CRM app</h1>
-<p>The examples used in this documentation are taken from a sample CRM application.</p>
-<p>To run the application, you need to:</p>
-<ol>
-<li>download the source code <a href="../2.%20Getting%20started">here</a></li>
-<li>extract the downloaded file to a root folder of your webserver</li>
-<li>create the empty database for your application</li>
-<li>run <a href="http://localhost/sample_crm/install.php">http://localhost/sample_crm/install.php</a></li>
-</ol>
-<p>The install script will first ask for database connection string and some other configuration parameters and then it will create the required tables and one administrator user account.</p>
-<p>After installation, you will be able to open up your application in the browser and log in as an administrator.</p>
-<h2>Content of the application</h2>
-<p>This application contains following widgets:</p>
+                <h1>File</h1>
+<p>This data type is used in ADIOS to upload and store files. All uploaded files are stored in the upload folder in the blade root. The SQL database only stores the name of the selected file as a <strong>varchar(255)</strong>.</p>
+<p><img src="../../../resources/img/file_column.png" alt="Screenshot of the ADIOS file column" /></p>
+<p><img src="../../../resources/img/file_picker.png" alt="Screenshot of the ADIOS file picker" /></p>
+<blockquote>
+<p>:bulb: After selecting the action button when viewing the File data type as an Input, a small menu opens with the option of selecting a previously uploaded file or uploading a new one.</p>
+</blockquote>
+<p><strong>Properties:</strong></p>
 <ul>
-<li>AddressBook</li>
-<li>Tasks</li>
-<li>Sales</li>
+<li>default value: ''</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Used in</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sql_definitions</td>
+<td>create SQL table</td>
+<td></td>
+<td>Additional SQL definitions to be used when creating the column</td>
+</tr>
+</tbody>
+</table>
               </div>
             </div>
           </div>
@@ -108,5 +119,5 @@
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
