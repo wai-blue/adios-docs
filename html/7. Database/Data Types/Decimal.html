@@ -4,7 +4,7 @@
       <head>
         <meta charset='UTF-8'>
         <title>ADIOS</title>
-        <link rel='stylesheet' href='../../resources/assets/css/style.css'>
+        <link rel='stylesheet' href='../../../resources/assets/css/style.css'>
       </head>
       <body>
       <div id='wrapper'>
@@ -82,199 +82,61 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Chart</h1>
-<p>The Chart view displays data in charts using the <a href="https://www.chartjs.org/">Chart.js</a> Javascript library.</p>
-<p><img src="../../../resources/img/chart_general.png" alt="Chart Functionality Preview" /></p>
-<h2>Properties</h2>
-<p>The Chart view supports various properties that can be used to meet its functionality requirements:</p>
+                <h1>Decimal</h1>
+<p>Decimal is a ADIOS data type for representing decimal numbers. Their visual representation by the <strong>UI/Input</strong> class is exactly the same as of <em>Integers</em>. Will be saved in SQL as type <em>decimal</em> if not specified otherwise.</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Default value: 0</li>
+</ul>
+<h2>Parameters</h2>
 <table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Type</th>
+<th>Parameter Name</th>
+<th>Used in</th>
 <th>Default value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>type</td>
-<td>string</td>
-<td>'pie'</td>
-<td>pie, bar, line, radar, bubble, doughnut, polarArea, radar, scatter</td>
+<td>sql_definitions</td>
+<td>create SQL table</td>
+<td></td>
+<td>Additional SQL properties</td>
 </tr>
 <tr>
-<td>datasets</td>
-<td>array</td>
-<td>[]</td>
-<td>Array of dataset objects</td>
+<td>byte_size</td>
+<td>create SQL table</td>
+<td>1</td>
+<td>Max byte size of the column</td>
+</tr>
+<tr>
+<td>decimals</td>
+<td>form + table</td>
+<td>1</td>
+<td>How many decimal places should the saved numbers have</td>
+</tr>
+<tr>
+<td>sql_data_type</td>
+<td>create SQL table</td>
+<td>decimal</td>
+<td>How the column should be stored (double, float, decimal, numeric)</td>
+</tr>
+<tr>
+<td>format</td>
+<td>table</td>
+<td></td>
+<td>Determines the format how the decimal number should be displayed</td>
 </tr>
 </tbody>
 </table>
-<p>You can also provide additional properties that will be utilized by the Chart.js object at a later stage, such as the
-<code>options</code> property. For a deeper understanding of Chart.js functionality, please refer to its documentation. Everything
-you define in properties will also be passed to the Chart.js object.</p>
-<h3>Dataset object</h3>
-<p>You may configure the view to display static or dynamic data. These properties of datasets are used exclusively by
-ADIOS.</p>
-<p><strong>1.1 Display dynamic data based on a model</strong></p>
-<table>
-<thead>
-<tr>
-<th>Proeprty</th>
-<th>Type</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>model</td>
-<td>string</td>
-<td>''</td>
-<td>Data source for the chart</td>
-</tr>
-<tr>
-<td>labelColumn</td>
-<td>object</td>
-<td>[]</td>
-<td>Contains column specification for chart labels. Look at <strong>1.2 Usage</strong></td>
-</tr>
-<tr>
-<td>dataColumns</td>
-<td>array</td>
-<td>[]</td>
-<td>Array of column names</td>
-</tr>
-<tr>
-<td>where</td>
-<td>array</td>
-<td>[]</td>
-<td>Where condition for choosing data</td>
-</tr>
-<tr>
-<td>function</td>
-<td>string</td>
-<td>''</td>
-<td>Determines how the data should be processed</td>
-</tr>
-<tr>
-<td>limit</td>
-<td>int</td>
-<td>10</td>
-<td>Sets the limit on how many rows of data may be used for the chart</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Note:</strong> If you don't want to specify dynamic labels, you may also define only a <code>labels</code> property instead of
-labelColumn and pass to it an array of labels (strings).</p>
-<p><strong>1.2 Usage</strong> An example dataset may look like this:</p>
-<pre><code class="language-php">[
-'model' =&gt; 'Path/To/Model',
-'function' =&gt; '', # optional, supports: count, sum
-'labelColumn' =&gt; [ 
-  'column' =&gt; 'labels_column'
-  # if the column is a foreign key, you can also specify:
-  # 'model' =&gt; 'Path/To/ForeignModel'  : Target model based on the foreign key
-  # 'lookup' =&gt; 'name'                 : Which column are you looking for on the target model
-  ],
-'dataColumns' =&gt; [
-  'data_column' =&gt; ['type' =&gt; 'data']
-],
-'where' =&gt; [
-  'model_id',
-  '=',
-  '1'
-  ]
+<h2>Example</h2>
+<pre><code class="language-php">"columnName" =&gt; [  
+    "type" =&gt; "decimal",  
+    "title" =&gt; "A Decimal Column",  
+    "show_column" =&gt; TRUE,  
 ]</code></pre>
-<p><strong>2.1 Display static data</strong></p>
-<table>
-<thead>
-<tr>
-<th>Proeprty</th>
-<th>Type</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>array</td>
-<td>[]</td>
-<td>Array of data</td>
-</tr>
-<tr>
-<td>labels</td>
-<td>array</td>
-<td>[]</td>
-<td>Array of labels</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Note:</strong> In this case, you may not use the <code>labelColumns</code> property instead of <code>labels</code>.</p>
-<p><strong>2.2 Usage</strong> An example dataset may look like this:</p>
-<pre><code class="language-php">[
-  'data' =&gt; [ /* ... */ ],
-  'labels' =&gt; [ /* ... */ ]
-]</code></pre>
-<h2>Examples</h2>
-<p><strong>Example #1:</strong> Simple static chart with styling properties for Chart.js library</p>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Chart([
-  'type' =&gt; 'line',
-  'datasets' =&gt; [
-    [
-      'data' =&gt; [1.00, 0.98, 0.99, 1.01, 1.01, 1.00],
-      'labels' =&gt; ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
-
-      'label' =&gt; 'Exchange rate development',
-      'fill' =&gt; 'true',
-      'hoverOffset' =&gt; 4,
-      'backgroundColor' =&gt; ['rgb(255, 99, 132)']
-    ]
-  ]
-])-&gt;render();</code></pre>
-<p><img src="../../../resources/img/chart_basic.png" alt="Example #1 preview" /></p>
-<p><strong>Example #2:</strong> Dynamic chart based on the ExchangeRate model</p>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Chart([
-  'type' =&gt; 'line',
-  'datasets' =&gt; [
-    [
-      'model' =&gt; 'App/Path/To/Model',
-      'labelColumn' =&gt; ['column' =&gt; 'date'],
-      'dataColumns' =&gt; [['rate' =&gt; ['type' =&gt; 'data']]],
-      'where' =&gt; ['currency_id', '=', '1'],
-
-      'label' =&gt; 'Exchange rate development'
-    ]
-  ]
-])-&gt;render();</code></pre>
-<p><strong>Example #3:</strong> Chart.js example
-<a href="https://www.chartjs.org/docs/latest/samples/other-charts/combo-bar-line.html">combo bar/line chart</a> recreated in ADIOS</p>
-<pre><code class="language-php">$this-&gt;adios-&gt;view-&gt;Chart([
-  'type' =&gt; 'bar',
-  'datasets' =&gt; [
-    [
-      'label' =&gt; 'Dataset 1',
-      'data' =&gt; [10,30,40,-20,20,10,70],
-      'borderColor' =&gt; 'rgb(255, 99, 132)',
-      'labels' =&gt; ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-      'backgroundColor' =&gt; 'rgb(255, 99, 132, 0.5)',
-      'order' =&gt; 1,
-    ],
-    [
-      'label' =&gt; 'Dataset 2',
-      'data' =&gt; [50, 32, 68, 95, -20, -50, 0],
-      'borderColor' =&gt; 'rgb(99, 132, 255)',
-      'labels' =&gt; [], # Labels are always defined in the first dataset, but this property must stay
-      'backgroundColor' =&gt; 'rgb(99, 132, 255, 0.5)',
-      'type' =&gt; 'line',
-      'order' =&gt; 0,
-    ],
-  ],
-])-&gt;render();</code></pre>
-<p><img src="../../../resources/img/chart_combined.png" alt="Combined Chart preview" /></p>
-<h2>Notes</h2>
               </div>
             </div>
           </div>
@@ -283,5 +145,5 @@ labelColumn and pass to it an array of labels (strings).</p>
       </body>
     </html>
 
-    <script src='../../resources/assets/js/main.js'></script>
+    <script src='../../../resources/assets/js/main.js'></script>
   
