@@ -113,7 +113,7 @@
 <tr>
 <td>supported_extensions</td>
 <td>insert + update</td>
-<td>defined in config</td>
+<td>['jpg', 'gif', 'png', 'jpeg', 'webp']</td>
 <td>Defines the supported extensions by this data type</td>
 </tr>
 </tbody>
@@ -122,7 +122,8 @@
 <pre><code class="language-php">"columnName" =&gt; [  
       "type" =&gt; "image",  
       "title" =&gt; "An Image Column",  
-      "show_column" =&gt; true,  
+      "show_column" =&gt; true,
+      "supported_extensions" =&gt; ['png', 'jpg'],
 ]</code></pre>
               </div>
             </div>

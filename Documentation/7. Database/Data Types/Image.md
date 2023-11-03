@@ -15,7 +15,7 @@ The data type is actually very similar to the File data type with the exception,
 | Parameter Name | Used in | Default value | Description |
 | --------------- | ---------------- | ----------------- | -------------------------------------------------------------------------------|
 | sql_definitions | create SQL table | | Additional SQL definitions to be used when creating the column |
-| supported_extensions | insert + update | defined in config | Defines the supported extensions by this data type |
+| supported_extensions | insert + update | ['jpg', 'gif', 'png', 'jpeg', 'webp'] | Defines the supported extensions by this data type |
 
 ## Example
 
@@ -23,6 +23,7 @@ The data type is actually very similar to the File data type with the exception,
 "columnName" => [  
       "type" => "image",  
       "title" => "An Image Column",  
-      "show_column" => true,  
+      "show_column" => true,
+      "supported_extensions" => ['png', 'jpg'],
 ]
 ```
