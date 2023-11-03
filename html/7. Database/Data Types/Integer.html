@@ -83,16 +83,16 @@
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
                 <h1>Integer</h1>
-<p>TODO: Toto je zatial priklad, ako dokumentovat datove typy. Treba este povylepsovat.
-TODO: prelinkovat s <a href="https://github.com/wai-blue/ADIOS/blob/main/src/Core/DB/DataTypes/DataTypeInt.php">https://github.com/wai-blue/ADIOS/blob/main/src/Core/DB/DataTypes/DataTypeInt.php</a></p>
-<p>NOTE: pat druhov parametrov:</p>
+<p>This ADIOS data type is used to save whole numbers. It is stored as an <strong>int</strong> in the SQL database, its size can be modified by the <code>byte_size</code> parameter.</p>
+<p><img src="../../../resources/img/int_column.png" alt="Screenshot of the ADIOS int column" /></p>
+<p><strong>Properties:</strong></p>
 <ul>
-<li>pouzivane pri vytvarani SQL stlpca</li>
-<li>pouzivane pri insert/update operaciach</li>
-<li>pouzivane pri generovani inputu</li>
-<li>pouzivane pri zobrazovani vo Form</li>
-<li>pouzivane pri zobrazovani v Table</li>
+<li>default value: <strong>null</strong>
+<h3>Enum values</h3></li>
 </ul>
+<p>When specifying the <code>enum_values</code> property, the data type turns into an Enum and acts as a select.</p>
+<p>![[int_enum.png]]</p>
+<h2>Parameters</h2>
 <table>
 <thead>
 <tr>
@@ -107,28 +107,56 @@ TODO: prelinkovat s <a href="https://github.com/wai-blue/ADIOS/blob/main/src/Cor
 <td>sql_definitions</td>
 <td>create SQL table</td>
 <td></td>
-<td></td>
+<td>Additional SQL definitions to be used when creating the column</td>
 </tr>
 <tr>
 <td>byte_size</td>
 <td>create SQL table</td>
 <td></td>
+<td>Defines the size limit of the number</td>
+</tr>
+<tr>
+<td>required</td>
+<td>form</td>
+<td>false</td>
+<td>Defines if the field should be able to be null or not</td>
+</tr>
+<tr>
+<td>format</td>
+<td>table</td>
 <td></td>
+<td>Defines how the value should be formatted (use {%VALUE%} in place of the column value)</td>
 </tr>
 <tr>
 <td>unit</td>
-<td>form + table</td>
+<td>table, form</td>
 <td></td>
-<td></td>
+<td>Defines the unit of the value</td>
 </tr>
 <tr>
 <td>enum_values</td>
-<td>form + table</td>
-<td></td>
-<td></td>
+<td>table, form</td>
+<td>not defined by default</td>
+<td>when present makes the column act as an enum</td>
 </tr>
 </tbody>
 </table>
+<h2>Examples</h2>
+<p><strong>#1</strong> Basic int column</p>
+<pre><code class="language-php">"columnName" =&gt; [
+    "type" =&gt; "int",
+    "title" =&gt; "An Int Column",
+    "show_column" =&gt; TRUE,
+    "byte_size" =&gt; 11,
+    "unit" =&gt; "#{%VALUE%}",
+]</code></pre>
+<p><strong>#2</strong> An enum column</p>
+<pre><code class="language-php">"columnName" =&gt; [
+    "type" =&gt; "int",
+    "title" =&gt; "An Enum Column",
+    "enum_values" =&gt; ['Red','Green','Blue']
+    "show_column" =&gt; TRUE,
+]</code></pre>
               </div>
             </div>
           </div>
