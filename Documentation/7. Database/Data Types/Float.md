@@ -14,7 +14,7 @@ Float data type is used to store and display decimal numbers in ADIOS. It is sav
 | sql_data_type   | create SQL table | double            | Defines how the data type should be saved in SQL (double, float, decimal, numberic) |
 | required        | form             | false             | Defines if the field should be able to be null or not                               |
 | escape_string   | insert, update   | defined in config | Defines the escape string |
-| format          | table            |                   | Defines how the value should be formatted (use {%VALUE%} in place of the column value) |
+| format          | table            |                   | Defines how the value should be formatted (use VALUE in place of the column value) |
 | unit            | table, form      |                   | Defines the unit of the value |
 | dumping_data    | table, form      | false             | |
 | null_value      | table, form      | false             | Sets the display value of the column to NULL |
