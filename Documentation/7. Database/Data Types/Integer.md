@@ -19,7 +19,7 @@ When specifying the `enum_values` property, the data type turns into an Enum and
 | sql_definitions | create SQL table | | Additional SQL definitions to be used when creating the column |
 | byte_size | create SQL table | | Defines the size limit of the number |
 | required | form | false | Defines if the field should be able to be null or not |
-| format | table | | Defines how the value should be formatted (use {%VALUE%} in place of the column value) |
+| format | table | | Defines how the value should be formatted (use VALUE in place of the column value) |
 | unit | table, form | | Defines the unit of the value |
 | enum_values | table, form | not defined by default | when present makes the column act as an enum |
 
@@ -32,7 +32,7 @@ When specifying the `enum_values` property, the data type turns into an Enum and
 	"title" => "An Int Column",
 	"show_column" => TRUE,
 	"byte_size" => 11,
-	"unit" => "#{%VALUE%}",
+	"unit" => "#VALUE",
 ]
 ```
 
