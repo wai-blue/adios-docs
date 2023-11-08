@@ -82,15 +82,19 @@
           <div class='container'>
             <div class='row'>
               <div class='col-lg-8 col-lg-offset-2'>
-                <h1>Password</h1>
-<p>Password is an ADIOS data type to create input boxes for password validation. It is saved in the SQL database as <strong>varchar</strong>. The password data type is saved in a hashed string.</p>
-<p><img src="../../../resources/examples/datatypes/password.png" alt="Preview of the password column rendered in a form" /></p>
+                <h1>Lookup</h1>
+<p>This ADIOS data type is used to link to other Models. In the SQL database is it save as an <strong>int(8)</strong>.
+It is render as a <em>select</em> HTML element by <strong>UI/Input</strong>. In case there are many entries and the <em>select</em> would look very confusing, it automatically switches to an <em>autocomplete</em>, when there are more than 10 entries available.
+The text used to represent each row is configured by the <strong>lookupSqlValue</strong> property of the Model of the row.</p>
+<p><img src="../../../resources/img/lookup_preview.png" alt="Screenshot of a Lookup column" /></p>
 <blockquote>
-<p>💡 The password column renders two input boxes, one for a password and one for the repeat of the password for validation. If the passwords in these input boxes don't match the boxes will become red.</p>
+<p>:bulb: The autocomplete text for many entries is a search field that automatically suggests the most likely entries based on your search query.</p>
 </blockquote>
 <p><strong>Properties:</strong></p>
 <ul>
-<li><strong>Default value:</strong> null (unless specified otherwise)</li>
+<li>default value: <strong>null</strong> or <strong>0</strong> (based on whether the foreign model has the parameter <strong>disable_foreign_key</strong>)</li>
+<li>the value stored in this column is the ID of the foreign row
+<h2>Parameters</h2></li>
 </ul>
 <table>
 <thead>
@@ -103,27 +107,34 @@
 </thead>
 <tbody>
 <tr>
-<td>sql_definition</td>
+<td>sql_definitions</td>
 <td>create SQL table</td>
 <td></td>
-<td>Additional SQL definitions to be specified</td>
+<td>Additional SQL definitions to be used when creating the column</td>
 </tr>
 <tr>
-<td>byte_size</td>
-<td>create SQL table</td>
-<td>255</td>
-<td>Byte size of the allowed input string</td>
+<td>input_style</td>
+<td>forms</td>
+<td>determined automatically</td>
+<td>Enforces an input style (autocomplete, select)</td>
 </tr>
 <tr>
-<td>required</td>
+<td>model</td>
 <td>create SQL table</td>
-<td>false</td>
-<td>Determines whether the column should be required</td>
+<td>Path to the foreign model</td>
 </tr>
 </tbody>
 </table>
-<pre><code class="language-php">"columnName" =&gt; [  
-    "type" =&gt; "password"
+<blockquote>
+<p>:bulb: For Prototype builder to successfully build the column, it is required, that its name starts with <code>id_</code>. It is also required (and very essential) that the <strong>model</strong> parameter is always specified.</p>
+<h2>Examples</h2>
+</blockquote>
+<p><strong>#1</strong> Basic lookup column</p>
+<pre><code class="language-php">"lookupColumn" =&gt; [
+    "type" =&gt; "lookup",
+    "title" =&gt; "Associated row",
+    "model" =&gt; "App\Widgets\Path\To\Model"
+    "show_column" =&gt; TRUE
 ]</code></pre>
               </div>
             </div>
